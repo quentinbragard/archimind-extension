@@ -18,7 +18,7 @@ class EventManager {
     chrome.runtime.onMessage.addListener(this.handleChromeMessage);
     
     // Set up DOM event listeners
-    document.addEventListener('archimind-network-intercept', this.handleDomEvent as EventListener);
+    document.addEventListener('jaydai:network-intercept', this.handleDomEvent as EventListener);
     
     console.log('EventManager initialized');
   }
@@ -31,7 +31,7 @@ class EventManager {
     chrome.runtime.onMessage.removeListener(this.handleChromeMessage);
     
     // Remove DOM event listeners
-    document.removeEventListener('archimind-network-intercept', this.handleDomEvent as EventListener);
+    document.removeEventListener('jaydai:network-intercept', this.handleDomEvent as EventListener);
     
     console.log('EventManager cleaned up');
   }

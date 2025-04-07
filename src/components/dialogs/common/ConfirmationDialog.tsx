@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useDialog } from '@/components/dialogs/core/DialogContext';
 import { DIALOG_TYPES } from '@/core/dialogs/registry';
+import { getMessage } from '@/core/utils/i18n';
 
 /**
  * Generic confirmation dialog component
@@ -20,10 +21,10 @@ export const ConfirmationDialog: React.FC = () => {
   const { isOpen, data, dialogProps } = useDialog(DIALOG_TYPES.CONFIRMATION);
   
   // Safe extraction of dialog data with defaults
-  const title = data?.title || 'Confirm Action';
-  const description = data?.description || 'Are you sure you want to proceed?';
-  const confirmText = data?.confirmText || 'Confirm';
-  const cancelText = data?.cancelText || 'Cancel';
+  const title = data?.title || getMessage('confirmAction', undefined, 'Confirm Action');
+  const description = data?.description || getMessage('confirmActionDescription', undefined, 'Are you sure you want to proceed?');
+  const confirmText = data?.confirmText || getMessage('confirm', undefined, 'Confirm');
+  const cancelText = data?.cancelText || getMessage('cancel', undefined, 'Cancel');
   const onConfirm = data?.onConfirm || (() => {});
   const onCancel = data?.onCancel || (() => {});
   

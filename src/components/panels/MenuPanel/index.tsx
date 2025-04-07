@@ -40,7 +40,7 @@ const MenuPanel: React.FC<MenuPanelProps> = ({
 
   // Handle AI news click - open external link
   const handleAiNewsClick = () => {
-    window.open('https://thetunnel.substack.com/?utm_source=archimind-extension', '_blank');
+    window.open('https://thetunnel.substack.com/?utm_source=jaydai-extension', '_blank');
   };
 
   return (
@@ -81,7 +81,7 @@ const MenuPanel: React.FC<MenuPanelProps> = ({
             <Bell className="mr-2 h-4 w-4" /> 
             {getMessage('notifications', undefined, 'Notifications')}
             {notificationCount > 0 && (
-              <span className="ml-auto bg-primary text-primary-foreground rounded-full text-xs px-1.5 py-0.5">
+              <span className="ml-auto  bg-red-500 text-white rounded-full text-xs px-1.5 py-0.5">
                 {notificationCount}
               </span>
             )}
@@ -97,7 +97,7 @@ const MenuPanel: React.FC<MenuPanelProps> = ({
             {getMessage('aiNews', undefined, 'AI News')}
           </Button>
           
-          <Button 
+         {/*} <Button 
             variant="ghost" 
             size="sm" 
             className="justify-start" 
@@ -105,7 +105,7 @@ const MenuPanel: React.FC<MenuPanelProps> = ({
           >
             <Settings className="mr-2 h-4 w-4" /> 
             {getMessage('settings', undefined, 'Settings')}
-          </Button>
+          </Button> */}
         </div>
       </Card>
     </BasePanel>

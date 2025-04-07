@@ -48,9 +48,9 @@ export const SettingsDialog: React.FC = () => {
     setLoading(true);
     try {
       // Get settings from chrome storage
-      chrome.storage.sync.get(['archimindSettings'], (result) => {
-        if (result.archimindSettings) {
-          setSettings(result.archimindSettings);
+      chrome.storage.sync.get(['jaydaiSettings'], (result) => {
+        if (result.jaydaiSettings) {
+          setSettings(result.jaydaiSettings);
         }
         setLoading(false);
       });
@@ -63,7 +63,7 @@ export const SettingsDialog: React.FC = () => {
   const saveSettings = async () => {
     try {
       // Save settings to chrome storage
-      chrome.storage.sync.set({ archimindSettings: settings }, () => {
+      chrome.storage.sync.set({ jaydaiSettings: settings }, () => {
         toast.success(getMessage('saveChanges', undefined, 'Settings saved'));
         
         // Notify content script to apply changes
@@ -102,9 +102,9 @@ export const SettingsDialog: React.FC = () => {
     <Dialog {...dialogProps}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{getMessage('archimindSettings', undefined, 'Settings')}</DialogTitle>
+          <DialogTitle>{getMessage('jaydaiSettings', undefined, 'Settings')}</DialogTitle>
           <DialogDescription>
-            {getMessage('configureArchimind', undefined, 'Configure Archimind settings')}
+            {getMessage('configureJaydai', undefined, 'Configure Archimind settings')}
           </DialogDescription>
         </DialogHeader>
         

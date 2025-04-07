@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
     
     // Get the API URL from env or use default values
     const apiUrl = env.VITE_API_URL || (isProduction 
-        ? 'https://archimind-api-sw5cmqbraq-uc.a.run.app/'
+        ? 'https://jaydai-api-sw5cmqbraq-uc.a.run.app/'
         : 'http://localhost:8000');
     
     // Get debug setting from env or default based on mode
@@ -89,7 +89,7 @@ export default defineConfig(({ mode }) => {
                     background: resolve(__dirname, 'src/extension/background/background.js'),
                     popup: resolve(__dirname, 'src/extension/popup/popup.tsx'),
                     welcome: resolve(__dirname, 'src/extension/welcome/welcome.tsx'),
-                    'injectedInterceptor': resolve(__dirname, 'src/extension/content/injectedInterceptor.js'),
+                    'injectedInterceptor': resolve(__dirname, 'src/extension/content/injectedInterceptor/index.js'),
                     'applicationInitializer': resolve(__dirname, 'src/extension/content/applicationInitializer.ts'),
                     'popup-styles': resolve(__dirname, 'src/extension/popup/popup.css'),
                     'welcome-styles': resolve(__dirname, 'src/extension/welcome/welcome.css'),

@@ -44,7 +44,7 @@ async function initializeInternal() {
     
     return success;
   } catch (error) {
-    console.error('❌ Error initializing Archimind:', error);
+    console.error('❌ Error initializing jaydai:', error);
     return false;
   }
 }
@@ -63,7 +63,7 @@ async function cleanupInternal() {
     
     return true;
   } catch (error) {
-    console.error('❌ Error cleaning up Archimind:', error);
+    console.error('❌ Error cleaning up jaydai:', error);
     return false;
   }
 }

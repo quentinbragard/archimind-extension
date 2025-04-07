@@ -34,7 +34,7 @@ export const BasePanel: React.FC<BasePanelProps> = ({
   headerClassName,
   contentClassName,
   children,
-  maxHeight = '400px',
+  maxHeight = '75vh',
   headerExtra,
   headerLeftExtra
 }) => {

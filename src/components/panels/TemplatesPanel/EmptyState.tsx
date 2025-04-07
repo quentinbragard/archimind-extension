@@ -43,7 +43,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
           disabled={refreshing}
         >
           <RefreshCw className={`h-4 w-4 mr-1 ${refreshing ? 'animate-spin' : ''}`} />
-          {refreshing ? 'Refreshing...' : 'Refresh'}
+          {refreshing ? getMessage('refreshing', undefined, 'Refreshing...') : getMessage('refresh', undefined, 'Refresh')}
         </Button>
       </div>
     </div>

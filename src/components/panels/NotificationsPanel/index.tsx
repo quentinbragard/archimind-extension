@@ -23,7 +23,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
   showBackButton,
   onBack,
   onClose, 
-  maxHeight = '400px' 
+  maxHeight = '75vh' 
 }) => {
   const {
     notifications,
@@ -46,13 +46,13 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
     };
 
     document.addEventListener(
-      'archimind:open-notifications',
+      'jaydai:open-notifications',
       handleOpenNotifications
     );
 
     return () => {
       document.removeEventListener(
-        'archimind:open-notifications',
+        'jaydai:open-notifications',
         handleOpenNotifications
       );
     };
@@ -100,7 +100,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
     >
       {/* Notification Controls */}
       {unreadCount > 1 && (
-        <div className="flex items-center justify-start mb-4 pb-2 w-full px-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-start mb-4 pb-2 w-full px-4 border-b border-gray-700">
           {/* Mark all read button */}
           <Button
             size="sm"
@@ -122,9 +122,9 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
           <LoadingSpinner size="md" message="Loading notifications..." />
         </div>
       ) : notifications.length === 0 ? (
-        <div className="flex flex-col justify-center items-center py-10 text-gray-500 dark:text-gray-400 p-4 text-center">
-          <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-3">
-            <Bell className="h-8 w-8 text-gray-400 dark:text-gray-500" />
+        <div className="flex flex-col justify-center items-center py-10 text-gray-400 p-4 text-center">
+          <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mb-3">
+            <Bell className="h-8 w-8 text-gray-500" />
           </div>
           <p className="font-medium">No notifications</p>
           <p className="text-xs mt-1 max-w-xs">
@@ -153,7 +153,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
       ) : (
         <>
           {/* Notification List */}
-          <div className="divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="divide-y divide-gray-700">
             {notifications.map((notification) => (
               <NotificationItem
                 key={notification.id}
@@ -166,7 +166,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
           </div>
           
           {/* Footer count */}
-          <div className="mt-4 pt-2 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+          <div className="mt-4 pt-2 border-t border-gray-700 flex justify-between items-center text-xs text-gray-400">
             {notifications.length} notification{notifications.length !== 1 ? 's' : ''}
           </div>
         </>

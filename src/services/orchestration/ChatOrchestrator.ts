@@ -86,13 +86,13 @@ export class ChatOrchestrator extends AbstractBaseService {
     debug('Initializing ChatOrchestrator');
     
     // Listen for network intercept events
-    document.addEventListener('archimind:message-extracted', this.handleMessageExtracted);
-    document.addEventListener('archimind:conversation-changed', this.handleConversationChanged);
+    document.addEventListener('jaydai:message-extracted', this.handleMessageExtracted);
+    document.addEventListener('jaydai:conversation-changed', this.handleConversationChanged);
   }
   
   protected onCleanup(): void {
-    document.removeEventListener('archimind:message-extracted', this.handleMessageExtracted);
-    document.removeEventListener('archimind:conversation-changed', this.handleConversationChanged);
+    document.removeEventListener('jaydai:message-extracted', this.handleMessageExtracted);
+    document.removeEventListener('jaydai:conversation-changed', this.handleConversationChanged);
     debug('ChatOrchestrator cleaned up');
   }
   

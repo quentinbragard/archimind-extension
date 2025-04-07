@@ -1,0 +1,550 @@
+{
+  "appName": {
+    "message": "Archimind Chrome Extension",
+    "description": "The name of the extension"
+  },
+  "appDesc": {
+    "message": "Jaydai: Maximize AI Potential. Jaydai is a Chrome extension offering a library of high-quality prompts.",
+    "description": "The description of the extension"
+  },
+  "welcomeTitle": {
+    "message": "Welcome to Archimind",
+    "description": "Welcome page title"
+  },
+  "yourAICompanion": {
+    "message": "Your AI companion",
+    "description": "Welcome page subtitle"
+  },
+  "useAIToPrefix": {
+    "message": "Use AI to",
+    "description": "Prefix for the changing tasks in the welcome page"
+  },
+  "aiTask1": {
+    "message": "write professional emails",
+    "description": "AI task example 1"
+  },
+  "aiTask2": {
+    "message": "organize complex data",
+    "description": "AI task example 2"
+  }, 
+  "aiTask3": {
+    "message": "create compelling content",
+    "description": "AI task example 3"
+  },
+  "aiTask4": {
+    "message": "summarize long documents",
+    "description": "AI task example 4"
+  },
+  "aiTask5": {
+    "message": "draft technical reports",
+    "description": "AI task example 5"
+  },
+  "welcomeDescription": {
+    "message": "Maximize your generative AI experience with Jaydai, the free Chrome extension that transforms how you use ChatGPT",
+    "description": "Welcome page description"
+  },
+  "browseOfficialTemplates": {
+    "message": "Browse Official Templates",
+    "description": "Browse official templates button"
+  },
+  "energyInsights": {
+    "message": "Unlock the full potential of AI",
+    "description": "Feature card title"
+  },
+  "energyInsightsDesc": {
+    "message": "Access our library of prompts created by experts and organized by topic",
+    "description": "Feature card description"
+  },
+  "smartTemplates": {
+    "message": "Boost your productivity",
+    "description": "Feature card title"
+  },
+  "smartTemplatesDesc": {
+    "message": "Access our library of prompts created by experts and organized by topic",
+    "description": "Feature card description"
+  },
+  "skillDevelopment": {
+    "message": "Measure your impact",
+    "description": "Feature card title"
+  },
+  "skillDevelopmentDesc": {
+    "message": "Get detailed analytics on your usage and energy footprint",
+    "description": "Feature card description"
+  },
+  "getStarted": {
+    "message": "Get Started",
+    "description": "CTA button"
+  },
+  "signIn": {
+    "message": "Sign In",
+    "description": "Sign in button"
+  },
+  "signUp": {
+    "message": "Sign Up",
+    "description": "Sign up button"
+  },
+  "emailConfirmationRequired": {
+    "message": "Email verification required after signup",
+    "description": "Email verification notice"
+  },
+  "allRightsReserved": {
+    "message": "All rights reserved",
+    "description": "Copyright footer text"
+  },
+  
+  "aiToolLauncher": {
+    "message": "AI Tool Launcher",
+    "description": "Title for the popup"
+  },
+  "welcomeSubtitle": {
+    "message": "Your Intelligent AI Usage Companion",
+    "description": "Welcome page subtitle"
+  },
+  
+  "howItWorks": {
+    "message": "How Archimind Empowers You",
+    "description": "Section title"
+  },
+  "aiUsageTracking": {
+    "message": "AI Usage Tracking",
+    "description": "Feature title"
+  },
+  "aiUsageTrackingDesc": {
+    "message": "Monitor your AI interactions, understand patterns, and gain insights into your digital workflow.",
+    "description": "Feature description"
+  },
+  "personalizedInsights": {
+    "message": "Personalized Insights",
+    "description": "Feature title"
+  },
+  "personalizedInsightsDesc": {
+    "message": "Receive actionable recommendations to improve your AI usage and maintain your skills.",
+    "description": "Feature description"
+  },
+  "continuousLearning": {
+    "message": "Continuous Learning",
+    "description": "Feature title"
+  },
+  "continuousLearningDesc": {
+    "message": "Develop a balanced approach to AI assistance with weekly reports and skill development tips.",
+    "description": "Feature description"
+  },
+  "readyToUnlock": {
+    "message": "Ready to Unlock Your AI Potential?",
+    "description": "CTA title"
+  },
+  "readyToUnlockDesc": {
+    "message": "Archimind helps you harness the power of AI while maintaining your unique human expertise.",
+    "description": "CTA description"
+  },
+  "name": {
+    "message": "Name",
+    "description": "Name label"
+  },
+  "signInWith": {
+    "message": "Sign In with $PROVIDER$",
+    "description": "Sign in with provider button",
+    "placeholders": {
+      "provider": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
+  },
+  "email": {
+    "message": "Email",
+    "description": "Email label"
+  },
+  "password": {
+    "message": "Password",
+    "description": "Password label"
+  },
+  "or": {
+    "message": "Or continue with",
+    "description": "Separator text"
+  },
+  "signInToJaydai": {
+    "message": "Sign In to Archimind",
+    "description": "Sign in dialog title"
+  },
+  "enterEmailPassword": {
+    "message": "Please enter both email and password.",
+    "description": "Validation message"
+  },
+  "signInSuccessful": {
+    "message": "Sign-in successful!",
+    "description": "Success message"
+  },
+  "youCanNowAccess": {
+    "message": "You can now access your ChatGPT conversations.",
+    "description": "Success message description"
+  },
+  "openChatGPT": {
+    "message": "Open ChatGPT",
+    "description": "Open ChatGPT button"
+  },
+  "signInFailed": {
+    "message": "Sign-in failed",
+    "description": "Error message"
+  },
+  "authError": {
+    "message": "Authentication Error",
+    "description": "Error title"
+  },
+  "unableToProcess": {
+    "message": "Unable to process at this moment.",
+    "description": "Error message"
+  },
+  "emailVerificationSent": {
+    "message": "Verify Your Email",
+    "description": "Email verification sent title"
+  },
+  "emailVerificationInstructions": {
+    "message": "We've sent a verification link to your email address. Please check your inbox and follow the instructions to complete your registration.",
+    "description": "Email verification instructions"
+  },
+  "close": {
+    "message": "Close",
+    "description": "Close button"
+  },
+  "signingIn": {
+    "message": "Signing in...",
+    "description": "Signing in loading text"
+  },
+  "signingUp": {
+    "message": "Creating account...",
+    "description": "Signing up loading text"
+  },
+  "signUpSuccessful": {
+    "message": "Account created successfully!",
+    "description": "Sign up success message"
+  },
+  "signUpFailed": {
+    "message": "Failed to create account",
+    "description": "Sign up failed message"
+  },
+  "passwordRequirements": {
+    "message": "Password must be at least 8 characters with at least one letter and one number.",
+    "description": "Password requirements hint"
+  },
+  "bySigningUp": {
+    "message": "By signing up, you agree to our Terms of Service and Privacy Policy.",
+    "description": "Terms agreement text"
+  },
+  "templates": {
+    "message": "Templates",
+    "description": "Templates menu item"
+  },
+  "menu": {
+    "message": "Menu",
+    "description": "Menu menu item"
+  },
+  "notifications": {
+    "message": "Notifications",
+    "description": "Notifications menu item"
+  },
+  "aiNews": {
+    "message": "AI News",
+    "description": "Élément de menu AI News"
+  },
+  "settings": {
+    "message": "Settings",
+    "description": "Settings menu item"
+  },
+  "cancel": {
+    "message": "Cancel",
+    "description": "Cancel button"
+  },
+  "save": {
+    "message": "Save",
+    "description": "Save button"
+  },
+  "saveChanges": {
+    "message": "Save Changes",
+    "description": "Save changes button"
+  },
+  "back": {
+    "message": "Back",
+    "description": "Back button"
+  },
+  "aiStats": {
+    "message": "AI Stats",
+    "description": "AI stats label"
+  },
+  "noActiveConversation": {
+    "message": "No Active Conversation",
+    "description": "Error message"
+  },
+  "pleaseSelectConversation": {
+    "message": "Please select a conversation first.",
+    "description": "Error message description"
+  },
+  "conversationSaved": {
+    "message": "Conversation Saved",
+    "description": "Success message"
+  },
+  "conversationSavedSuccess": {
+    "message": "Your conversation has been saved successfully.",
+    "description": "Success message description"
+  },
+  "errorSavingConversation": {
+    "message": "Error Saving Conversation",
+    "description": "Error message"
+  },
+  "problemSavingConversation": {
+    "message": "There was a problem saving your conversation.",
+    "description": "Error message description"
+  },
+  "markAllRead": {
+    "message": "Mark all read",
+    "description": "Mark all read button"
+  },
+  "loadingNotifications": {
+    "message": "Loading notifications...",
+    "description": "Loading message"
+  },
+  "noNotifications": {
+    "message": "You don't have any notifications yet",
+    "description": "Empty state message"
+  },
+  "dismiss": {
+    "message": "Dismiss",
+    "description": "Dismiss button"
+  },
+  "newTemplate": {
+    "message": "New",
+    "description": "New template button"
+  },
+  "officialTemplates": {
+    "message": "Official Templates",
+    "description": "Official templates section title"
+  },
+  "myTemplates": {
+    "message": "My Templates",
+    "description": "My templates section title"
+  },
+  "noTemplates": {
+    "message": "No templates found",
+    "description": "Empty state message"
+  },
+  "createTemplate": {
+    "message": "Create Template",
+    "description": "Create template button"
+  },
+  "createFirstTemplate": {
+    "message": "Create your first template",
+    "description": "Create first template button"
+  },
+  "createTemplateTitle": {
+    "message": "Create Template",
+    "description": "Create template dialog title"
+  },
+  "templateName": {
+    "message": "Name",
+    "description": "Template name label"
+  },
+  "templateDescription": {
+    "message": "Description (optional)",
+    "description": "Template description label"
+  },
+  "templateFolder": {
+    "message": "Folder (optional)",
+    "description": "Template folder label"
+  },
+  "templateContent": {
+    "message": "Content",
+    "description": "Template content label"
+  },
+  "update": {
+    "message": "Update",
+    "description": "Update button"
+  },
+  "create": {
+    "message": "Create",
+    "description": "Create button"
+  },
+  "jaydaiSettings": {
+    "message": "Archimind Settings",
+    "description": "Settings dialog title"
+  },
+  "configureJaydai": {
+    "message": "Configure how Archimind works with ChatGPT",
+    "description": "Settings dialog description"
+  },
+  "autoSaveConversations": {
+    "message": "Auto-save conversations",
+    "description": "Settings option"
+  },
+  "autoSaveInterval": {
+    "message": "Auto-save interval (seconds)",
+    "description": "Settings option"
+  },
+  "enableSync": {
+    "message": "Enable synchronization",
+    "description": "Settings option"
+  },
+  "showStatsPanel": {
+    "message": "Show stats panel",
+    "description": "Settings option"
+  },
+  "customizeTemplate": {
+    "message": "Customize Template: $TEMPLATE_NAME$",
+    "description": "Customize template dialog title",
+    "placeholders": {
+      "template_name": {
+        "content": "$1",
+        "example": "My Template"
+      }
+    }
+  },
+  "customizeTemplateDesc": {
+    "message": "Customize the template to your needs",
+    "description": "Customize template dialog description"
+  },
+  "replacePlaceholders": {
+    "message": "Replace Placeholders",
+    "description": "Replace placeholders section title"
+  },
+  "editTemplate": {
+    "message": "Edit Template",
+    "description": "Edit template section title"
+  },
+  "noPlaceholders": {
+    "message": "No placeholders found in this template",
+    "description": "No placeholders message"
+  },
+  "useTemplate": {
+    "message": "Use Template",
+    "description": "Use template button"
+  },
+  "browseMore": {
+    "message": "Browse More",
+    "description": "Browse more button text"
+  },
+  "browseMoreTitle": {
+    "message": "Browse Templates",
+    "description": "Browse more modal title"
+  },
+  "browseMoreDesc": {
+    "message": "Browse and pin official and organization templates",
+    "description": "Browse more modal description"
+  },
+  "pinFolder": {
+    "message": "Pin Folder",
+    "description": "Pin folder button text"
+  },
+  "unpinFolder": {
+    "message": "Unpin Folder",
+    "description": "Unpin folder button text"
+  },
+  "pinnedFolders": {
+    "message": "Pinned Folders",
+    "description": "Pinned folders section title"
+  },
+  "allFolders": {
+    "message": "All Folders",
+    "description": "All folders section title"
+  },
+  "enterpriseFeature": {
+    "message": "This feature is only available in the Enterprise plan",
+    "description": "Message shown when a feature is enterprise-only"
+  },
+  "contactForEnterprise": {
+    "message": "Contact us to learn more about our Enterprise plan",
+    "description": "Call to action for enterprise plan"
+  },
+  "refreshing": {
+    "message": "Refreshing...",
+    "description": "Loading state text for refresh action"
+  },
+  "refresh": {
+    "message": "Refresh",
+    "description": "Refresh button text"
+  },
+  "noPinnedOfficialTemplates": {
+    "message": "No pinned official templates. Click Browse More to add some.",
+    "description": "Empty state message for official templates section"
+  },
+  "noUserTemplates": {
+    "message": "No user templates. Create a template to get started.",
+    "description": "Empty state message for user templates section"
+  },
+  "confirmAction": {
+    "message": "Confirm Action",
+    "description": "Default title for confirmation dialog"
+  },
+  "confirmActionDescription": {
+    "message": "Are you sure you want to proceed?",
+    "description": "Default description for confirmation dialog"
+  },
+  "confirm": {
+    "message": "Confirm",
+    "description": "Confirm button text"
+  },
+  "today": {
+    "message": "today",
+    "description": "Relative time for current day"
+  },
+  "yesterday": {
+    "message": "yesterday",
+    "description": "Relative time for previous day"
+  },
+  "daysAgo": {
+    "message": "$1 days ago",
+    "description": "Relative time for days ago",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "untitledTemplate": {
+    "message": "Untitled Template",
+    "description": "Default title for untitled templates"
+  },
+  "passwordTooShort": {
+    "message": "Password must be at least 8 characters",
+    "description": "Password validation error message"
+  },
+  "invalidCredentials": {
+    "message": "Invalid email or password",
+    "description": "Authentication error message"
+  },
+  "emailNotVerified": {
+    "message": "Email not verified",
+    "description": "Email verification error message"
+  },
+  "emailAlreadyInUse": {
+    "message": "Email already in use",
+    "description": "Sign up error message"
+  },
+  "sessionExpired": {
+    "message": "Session expired. Please sign in again.",
+    "description": "Session expiration message"
+  },
+  "notAuthenticated": {
+    "message": "Not authenticated. Please sign in.",
+    "description": "Authentication required message"
+  },
+  "networkError": {
+    "message": "Network error while refreshing token",
+    "description": "Network error message"
+  },
+  "googleAuthCanceled": {
+    "message": "Google authentication was canceled",
+    "description": "Google auth cancellation message"
+  },
+  "noAuthData": {
+    "message": "No authentication data received from Google",
+    "description": "Google auth error message"
+  },
+  "injectingUI": {
+    "message": "Injecting UI components...",
+    "description": "UI injection log message"
+  },
+  "uiInjected": {
+    "message": "UI components injected",
+    "description": "UI injection success message"
+  }
+}

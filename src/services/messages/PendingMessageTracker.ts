@@ -24,13 +24,13 @@ export class PendingMessageTracker extends AbstractBaseService {
   
   protected async onInitialize(): Promise<void> {
     debug('Initializing PendingMessageTracker');
-    document.addEventListener('archimind:message-extracted', this.handleExtractedMessage);
-    document.addEventListener('archimind:conversation-changed', this.handleConversationChanged);
+    document.addEventListener('jaydai:message-extracted', this.handleExtractedMessage);
+    document.addEventListener('jaydai:conversation-changed', this.handleConversationChanged);
   }
   
   protected onCleanup(): void {
-    document.removeEventListener('archimind:message-extracted', this.handleExtractedMessage);
-    document.removeEventListener('archimind:conversation-changed', this.handleConversationChanged);
+    document.removeEventListener('jaydai:message-extracted', this.handleExtractedMessage);
+    document.removeEventListener('jaydai:conversation-changed', this.handleConversationChanged);
     this.pendingMessages = [];
     debug('PendingMessageTracker cleaned up');
   }
@@ -88,7 +88,7 @@ export class PendingMessageTracker extends AbstractBaseService {
       const updatedMessage = { ...item.message, conversationId };
       
       // Emit event for the message with updated conversation ID
-      document.dispatchEvent(new CustomEvent('archimind:message-extracted', {
+      document.dispatchEvent(new CustomEvent('jaydai:message-extracted', {
         detail: { message: updatedMessage }
       }));
       

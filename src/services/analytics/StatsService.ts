@@ -13,29 +13,31 @@ import {
 
 export interface Stats {
   totalChats: number;
-  recentChats: number; // Added field for recent chats (last 7 days)
+  recentChats: number;
   totalMessages: number;
   avgMessagesPerChat: number;
   messagesPerDay: Record<string, number>;
+  chatsPerDay: Record<string, number>;  // Add this property
   efficiency?: number;
   tokenUsage: {
-    recent: number; // renamed from lastMonth to recent
-    recentInput: number; // New field
-    recentOutput: number; // New field
+    recent: number;
+    recentInput: number;
+    recentOutput: number;
     total: number;
-    totalInput: number; // New field
-    totalOutput: number; // New field
+    totalInput: number;
+    totalOutput: number;
   };
   energyUsage: {
-    recent: number; // New field
-    total: number;
-    perMessage: number;
-  };
+    recentWh: number;
+    totalWh: number;
+    perMessageWh: number;
+    equivalent?: string;
+  };  
   thinkingTime: {
     total: number;
     average: number;
   };
-  modelUsage?: Record<string, { // New field for model breakdown
+  modelUsage?: Record<string, {
     count: number;
     inputTokens: number;
     outputTokens: number;
@@ -58,6 +60,7 @@ export class StatsService extends AbstractBaseService {
     totalMessages: 0,
     avgMessagesPerChat: 0,
     messagesPerDay: {},
+    chatsPerDay: {},  // Add this
     tokenUsage: {
       recent: 0,
       recentInput: 0,
@@ -67,9 +70,9 @@ export class StatsService extends AbstractBaseService {
       totalOutput: 0
     },
     energyUsage: {
-      recent: 0,
-      total: 0,
-      perMessage: 0
+      recentWh: 0,
+      totalWh: 0,
+      perMessageWh: 0
     },
     thinkingTime: {
       total: 0,
@@ -106,14 +109,14 @@ export class StatsService extends AbstractBaseService {
     // Load initial stats
     await this.loadStats();
     
-    // Set up regular refresh from backend
+    // Set up more frequent refresh from backend
     this.updateInterval = window.setInterval(() => {
-      // Only refresh if it's been at least 1 minute since the last load
+      // Only refresh if it's been at least 10 seconds since the last load
       const now = Date.now();
-      if (now - this.lastLoadTime >= 60000) {
+      if (now - this.lastLoadTime >= 10000) { // 10 seconds instead of 60 seconds
         this.loadStats();
       }
-    }, 60000); // Check every minute
+    }, 20000); // Check every 20 seconds
     
     debug('Stats service initialized');
   }
@@ -131,62 +134,287 @@ export class StatsService extends AbstractBaseService {
     debug('Stats service cleaned up');
   }
   
+ /**
+ * Set up event listeners for tracking stats
+ */
+private setupEventListeners(): void {
+  // Main network intercept listener
+  document.addEventListener('jaydai:network-intercept', this.handleNetworkEvent);
+  
+  // Listen for message-specific events
+  document.addEventListener('jaydai:message-extracted', this.handleMessageExtracted);
+  
+  // Listen for conversation changes
+  document.addEventListener('jaydai:conversation-loaded', this.handleConversationLoaded);
+  document.addEventListener('jaydai:conversation-list', this.handleConversationList);
+  document.addEventListener('jaydai:conversation-changed', this.handleConversationChanged);
+  
+  // Listen for internal events from our app
+  document.addEventListener(AppEvent.CHAT_MESSAGE_SENT, this.handleChatMessageSent);
+  document.addEventListener(AppEvent.CHAT_MESSAGE_RECEIVED, this.handleChatMessageReceived);
+  document.addEventListener(AppEvent.CHAT_CONVERSATION_CHANGED, this.handleChatConversationChanged);
+}
+
+/**
+ * Handle message extracted event
+ */
+private handleMessageExtracted = (event: CustomEvent): void => {
+  const { message } = event.detail;
+  if (!message) return;
+
+  try {
+    // Different handling based on message role
+    if (message.role === 'user') {
+      this.trackUserMessageSent(message.content);
+    } else if (message.role === 'assistant') {
+      this.trackAssistantMessageReceived(message.content, message.thinkingTime);
+    }
+    
+    // Trigger a debounced refresh to eventually sync with server
+    this.debounceRefresh();
+  } catch (error) {
+    debug('Error handling message extracted event:', error);
+  }
+};
+
+/**
+ * Handle conversation loaded event
+ */
+private handleConversationLoaded = (_event: CustomEvent): void => {
+  // When a conversation is loaded, refresh stats
+  this.debounceRefresh(500);
+};
+
+/**
+ * Handle conversation list event
+ */
+private handleConversationList = (event: CustomEvent): void => {
+  const { conversations } = event.detail;
+  if (conversations && Array.isArray(conversations)) {
+    // Update totalChats based on conversations
+    const currentTotalChats = this.stats.totalChats;
+    const newTotalChats = conversations.length;
+    
+    if (newTotalChats !== currentTotalChats) {
+      this.stats.totalChats = newTotalChats;
+      this.notifyUpdateListeners();
+      
+      // Also refresh from backend
+      this.debounceRefresh();
+    }
+  }
+};
+
+/**
+ * Handle conversation changed event
+ */
+private handleConversationChanged = (_event: CustomEvent): void => {
+  // When conversation changes, refresh stats
+  this.debounceRefresh(500);
+};
+
+/**
+ * Handle chat message sent event
+ */
+private handleChatMessageSent = (event: CustomEvent): void => {
+  try {
+    const { content } = event.detail;
+    if (content) {
+      this.trackUserMessageSent(content);
+    }
+  } catch (error) {
+    debug('Error handling chat message sent event:', error);
+  }
+};
+
+/**
+ * Handle chat message received event
+ */
+private handleChatMessageReceived = (event: CustomEvent): void => {
+  try {
+    const { content, thinkingTime } = event.detail;
+    if (content) {
+      this.trackAssistantMessageReceived(content, thinkingTime);
+    }
+  } catch (error) {
+    debug('Error handling chat message received event:', error);
+  }
+};
+
+/**
+ * Handle chat conversation changed event
+ */
+private handleChatConversationChanged = (_event: CustomEvent): void => {
+  // When conversation changes, refresh stats
+  this.debounceRefresh(500);
+};
+
+
   /**
-   * Set up event listeners for tracking stats
-   */
-  private setupEventListeners(): void {
-    // Example: listen for message events to track message counts
-    document.addEventListener('archimind-network-intercept', this.handleNetworkEvent);
+ * Update stats optimistically when a user message is sent
+ */
+public trackUserMessageSent(messageContent: string): void {
+  // Increment message count
+  this.stats.totalMessages++;
+  
+  // Update messages per day
+  const today = new Date().toISOString().split('T')[0];
+  this.stats.messagesPerDay[today] = (this.stats.messagesPerDay[today] || 0) + 1;
+  
+  // Estimate token usage
+  const estimatedTokens = this.estimateTokens(messageContent);
+  this.stats.tokenUsage.totalInput += estimatedTokens;
+  this.stats.tokenUsage.recent += estimatedTokens;
+  this.stats.tokenUsage.recentInput += estimatedTokens;
+  
+  // Update energy usage
+  const energyUsage = estimatedTokens * 0.0003 / 3_600_000; // convert to kWh
+  this.stats.energyUsage.total += energyUsage;
+  this.stats.energyUsage.recent += energyUsage;
+  
+  // Notify listeners of the update
+  this.notifyUpdateListeners();
+}
+
+/**
+ * Update stats optimistically when an assistant message is received
+ */
+public trackAssistantMessageReceived(messageContent: string, thinkingTime?: number): void {
+  // Increment message count
+  this.stats.totalMessages++;
+  
+  // Update messages per day
+  const today = new Date().toISOString().split('T')[0];
+  this.stats.messagesPerDay[today] = (this.stats.messagesPerDay[today] || 0) + 1;
+  
+  // Estimate token usage
+  const estimatedTokens = this.estimateTokens(messageContent);
+  this.stats.tokenUsage.totalOutput += estimatedTokens;
+  this.stats.tokenUsage.recent += estimatedTokens;
+  this.stats.tokenUsage.recentOutput += estimatedTokens;
+  
+  // Update energy usage
+  const energyUsage = estimatedTokens * 0.0006 / 3_600_000; // convert to kWh
+  this.stats.energyUsage.total += energyUsage;
+  this.stats.energyUsage.recent += energyUsage;
+  
+  // Update thinking time if provided
+  if (thinkingTime) {
+    this.stats.thinkingTime.total += thinkingTime;
+    // Recalculate average
+    this.stats.thinkingTime.average = 
+      this.stats.totalMessages > 0 ? this.stats.thinkingTime.total / this.stats.totalMessages : 0;
   }
   
+  // Notify listeners of the update
+  this.notifyUpdateListeners();
+}
+
+/**
+ * Estimate the number of tokens in text
+ */
+private estimateTokens(text: string): number {
+  if (!text) return 0;
+  // A rough estimation: ~4 characters per token for English text
+  return Math.max(1, Math.ceil(text.length / 4));
+}
+  
   /**
-   * Handle network interception events for stats
-   */
-  private handleNetworkEvent = (event: CustomEvent): void => {
-    const { type, data } = event.detail;
-    
-    if (!data) return;
-    
-    try {
-      switch (type) {
-        case 'chatCompletion':
-          // Track user message sent
-          this.trackMessageSent(data);
-          break;
-        case 'assistantResponse':
-          // Track assistant response if complete
-          if (data.isComplete) {
-            this.trackMessageReceived(data);
+ * Handle network interception events for stats
+ */
+private handleNetworkEvent = (event: CustomEvent): void => {
+  const { type, data } = event.detail;
+  
+  if (!data) return;
+  
+  try {
+    switch (type) {
+      case 'chatCompletion':
+        // Track user message sent - use optimistic tracking
+        if (data.requestBody?.messages?.length > 0) {
+          // Extract user message content
+          const userMessage = this.extractUserMessage(data.requestBody);
+          if (userMessage && userMessage.content) {
+            this.trackUserMessageSent(userMessage.content);
+            
+            // Trigger a debounced refresh to eventually sync with server
+            this.debounceRefresh();
           }
-          break;
-      }
-    } catch (error) {
-      debug('Error handling stats event:', error);
+        }
+        break;
+        
+      case 'assistantResponse':
+        // Track assistant response if complete
+        if (data.isComplete && data.content) {
+          this.trackAssistantMessageReceived(data.content, data.thinkingTime);
+          
+          // Trigger a debounced refresh to eventually sync with server
+          this.debounceRefresh();
+        }
+        break;
+        
+      case 'conversationList':
+        // When conversation list changes, refresh stats
+        this.debounceRefresh();
+        break;
+        
+      case 'specificConversation':
+        // When a specific conversation is loaded, refresh stats
+        this.debounceRefresh(500); // Shorter delay for conversation loads
+        break;
     }
-  };
-  
-  /**
-   * Track when a user sends a message
-   */
-  private trackMessageSent(data: Record<string, any>): void {
-    // Local tracking could be implemented here
-    // For example, increment a counter or add to local storage
-    // This would be synced with the backend periodically
+  } catch (error) {
+    debug('Error handling stats event:', error);
+  }
+};
+
+/**
+ * Extract user message from chat completion request body
+ */
+private extractUserMessage(requestBody: any): { id: string, content: string } | null {
+  try {
+    if (!requestBody || !requestBody.messages) return null;
+    
+    // Find the user message
+    const message = requestBody.messages.find(
+      (m: any) => m.author?.role === 'user' || m.role === 'user'
+    );
+    
+    if (!message) return null;
+    
+    // Extract content
+    let content = '';
+    if (message.content?.parts) {
+      content = message.content.parts.join('\n');
+    } else if (typeof message.content === 'string') {
+      content = message.content;
+    } else if (message.content) {
+      content = JSON.stringify(message.content);
+    }
+    
+    return {
+      id: message.id || `user-${Date.now()}`,
+      content
+    };
+  } catch (error) {
+    debug('Error extracting user message:', error);
+    return null;
+  }
+}
+
+// Add debounce mechanism to prevent too many API calls
+private refreshTimeout: number | null = null;
+private debounceRefresh(delay: number = 1000): void {
+  if (this.refreshTimeout !== null) {
+    window.clearTimeout(this.refreshTimeout);
   }
   
-  /**
-   * Track when an assistant message is received
-   */
-  private trackMessageReceived(data: Record<string, any>): void {
-    // Track thinking time if available
-    if (data.thinkingTime) {
-      // Update local stats
-      this.stats.thinkingTime.total += data.thinkingTime;
-      // Recalculate average
-      this.stats.thinkingTime.average = 
-        this.stats.totalMessages > 0 ? this.stats.thinkingTime.total / this.stats.totalMessages : 0;
-    }
-  }
+  this.refreshTimeout = window.setTimeout(() => {
+    this.refreshTimeout = null;
+    this.loadStats();
+  }, delay);
+}
+
   
   /**
    * Get current stats
@@ -199,7 +427,10 @@ export class StatsService extends AbstractBaseService {
    * Get chart data for messages per day
    */
   public getMessagesPerDayChart(): ChartData {
-    const sortedDays = Object.keys(this.stats.messagesPerDay).sort();
+    // Sort days chronologically (oldest to newest)
+    const sortedDays = Object.keys(this.stats.messagesPerDay)
+      .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+    
     return {
       labels: sortedDays,
       values: sortedDays.map(day => this.stats.messagesPerDay[day])
@@ -302,10 +533,11 @@ export class StatsService extends AbstractBaseService {
             totalOutput: data.token_usage?.total_output || 0
           },
           energyUsage: {
-            recent: data.energy_usage?.recent || 0,
-            total: data.energy_usage?.total || 0,
-            perMessage: data.energy_usage?.per_message || 0
-          },
+            recentWh: data.energy_usage?.recent_wh || 0,
+            totalWh: data.energy_usage?.total_wh || 0,
+            perMessageWh: data.energy_usage?.per_message_wh || 0,
+            equivalent: data.energy_usage?.equivalent || ""
+          },          
           thinkingTime: {
             total: data.thinking_time?.total || 0,
             average: data.thinking_time?.average || 0
@@ -411,6 +643,8 @@ export class StatsService extends AbstractBaseService {
     }
   }
 }
+
+
 
 // Don't export a singleton instance here - we'll create it when registering services
 // This allows for better testing and dependency injection

@@ -10,13 +10,13 @@ import { AppError, ErrorCode } from '@/core/errors/AppError';
 export function injectNetworkInterceptor(): void {
   try {
     // Check if already injected
-    if (document.querySelector('#archimind-network-interceptor')) {
+    if (document.querySelector('#jaydai:network-interceptor')) {
       return;
     }
     
     // Create a script element
     const script = document.createElement('script');
-    script.id = 'archimind-network-interceptor';
+    script.id = 'jaydai:network-interceptor';
     
     // Set script source from extension resources
     script.src = chrome.runtime.getURL('injectedInterceptor.js');
@@ -38,9 +38,9 @@ export function injectNetworkInterceptor(): void {
  * Sets up a listener for events from the injected script
  */
 function setupInterceptListener(): void {
-  document.addEventListener('archimind-network-intercept', async (event: CustomEvent) => {
+  document.addEventListener('jaydai:network-intercept', async (event: CustomEvent) => {
     const { type, data } = event.detail;
-    
+    console.log('==============setupInterceptListener', type, data);
     try {
       switch (type) {
         case 'userInfo':
@@ -48,6 +48,7 @@ function setupInterceptListener(): void {
           break;
           
         case 'conversationList':
+          console.log('==============handleConversationList', data);
           handleConversationList(data);
           break;
           
@@ -104,6 +105,7 @@ function handleUserInfo(data: any): void {
  * Handle intercepted conversation list data
  */
 function handleConversationList(data: any): void {
+  console.log('handleConversationList', data);
   try {
     if (data && data.responseBody) {
       // Process the conversation list data
@@ -146,6 +148,7 @@ function extractConversations(responseBody: any): any[] {
   }
   return [];
 }
+
 
 /**
  * Handle intercepted specific conversation data

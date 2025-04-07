@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { getMessage } from '@/core/utils/i18n';
 
 export interface BaseDialogProps {
   open: boolean;
@@ -27,8 +28,8 @@ export const BaseDialog: React.FC<BaseDialogProps> = ({
         className={className} 
         onClick={(e) => e.stopPropagation()}
       >
-        {title && <h2 className="dialog-title">{title}</h2>}
-        {description && <p className="dialog-description">{description}</p>}
+        {title && <h2 className="dialog-title">{getMessage(title, undefined, title)}</h2>}
+        {description && <p className="dialog-description">{getMessage(description, undefined, description)}</p>}
         {children}
       </DialogContent>
     </Dialog>

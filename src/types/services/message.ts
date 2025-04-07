@@ -5,7 +5,7 @@ export interface Message {
     role: 'user' | 'assistant' | 'system' | 'tool';
     model?: string;
     timestamp: number;           // This will store create_time
-    parent_message_id?: string;  // New field to track message thread
+    parent_message_provider_id?: string;  // New field to track message thread
     thinkingTime?: number;
     // rank property removed
   }

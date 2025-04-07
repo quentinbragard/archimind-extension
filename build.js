@@ -44,9 +44,9 @@ try {
   // Create zip file for production builds if requested
   if (isProd && isZip) {
     console.log('📦 Creating zip file for Chrome Web Store submission...');
-    const zipCommand = 'cd dist && zip -r ../archimind-extension.zip *';
+    const zipCommand = 'cd dist && zip -r ../jaydai-extension.zip *';
     execSync(zipCommand, { stdio: 'inherit' });
-    console.log('📦 Created archimind-extension.zip');
+    console.log('📦 Created jaydai-extension.zip');
   }
   
   console.log('✅ Build completed successfully!');
@@ -62,7 +62,7 @@ try {
   
   // Display API URL
   const apiUrl = isProd 
-    ? 'https://archimind-api-sw5cmqbraq-uc.a.run.app/' 
+    ? 'https://api-prod-sw5cmqbraq-od.a.run.app' 
     : 'http://localhost:8000';
   console.log(`\n🔌 API URL: ${apiUrl}`);
   
@@ -73,7 +73,7 @@ try {
     console.log('2. Enable Developer Mode');
     console.log('3. Load unpacked extension from the "dist" folder');
     if (isZip) {
-      console.log('4. Upload archimind-extension.zip to Chrome Web Store');
+      console.log('4. Upload jaydai-extension.zip to Chrome Web Store');
     }
   } else {
     console.log('1. Open Chrome Extensions page (chrome://extensions/)');

@@ -1,5 +1,5 @@
 // src/components/dialogs/core/DialogContext.tsx
-import React, { createContext, useContext, useState, useCallback, useMemo, ReactNode, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo, ReactNode, useEffect, useRef } from 'react';
 import { DialogType, DialogProps, DIALOG_TYPES } from '@/types/dialog';
 
 // Define the Dialog Manager context type
@@ -21,9 +21,40 @@ declare global {
     dialogManager?: {
       openDialog: <T extends DialogType>(type: T, data?: DialogProps[T]) => void;
       closeDialog: (type: DialogType) => void;
+      isInitialized?: boolean;
     };
   }
 }
+
+/**
+ * Create a fallback dialog manager for when the context isn't available
+ */
+const createFallbackDialogManager = (): DialogManagerContextType => {
+  console.warn('Using fallback dialog manager. Some functionality may be limited.');
+  
+  return {
+    openDialogs: {} as Record<DialogType, boolean>,
+    dialogData: {} as DialogProps,
+    openDialog: (type, data) => {
+      console.warn(`Attempted to open dialog ${type} using fallback dialog manager`);
+      if (typeof window !== 'undefined' && window.dialogManager) {
+        window.dialogManager.openDialog(type, data);
+      } else {
+        console.error(`Cannot open dialog ${type}: dialog manager not available`);
+      }
+    },
+    closeDialog: (type) => {
+      console.warn(`Attempted to close dialog ${type} using fallback dialog manager`);
+      if (typeof window !== 'undefined' && window.dialogManager) {
+        window.dialogManager.closeDialog(type);
+      } else {
+        console.error(`Cannot close dialog ${type}: dialog manager not available`);
+      }
+    },
+    isDialogOpen: () => false,
+    getDialogData: () => undefined,
+  };
+};
 
 /**
  * Hook to use the dialog manager within components
@@ -46,8 +77,9 @@ export function useDialogManager(): DialogManagerContextType {
       };
     }
     
-    // If no fallback is available, throw the error
-    throw new Error('useDialogManager must be used within a DialogManagerProvider');
+    // If no fallback is available, use our fallback implementation
+    // instead of throwing an error
+    return createFallbackDialogManager();
   }
   
   return context;
@@ -87,6 +119,7 @@ export function useDialog<T extends DialogType>(type: T) {
   };
 }
 
+
 /**
  * Hook for opening dialogs with type safety
  */
@@ -113,6 +146,9 @@ export function useOpenDialog() {
     
     openConfirmation: (props: DialogProps[typeof DIALOG_TYPES.CONFIRMATION]) => 
       openDialog(DIALOG_TYPES.CONFIRMATION, props),
+      
+    // Add the enhanced stats dialog opener
+    openEnhancedStats: () => openDialog(DIALOG_TYPES.ENHANCED_STATS, {}),
   };
 }
 
@@ -128,6 +164,7 @@ export const DialogManagerProvider: React.FC<DialogManagerProviderProps> = ({ ch
   // State for tracking open dialogs and their data
   const [openDialogs, setOpenDialogs] = useState<Record<DialogType, boolean>>({} as Record<DialogType, boolean>);
   const [dialogData, setDialogData] = useState<DialogProps>({} as DialogProps);
+  const isInitializedRef = useRef(false);
   
   // Dialog management functions
   const openDialog = useCallback(<T extends DialogType>(type: T, data?: DialogProps[T]) => {
@@ -161,32 +198,38 @@ export const DialogManagerProvider: React.FC<DialogManagerProviderProps> = ({ ch
     getDialogData,
   }), [openDialogs, dialogData, openDialog, closeDialog, isDialogOpen, getDialogData]);
   
-  // Assign window.dialogManager methods
+  // Assign window.dialogManager methods - using useEffect with an empty
+  // dependency array ensures this only runs once on mount
   useEffect(() => {
     console.log('Initializing window.dialogManager');
     
-    // Make sure to define window.dialogManager if it doesn't exist
+    // Initialize dialogManager if it doesn't exist
     if (!window.dialogManager) {
       window.dialogManager = {
         openDialog,
-        closeDialog
+        closeDialog,
+        isInitialized: true
       };
       console.log('window.dialogManager initialized successfully');
+      isInitializedRef.current = true;
     } else {
+      // Update existing dialog manager
       console.log('window.dialogManager already exists, updating methods');
       window.dialogManager.openDialog = openDialog;
       window.dialogManager.closeDialog = closeDialog;
+      window.dialogManager.isInitialized = true;
+      isInitializedRef.current = true;
     }
     
     // Keep the useEffect for cleanup
     return () => {
       console.log('Cleaning up window.dialogManager');
-      if (window.dialogManager) {
-        // Only delete if our functions were assigned
+      if (window.dialogManager && isInitializedRef.current) {
+        // Check if our functions were assigned
         if (window.dialogManager.openDialog === openDialog) {
-          // Instead of deleting the object, set to undefined
-          window.dialogManager = undefined;
-          console.log('window.dialogManager cleaned up');
+          // Just mark as uninitialized instead of deleting
+          window.dialogManager.isInitialized = false;
+          console.log('window.dialogManager marked as uninitialized');
         } else {
           console.log('Not cleaning up window.dialogManager as it was overridden');
         }

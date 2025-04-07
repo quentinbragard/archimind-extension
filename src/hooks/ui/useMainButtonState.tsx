@@ -1,72 +1,90 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
-import { useNotifications } from '@/hooks/notifications/useNotifications';
+// src/hooks/ui/useMainButtonState.ts
 
-/**
- * Hook to manage the state of the main button and its panel
- */
-export function useMainButtonState() {
+import { useState, useRef, useEffect } from 'react';
+
+export type PanelType = 'menu' | 'notifications' | 'templates' | 'stats' | 'templatesBrowse';
+
+export const useMainButtonState = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [panelType, setPanelType] = useState<PanelType>('menu');
+  const [notificationCount, setNotificationCount] = useState(0);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-  
-  // Get notification count directly from useNotifications hook
-  const { unreadCount } = useNotifications();
 
-  // Handle clicks outside to close menu
+  // Combined event handling for improved coordination
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        isOpen &&
-        menuRef.current &&
-        buttonRef.current &&
-        !menuRef.current.contains(e.target as Node) &&
-        !buttonRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
+    console.log('🔁 useMainButtonState mounted');
+    // Handle notification count changes
+    const handleNotificationCountChanged = (event: CustomEvent) => {
+      const { unreadCount } = event.detail;
+      console.log("unreadCount 👀👀👀👀", unreadCount);
+      setNotificationCount(unreadCount);
+    };
+
+    // Handle specific request to open notifications panel
+    const handleOpenNotifications = () => {
+      console.log('Opening notifications panel');
+      // Important: Set panel type first, then open
+      setIsOpen(true);
+    };
+
+    // Handle toggle panel event for any panel type
+    const handleTogglePanel = (event: CustomEvent) => {
+      const { panel } = event.detail;
+      if (panel) {
+        console.log(`Toggle panel requested: ${panel}`);
+        // Set the requested panel type
+        setPanelType(panel as PanelType);
+        // Only open if not already open
+        if (!isOpen) {
+          setIsOpen(true);
+        }
       }
     };
-  
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+
+    // Handle close all panels event - NEW!
+    const handleCloseAllPanels = () => {
+      console.log('Closing all panels');
+      setIsOpen(false);
     };
-  }, [isOpen]);
 
-  // UI event handlers
-  const toggleMenu = useCallback(() => {
-    setIsOpen(prevIsOpen => !prevIsOpen);
-  }, []);
+    // Register all event listeners
+    document.addEventListener('jaydai:notification-count-changed', handleNotificationCountChanged as EventListener);
+    document.addEventListener('jaydai:open-notifications', handleOpenNotifications);
+    document.addEventListener('jaydai:toggle-panel', handleTogglePanel as EventListener);
+    document.addEventListener('jaydai:close-all-panels', handleCloseAllPanels);
 
-  const handleClosePanel = useCallback(() => {
+    // Cleanup function
+    return () => {
+      document.removeEventListener('jaydai:notification-count-changed', handleNotificationCountChanged as EventListener);
+      document.removeEventListener('jaydai:open-notifications', handleOpenNotifications);
+      document.removeEventListener('jaydai:toggle-panel', handleTogglePanel as EventListener);
+      document.removeEventListener('jaydai:close-all-panels', handleCloseAllPanels);
+    };
+  }, [isOpen]); // Include isOpen in dependencies for toggling logic
+
+  // Toggle menu open/closed without resetting panel type
+  const toggleMenu = () => {
+    setIsOpen(prev => !prev);
+    // Only reset to menu panel when opening and no specific panel is active
+    if (!isOpen && panelType === 'menu') {
+      setPanelType('menu');
+    }
+  };
+
+  // Close panel
+  const handleClosePanel = () => {
     setIsOpen(false);
-  }, []);
-
-  const handleImageLoad = useCallback(() => {
-    setImageLoaded(true);
-  }, []);
-
-  const handleImageError = useCallback(() => {
-    setImageLoaded(false);
-    console.error("Failed to load logo image");
-  }, []);
+    // Optionally reset panel type when closing
+    // setPanelType('menu');
+  };
 
   return {
-    // State
     isOpen,
-    notificationCount: unreadCount, // Use the count from useNotifications
-    imageLoaded,
-    
-    // Refs
+    panelType,
+    setPanelType,
+    notificationCount,
     buttonRef,
-    menuRef,
-    
-    // Event handlers
     toggleMenu,
     handleClosePanel,
-    handleImageLoad,
-    handleImageError
   };
-}
-
-export default useMainButtonState;
+};

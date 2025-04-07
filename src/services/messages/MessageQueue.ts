@@ -29,11 +29,12 @@ export class MessageQueue extends AbstractBaseService {
   
   protected async onInitialize(): Promise<void> {
     debug('Initializing MessageQueue');
-    document.addEventListener('archimind:queue-message', this.handleQueueMessage);
+    // Use direct event listener
+    document.addEventListener('jaydai:queue-message', this.handleQueueMessage);
   }
   
   protected onCleanup(): void {
-    document.removeEventListener('archimind:queue-message', this.handleQueueMessage);
+    document.removeEventListener('jaydai:queue-message', this.handleQueueMessage);
     if (this.timer !== null) {
       clearTimeout(this.timer);
       this.timer = null;
@@ -108,11 +109,11 @@ export class MessageQueue extends AbstractBaseService {
     try {
       // Format messages for API
       const formattedMessages = messages.map(msg => ({
-        message_id: msg.messageId,
-        provider_chat_id: msg.conversationId,
+        message_provider_id: msg.messageId,
+        chat_provider_id: msg.conversationId,
         content: msg.content,
         role: msg.role,
-        parent_message_id: msg.parent_message_id,
+        parent_message_provider_id: msg.parent_message_provider_id,
         model: msg.model || 'unknown',
         created_at: msg.timestamp
       }));

@@ -2,17 +2,17 @@
 import { apiClient } from './ApiClient';
 
 export interface SaveMessageParams {
-  message_id: string;
+  message_provider_id: string;
   content: string;
   role: string;
-  provider_chat_id: string;
+  chat_provider_id: string;
   model?: string;
   created_at?: number;
-  parent_message_id?: string; // Added parent_message_id
+  parent_message_provider_id?: string; // Added parent_message_provider_id
 }
 
 export interface SaveChatParams {
-  provider_chat_id: string;
+  chat_provider_id: string;
   title: string;
   provider_name?: string;
 }
@@ -22,6 +22,7 @@ export class MessageApi {
    * Save a batch of messages in one operation
    */
   async saveMessageBatch(messages: SaveMessageParams[]): Promise<any> {
+    console.log('saveMessageBatch', messages);
     return apiClient.request('/save/batch/message', {
       method: 'POST',
       body: JSON.stringify({
@@ -59,7 +60,7 @@ export class MessageApi {
     return apiClient.request('/save/chat', {
       method: 'POST',
       body: JSON.stringify({
-        provider_chat_id: chat.provider_chat_id,
+        chat_provider_id: chat.chat_provider_id,
         title: chat.title,
         provider_name: chat.provider_name || 'ChatGPT'
       })

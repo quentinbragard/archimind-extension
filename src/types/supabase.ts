@@ -38,7 +38,7 @@ export type Database = {
         Row: {
           created_at: string
           id: number
-          provider_chat_id: string | null
+          chat_provider_id: string | null
           provider_name: string | null
           title: string | null
           user_id: string | null
@@ -46,7 +46,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: number
-          provider_chat_id?: string | null
+          chat_provider_id?: string | null
           provider_name?: string | null
           title?: string | null
           user_id?: string | null
@@ -54,7 +54,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: number
-          provider_chat_id?: string | null
+          chat_provider_id?: string | null
           provider_name?: string | null
           title?: string | null
           user_id?: string | null

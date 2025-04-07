@@ -14,7 +14,7 @@ export class AuthNotifications {
         label: 'Sign In',
         onClick: () => {
           // Trigger sign-in dialog
-          document.dispatchEvent(new CustomEvent('archimind:show-auth-modal', {
+          document.dispatchEvent(new CustomEvent('jaydai:show-auth-modal', {
             detail: { mode: 'signin', isSessionExpired: true }
           }));
         }
@@ -35,7 +35,7 @@ export class AuthNotifications {
    * Emit auth error event
    */
   public static notifyAuthError(errorCode: AuthErrorCode, errorMessage: string | null): void {
-    document.dispatchEvent(new CustomEvent('archimind:auth-error', {
+    document.dispatchEvent(new CustomEvent('jaydai:auth-error', {
       detail: { errorCode }
     }));
     

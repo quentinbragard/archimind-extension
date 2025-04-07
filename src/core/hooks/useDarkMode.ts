@@ -10,7 +10,7 @@ type Theme = 'light' | 'dark' | 'system';
  * Hook to manage dark mode
  */
 export function useDarkMode(): [Theme, (theme: Theme) => void] {
-  const [theme, setThemeInStorage] = useLocalStorage<Theme>('archimind-theme', 'system');
+  const [theme, setThemeInStorage] = useLocalStorage<Theme>('jaydai-theme', 'system');
   
   // Apply theme
   useEffect(() => {

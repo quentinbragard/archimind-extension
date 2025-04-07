@@ -68,7 +68,7 @@ async function emailSignIn(email, password, sendResponse) {
     try {
       console.log("🔑 Attempting email sign-in for:", email);
       
-      const response = await fetch("http://127.0.0.1:8000/auth/sign_in", {
+      const response = await fetch(`${process.env.VITE_API_URL}/auth/sign_in`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -97,6 +97,7 @@ async function emailSignIn(email, password, sendResponse) {
       
       console.log("✅ Email Sign-In successful");
       
+      
       // Store session data first (tokens)
       storeAuthSession(data.session);
       
@@ -106,6 +107,8 @@ async function emailSignIn(email, password, sendResponse) {
       } else {
         console.warn("⚠️ No user data returned from sign-in endpoint");
       }
+
+      chrome.tabs.create({ url: 'https://chat.openai.com' });
       
       // Response should be sent after storage operations
       sendResponse({ 
@@ -128,7 +131,7 @@ async function emailSignIn(email, password, sendResponse) {
     console.log("📝 Attempting sign-up for:", email);
     
     // Send request to our backend API
-    fetch("http://127.0.0.1:8000/auth/sign_up", {
+    fetch(`${process.env.VITE_API_URL}/auth/sign_up`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, name }),
@@ -158,9 +161,11 @@ async function emailSignIn(email, password, sendResponse) {
         storeAuthSession(data.session);
       }
       
+      // Open ChatGPT in a new tab
+      chrome.tabs.create({ url: 'https://chat.openai.com' });
+      
       sendResponse({ 
         success: true, 
-        message: "Signup successful. Please check your email to verify your account.",
         user: data.user
       });
     })
@@ -175,16 +180,32 @@ async function emailSignIn(email, password, sendResponse) {
     return true; // Keep channel open for async response
   }
   
+  // In src/extension/background/background.js
   function googleSignIn(sendResponse) {
     console.log("🔍 Starting Google sign-in flow");
     
     const manifest = chrome.runtime.getManifest();
-    const authUrl = new URL("https://accounts.google.com/o/oauth2/auth");
+    const redirectUri = `https://${chrome.runtime.id}.chromiumapp.org`;
+    
+    // Ensure required configuration is present
+    if (!manifest.oauth2 || !manifest.oauth2.client_id) {
+      console.error("❌ Missing Google OAuth client ID in manifest");
+      sendResponse({ 
+        success: false, 
+        error: "Google OAuth is not properly configured"
+      });
+      return true;
+    }
+    
+    const authUrl = new URL('https://accounts.google.com/o/oauth2/auth');
+    authUrl.searchParams.set('client_id', manifest.oauth2.client_id);
+    authUrl.searchParams.set('response_type', 'id_token');
+    authUrl.searchParams.set('access_type', 'offline');
+    authUrl.searchParams.set('redirect_uri', redirectUri);
+    authUrl.searchParams.set('scope', (manifest.oauth2.scopes || ['email', 'profile']).join(' '));
+    authUrl.searchParams.set('prompt', 'consent');
   
-    authUrl.searchParams.set("client_id", manifest.oauth2.client_id);
-    authUrl.searchParams.set("response_type", "id_token");
-    authUrl.searchParams.set("redirect_uri", `https://${chrome.runtime.id}.chromiumapp.org`);
-    authUrl.searchParams.set("scope", manifest.oauth2.scopes.join(" "));
+    console.log("Redirect URI:", redirectUri);
   
     chrome.identity.launchWebAuthFlow({ 
       url: authUrl.href, 
@@ -214,7 +235,7 @@ async function emailSignIn(email, password, sendResponse) {
         const idToken = params.get("id_token");
   
         if (!idToken) {
-          console.error("❌ No ID token in redirect URL");
+          console.error("❌ No id_token in redirect URL");
           sendResponse({ 
             success: false, 
             error: "Google authentication didn't return an ID token" 
@@ -224,10 +245,18 @@ async function emailSignIn(email, password, sendResponse) {
   
         console.log("🔹 Google ID Token received");
   
-        const response = await fetch("http://127.0.0.1:8000/auth/google", {
+        // Use environment variable for the API endpoint
+        const apiUrl = process.env.VITE_API_URL;
+        const response = await fetch(`${apiUrl}/auth/sign_in_with_google`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id_token: idToken }),
+          headers: { 
+            "Content-Type": "application/json",
+            "Origin": chrome.runtime.getURL('') 
+          },
+          body: JSON.stringify({ 
+            id_token: idToken
+          }),
+          credentials: 'include'
         });
   
         const data = await response.json();
@@ -258,13 +287,15 @@ async function emailSignIn(email, password, sendResponse) {
         
         if (data.user) {
           storeUser(data.user);
-          storeUserId(data.user.id);
         }
+        
+        // Open ChatGPT in a new tab (success case)
+        chrome.tabs.create({ url: 'https://chat.openai.com' });
         
         sendResponse({ 
           success: true, 
           user: data.user, 
-          access_token: data.session.access_token 
+          session: data.session
         });
       } catch (error) {
         console.error("❌ Error processing Google authentication:", error);
@@ -278,6 +309,9 @@ async function emailSignIn(email, password, sendResponse) {
     return true; // Keep channel open for async response
   }
   
+  /**
+   * Store user data
+   */
   function storeUser(user) {
     if (!user) {
       console.error("❌ Attempted to store undefined/null user");
@@ -293,6 +327,7 @@ async function emailSignIn(email, password, sendResponse) {
     });
   }
   
+  
   function storeUserId(userId) {
     if (!userId) {
       console.error("❌ Attempted to store empty user ID");
@@ -307,6 +342,38 @@ async function emailSignIn(email, password, sendResponse) {
       }
     });
   }
+
+
+
+/**
+ * Store authentication session
+ */
+function storeAuthSession(session) {
+  if (!session) {
+    console.error("❌ Attempted to store undefined/null session");
+    return;
+  }
+
+  if (!session.access_token || !session.refresh_token) {
+    console.error("❌ Incomplete session data:", session);
+    return;
+  }
+
+  console.log("🔄 Storing auth session. Expires at:", session.expires_at);
+  
+  chrome.storage.local.set({
+    access_token: session.access_token,
+    refresh_token: session.refresh_token,
+    token_expires_at: session.expires_at,
+  }, () => {
+    if (chrome.runtime.lastError) {
+      console.error("❌ Error storing auth session:", chrome.runtime.lastError);
+    } else {
+      console.log("✅ Auth session stored successfully");
+    }
+  });
+}
+
 
 /* ==========================================
  🔹 AUTH TOKEN MANAGEMENT
@@ -366,14 +433,14 @@ function sendAuthToken(sendResponse) {
         if (result.user && result.user.id) {
           sendResponse({ 
             success: false, 
-            error: "Session expired. Please sign in again.",
+            error: chrome.i18n.getMessage('sessionExpired', undefined, 'Session expired. Please sign in again.'),
             errorCode: "REFRESH_TOKEN_MISSING",
             needsReauth: true
           });
         } else {
           sendResponse({ 
             success: false, 
-            error: "Not authenticated. Please sign in.",
+            error: chrome.i18n.getMessage('notAuthenticated', undefined, 'Not authenticated. Please sign in.'),
             errorCode: "NOT_AUTHENTICATED",
             needsReauth: true
           });
@@ -383,7 +450,7 @@ function sendAuthToken(sendResponse) {
       
       try {
         console.log("🔄 Attempting to refresh token...");
-        const response = await fetch("http://127.0.0.1:8000/auth/refresh_token", {
+        const response = await fetch(`${process.env.VITE_API_URL}/auth/refresh_token`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ refresh_token: result.refresh_token }),
@@ -398,14 +465,14 @@ function sendAuthToken(sendResponse) {
             
             sendResponse({ 
               success: false, 
-              error: "Session expired. Please sign in again.", 
+              error: chrome.i18n.getMessage('sessionExpired', undefined, 'Session expired. Please sign in again.'),
               errorCode: "INVALID_REFRESH_TOKEN",
               needsReauth: true
             });
           } else {
             sendResponse({ 
               success: false, 
-              error: "Failed to refresh token. Please try again.", 
+              error: chrome.i18n.getMessage('refreshFailed', undefined, 'Failed to refresh token. Please try again.'),
               errorCode: "REFRESH_FAILED"
             });
           }
@@ -432,7 +499,7 @@ function sendAuthToken(sendResponse) {
         console.error("❌ Error refreshing access token:", error);
         sendResponse({ 
           success: false, 
-          error: "Network error while refreshing token", 
+          error: chrome.i18n.getMessage('networkError', undefined, 'Network error while refreshing token'), 
           errorCode: "NETWORK_ERROR"
         });
       }
@@ -440,34 +507,7 @@ function sendAuthToken(sendResponse) {
     return true; // Keep channel open for async response
   }
   
-  /**
-   * Stores authentication session.
-   */
-  function storeAuthSession(session) {
-    if (!session) {
-      console.error("❌ Attempted to store undefined/null session");
-      return;
-    }
   
-    if (!session.access_token || !session.refresh_token) {
-      console.error("❌ Incomplete session data:", session);
-      return;
-    }
-  
-    console.log("🔄 Storing auth session. Expires at:", session.expires_at);
-    
-    chrome.storage.local.set({
-      access_token: session.access_token,
-      refresh_token: session.refresh_token,
-      token_expires_at: session.expires_at,
-    }, () => {
-      if (chrome.runtime.lastError) {
-        console.error("❌ Error storing auth session:", chrome.runtime.lastError);
-      } else {
-        console.log("✅ Auth session stored successfully");
-      }
-    });
-  }
   
   /**
    * Clear authentication data - useful for sign out or when tokens become invalid

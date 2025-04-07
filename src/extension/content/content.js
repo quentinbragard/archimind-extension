@@ -11,7 +11,7 @@
     
     // Create the script element
     const script = document.createElement('script');
-    script.id = 'archimind-network-interceptor';
+    script.id = 'jaydai:network-interceptor';
     script.src = chrome.runtime.getURL('injectedInterceptor.js');
     
     // Function to actually inject the script

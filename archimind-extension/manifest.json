@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_appName__",
+  "version": "1.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "32108269805-41r18uv12i7ckqqo9ice7dr7jbe50qgp.apps.googleusercontent.com",
+    "scopes": ["openid", "email", "profile"]
+  },
+  "background": {
+      "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "type": "module"
+    }
+  ],
+  "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+      }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/popup-styles.css",
+        "assets/welcome-styles.css",
+        "welcome.js",
+        "popup.js",
+        "assets/*",
+        "content-init.js",
+        "injectedInterceptor.js",
+        "applicationInitializer.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

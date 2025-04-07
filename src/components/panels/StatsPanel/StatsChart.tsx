@@ -1,8 +1,6 @@
 import React from 'react';
-import { 
-  LineChart, 
-  Line, 
-  BarChart, 
+import {  
+  BarChart,
   Bar, 
   PieChart, 
   Pie, 
@@ -15,6 +13,8 @@ import {
   ResponsiveContainer 
 } from 'recharts';
 import { ChartData } from '@/services/analytics/StatsService';
+import { getMessage } from '@/core/utils/i18n';
+import { BarChart2 } from 'lucide-react';
 
 interface StatsChartProps {
   data: ChartData;
@@ -52,52 +52,22 @@ const StatsChart: React.FC<StatsChartProps> = ({
   
   // Render appropriate chart based on type
   const renderChart = () => {
+    // Check if there's any data to display
+    const hasData = data.values.some(value => value > 0) || data.values.length === 0;
+    
+    // If no data, show an empty state
+    if (!hasData) {
+      return (
+        <div className="flex flex-col items-center justify-center h-full text-center">
+          <BarChart2 className="h-10 w-10 text-muted-foreground mb-2 opacity-30" />
+          <p className="text-xs text-muted-foreground">No data available</p>
+        </div>
+      );
+    }
+    
     switch (type) {
-      case 'line':
-        return (
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={chartData}
-              margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
-            >
-              {showGrid && <CartesianGrid strokeDasharray="3 3" vertical={false} />}
-              <XAxis 
-                dataKey="name" 
-                tick={{ fontSize: 10 }} 
-                tickLine={false} 
-                axisLine={false} 
-              />
-              <YAxis 
-                tick={{ fontSize: 10 }} 
-                tickLine={false} 
-                axisLine={false}
-                width={25}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)', 
-                  border: 'none',
-                  borderRadius: '4px',
-                  fontSize: '12px',
-                  padding: '8px'
-                }}
-                itemStyle={{ color: '#fff' }}
-                labelStyle={{ color: '#ccc', marginBottom: '4px' }}
-              />
-              {showLegend && <Legend />}
-              <Line 
-                type="monotone" 
-                dataKey="value" 
-                stroke={color} 
-                strokeWidth={2} 
-                dot={{ r: 2, fill: color }} 
-                activeDot={{ r: 4 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        );
-        
       case 'bar':
+        console.log("chartData", chartData);
         return (
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -188,7 +158,7 @@ const StatsChart: React.FC<StatsChartProps> = ({
         );
         
       default:
-        return <div>Unsupported chart type</div>;
+        return <div>{getMessage('unsupportedChartType', undefined, 'Unsupported chart type')}</div>;
     }
   };
 

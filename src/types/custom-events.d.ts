@@ -4,50 +4,50 @@
  */
 
 interface ArchimindEventMap {
-    'archimind-network-intercept': CustomEvent<{
+    'jaydai:network-intercept': CustomEvent<{
         type: string;
         data: any;
       }>;
       
       // Message events
-      'archimind:message-extracted': CustomEvent<{
+      'jaydai:message-extracted': CustomEvent<{
         message: import('./services/message').Message;
       }>;
       
-    'archimind:queue-message': CustomEvent<{
+    'jaydai:queue-message': CustomEvent<{
       message: import('./services/message').Message;
     }>;
     
     // Conversation events
-    'archimind:conversation-loaded': CustomEvent<{
+    'jaydai:conversation-loaded': CustomEvent<{
       conversation: import('./services/conversation').Conversation;
       messages: import('./services/message').Message[];
     }>;
-    'archimind:conversation-list': CustomEvent<{
+    'jaydai:conversation-list': CustomEvent<{
       conversations: import('./services/conversation').Conversation[];
     }>;
-    'archimind:conversation-changed': CustomEvent<{
+    'jaydai:conversation-changed': CustomEvent<{
       conversationId: string;
     }>;
     
     // Notification events
-    'archimind:notification-count-changed': CustomEvent<{
+    'jaydai:notification-count-changed': CustomEvent<{
       unreadCount: number;
     }>;
-    'archimind:open-notifications': CustomEvent<void>;
-    'archimind:open-settings': CustomEvent<void>;
-    'archimind:open-templates': CustomEvent<void>;
+    'jaydai:open-notifications': CustomEvent<void>;
+    'jaydai:open-settings': CustomEvent<void>;
+    'jaydai:open-templates': CustomEvent<void>;
     
     // Dialog events
-    'archimind:show-auth-modal': CustomEvent<{
+    'jaydai:show-auth-modal': CustomEvent<{
       mode: 'signin' | 'signup';
       isSessionExpired?: boolean;
     }>;
-    'archimind:auth-error': CustomEvent<{
+    'jaydai:auth-error': CustomEvent<{
       errorCode: string;
     }>;
-    'archimind:placeholder-editor-opened': CustomEvent<void>;
-    'archimind:placeholder-editor-closed': CustomEvent<void>;
+    'jaydai:placeholder-editor-opened': CustomEvent<void>;
+    'jaydai:placeholder-editor-closed': CustomEvent<void>;
   }
   
   // Augment the Document interface to include our custom events

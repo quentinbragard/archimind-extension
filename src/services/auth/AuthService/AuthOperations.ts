@@ -1,5 +1,5 @@
-// src/services/auth/AuthOperations.ts
-import { AuthUser } from '@/types';
+// src/services/auth/AuthService/AuthOperations.ts
+import { AuthUser, AuthToken } from '@/types';
 import { emitEvent, AppEvent } from '@/core/events/events';
 
 export class AuthOperations {
@@ -21,6 +21,7 @@ export class AuthOperations {
     success: boolean;
     user?: AuthUser;
     error?: string;
+    session?: AuthToken;
   }> {
     return new Promise((resolve) => {
       chrome.runtime.sendMessage(
@@ -39,6 +40,7 @@ export class AuthOperations {
     success: boolean;
     user?: AuthUser;
     error?: string;
+    session?: AuthToken;
   }> {
     return new Promise((resolve) => {
       chrome.runtime.sendMessage(
@@ -49,6 +51,27 @@ export class AuthOperations {
       );
     });
   }
+  
+  /**
+   * Sign in with Google OAuth
+   */
+  public static async signInWithGoogle(): Promise<{
+    success: boolean;
+    user?: AuthUser;
+    error?: string;
+    session?: AuthToken;
+  }> {
+    return new Promise((resolve) => {
+      chrome.runtime.sendMessage(
+        { action: "googleSignIn" }, 
+        (response) => {
+          resolve(response);
+        }
+      );
+    });
+  }
+  
+  
   
   /**
    * Sign out the current user

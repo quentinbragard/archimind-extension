@@ -80,7 +80,7 @@ export class ContentScript {
   private injectUIComponents(): void {
     // Inject main button
     componentInjector.inject(Main, {}, {
-      id: 'archimind-root',
+      id: 'jaydai-root',
       position: {
         type: 'fixed',
         zIndex: '9999'

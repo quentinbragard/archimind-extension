@@ -2,7 +2,7 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
+import { getMessage } from '@/core/utils/i18n';
 interface PinButtonProps {
   isPinned: boolean;
   onClick: (e: React.MouseEvent) => void;
@@ -35,7 +35,7 @@ export function PinButton({
           : 'text-muted-foreground opacity-70 hover:opacity-100'
       } ${className}`}
       onClick={handleClick}
-      title={isPinned ? 'Unpin folder' : 'Pin folder'}
+      title={isPinned ? getMessage('unpin_folder', undefined, 'Unpin folder') : getMessage('pin_folder', undefined, 'Pin folder')}
       disabled={disabled}
     >
       <Star className={`h-4 w-4 ${isPinned ? 'fill-yellow-500' : ''}`} />

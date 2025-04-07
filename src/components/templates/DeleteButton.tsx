@@ -16,6 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { getMessage } from '@/core/utils/i18n';
 
 interface DeleteButtonProps {
   onDelete: () => Promise<void | boolean> | void;
@@ -82,7 +83,7 @@ export function DeleteButton({
               className="text-destructive cursor-pointer"
             >
               <Trash className="h-4 w-4 mr-2" />
-              Delete {itemType === 'folder' ? 'Folder' : 'Template'}
+              {getMessage('deleteItem', [itemType === 'folder' ? getMessage('folder', undefined, 'Folder') : getMessage('template', undefined, 'Template')], `Delete ${itemType === 'folder' ? 'Folder' : 'Template'}`)}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -99,35 +100,40 @@ export function DeleteButton({
         </Button>
       )}
 
-      {/* Delete confirmation dialog */}
+      {/* Delete Confirmation Dialog */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="flex items-center">
-              <AlertTriangle className="h-5 w-5 mr-2 text-destructive" />
-              Delete {itemType === 'folder' ? 'Folder' : 'Template'}
+            <DialogTitle>
+              {getMessage('deleteConfirmTitle', [itemType === 'folder' ? getMessage('folder', undefined, 'Folder') : getMessage('template', undefined, 'Template')], `Delete ${itemType === 'folder' ? 'Folder' : 'Template'}`)}
             </DialogTitle>
             <DialogDescription>
-              {itemType === 'folder' 
-                ? 'This will permanently delete the folder and all templates inside it.' 
-                : 'This will permanently delete this template.'} 
-              This action cannot be undone.
+              {getMessage('deleteConfirmMessageNoName', [itemType === 'folder' ? getMessage('folder', undefined, 'folder') : getMessage('template', undefined, 'template')], `This will permanently delete this ${itemType}.`)}
+              {itemType === 'folder' && (
+                <div className="mt-2 text-amber-600 dark:text-amber-400 flex items-start">
+                  <AlertTriangle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+                  <span>{getMessage('deleteFolderWarning', undefined, 'All templates inside this folder will also be deleted.')}</span>
+                </div>
+              )}
+              <div className="mt-2 text-amber-600 dark:text-amber-400 flex items-start">
+                <AlertTriangle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+                <span>{getMessage('deleteActionWarning', undefined, 'This action cannot be undone.')}</span>
+              </div>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button
-              variant="outline"
+            <Button 
+              variant="outline" 
               onClick={() => setIsDeleteDialogOpen(false)}
-              disabled={isDeleting}
             >
-              Cancel
+              {getMessage('cancel', undefined, 'Cancel')}
             </Button>
             <Button 
               variant="destructive" 
               onClick={handleDelete}
               disabled={isDeleting}
             >
-              {isDeleting ? 'Deleting...' : 'Delete'}
+              {isDeleting ? getMessage('deleting', undefined, 'Deleting...') : getMessage('delete', undefined, 'Delete')}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -1,34 +1,48 @@
-// src/components/layout/MainButton.tsx
+// src/components/MainButton.tsx
 
+import { useEffect } from 'react';
 import { Toaster } from "sonner";
 import { Button } from '@/components/ui/button';
 import { X } from "lucide-react";
 import PanelManager from '@/components/panels/PanelManager';
 import ErrorBoundary from '@/components/common/ErrorBoundary';
 import { useMainButtonState } from '@/hooks/ui/useMainButtonState';
+import { getMessage } from '@/core/utils/i18n';
 
 /**
  * Main floating button component that opens various panels
  */
-
 const MainButton = () => {
   const {
     isOpen,
+    panelType,
+    setPanelType,
     notificationCount,
     buttonRef,
     toggleMenu,
     handleClosePanel,
   } = useMainButtonState();
 
+  // We don't need this event listener anymore because it's handled in useMainButtonState
+  // But keeping the component structure for reference
+  useEffect(() => {
+    // Any additional component-specific initialization can go here
+    
+    return () => {
+      // Cleanup if needed
+    };
+  }, []);
+
   return (
     <ErrorBoundary>
-      <div className="fixed bottom-6 right-2 z-[9999]">
+      <div className="fixed bottom-6 right-8 z-[9999]">
         <div className="relative">
           {/* Panel Manager */}
           <PanelManager
             isOpen={isOpen}
             onClose={handleClosePanel}
             notificationCount={notificationCount}
+            activePanelType={panelType}
           />
 
           {/* Main Button with logo */}
@@ -36,11 +50,13 @@ const MainButton = () => {
             <Button 
               ref={buttonRef}
               onClick={toggleMenu}
-              className="bg-transparent w-full h-full rounded-full shadow-lg p-0 overflow-hidden flex items-center justify-center"
+              className="bg-transparent hover:bg-transparent hover:scale-125 transition-all duration-300 w-full h-full rounded-full p-0 overflow-hidden flex items-center justify-center"
             >
               <img 
-                src="https://gjszbwfzgnwblvdehzcq.supabase.co/storage/v1/object/public/chrome_extension_assets/archimind-logo.png" 
-                alt="Archimind Logo" 
+                src={document.documentElement.classList.contains('dark') 
+                  ? "https://vetoswvwgsebhxetqppa.supabase.co/storage/v1/object/public/images/jaydai-extension-logo.png" 
+                  : "https://vetoswvwgsebhxetqppa.supabase.co/storage/v1/object/public/images/jaydai-extension-logo-dark.png"} 
+                alt={getMessage('appName', undefined, 'Jaydai Chrome Extension')} 
                 className="w-full h-full object-cover"
               />
               

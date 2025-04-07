@@ -5,6 +5,8 @@ import { debug } from '@/core/config';
 import { errorReporter } from '@/core/errors/ErrorReporter';
 import { AppError, ErrorCode } from '@/core/errors/AppError';
 import { emitEvent, AppEvent } from '@/core/events/events';
+import { SaveChatParams, messageApi } from '../api/MessageApi';
+
 
 /**
  * Manages conversation data and current conversation state
@@ -32,15 +34,15 @@ export class ConversationManager extends AbstractBaseService {
     window.addEventListener('popstate', this.checkUrlForConversationId);
     this.checkUrlForConversationId(); // Check current URL
     
-    // Listen for conversation data events
-    document.addEventListener('archimind:conversation-loaded', this.handleConversationLoaded);
-    document.addEventListener('archimind:conversation-list', this.handleConversationList);
+    // Listen for conversation data events - using direct event listeners
+    document.addEventListener('jaydai:conversation-loaded', this.handleConversationLoaded);
+    document.addEventListener('jaydai:conversation-list', this.handleConversationList);
   }
   
   protected onCleanup(): void {
     window.removeEventListener('popstate', this.checkUrlForConversationId);
-    document.removeEventListener('archimind:conversation-loaded', this.handleConversationLoaded);
-    document.removeEventListener('archimind:conversation-list', this.handleConversationList);
+    document.removeEventListener('jaydai:conversation-loaded', this.handleConversationLoaded);
+    document.removeEventListener('jaydai:conversation-list', this.handleConversationList);
     debug('ConversationManager cleaned up');
   }
   
@@ -75,16 +77,56 @@ export class ConversationManager extends AbstractBaseService {
       this.addConversation(conversation);
     }
   };
+
+  /**
+   * Map conversations to chat parameters for saving
+   */
+  private mapConversationsToChatParams(conversations: any[]): SaveChatParams[] {
+    return conversations.map(chat => ({
+      chat_provider_id: chat.id,
+      title: chat.title || 'Unnamed Conversation',
+      provider_name: 'ChatGPT'  // Explicitly set to ChatGPT
+    })).filter(chat => 
+      // Filter out any chats with missing or invalid chat_provider_id
+      chat.chat_provider_id && 
+      chat.chat_provider_id.trim() !== ''
+    );
+  }
+
+  /**
+   * Save a batch of chats
+   */
+  async saveChatBatch(chats: SaveChatParams[]): Promise<any> {
+    const processedChats = this.mapConversationsToChatParams(chats);
+    return messageApi.saveChatBatch(processedChats);
+  }
   
   /**
    * Handle conversation list data
    */
   private handleConversationList = (event: CustomEvent): void => {
-    const { conversations } = event.detail;
-    if (conversations && Array.isArray(conversations)) {
-      conversations.forEach(conversation => {
-        this.addConversation(conversation);
-      });
+    try {
+      // The format might have changed with the new event system
+      // Now we expect conversations directly in detail.conversations, or
+      // we fallback to the old format looking for responseBody.items
+      
+      const { conversations, data } = event.detail;
+      
+      // Try to get conversations from the new format first
+      let conversationItems = conversations;
+      
+      // If not found, try the old format
+      if (!conversationItems && data?.responseBody?.items) {
+        conversationItems = data.responseBody.items;
+      }
+      
+      if (conversationItems && Array.isArray(conversationItems)) {
+        this.saveChatBatch(conversationItems);
+      }
+    } catch (error) {
+      errorReporter.captureError(
+        new AppError('Error handling conversation list', ErrorCode.API_ERROR, error)
+      );
     }
   };
   
@@ -103,8 +145,13 @@ export class ConversationManager extends AbstractBaseService {
     
     this.currentConversationId = conversationId;
     
-    // Emit event for conversation change
+    // Emit event for conversation change - both new app event and custom event
     emitEvent(AppEvent.CHAT_CONVERSATION_CHANGED, { conversationId });
+    
+    // Also dispatch custom event for components that listen to it directly
+    document.dispatchEvent(new CustomEvent('jaydai:conversation-changed', {
+      detail: { conversationId }
+    }));
   }
   
   /**

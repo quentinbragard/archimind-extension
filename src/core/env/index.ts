@@ -7,7 +7,7 @@
  */
 export const ENV = {
   // Use process.env for Vite's replacement
-  API_URL: process.env.VITE_API_URL || 'http://localhost:8000',
+  API_URL: process.env.VITE_API_URL,
   DEBUG: process.env.VITE_DEBUG === 'true' || process.env.NODE_ENV !== 'production',
   APP_VERSION: process.env.VITE_APP_VERSION || '1.0.0',
   NODE_ENV: process.env.NODE_ENV || 'development',

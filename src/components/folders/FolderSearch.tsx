@@ -37,23 +37,27 @@ export function FolderSearch({
   
   return (
     <div className={`p-4 ${className}`}>
-      <div className="relative mb-2">
-        <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <div className="flex items-center relative mb-2">
+        <div className="absolute left-2 pointer-events-none">
+          <Search className="h-4 w-4 text-muted-foreground" />
+        </div>
         <Input 
           value={searchQuery} 
           onChange={handleSearchChange}
           placeholder={placeholderText}
-          className="pl-8 pr-8"
+          className="w-full pl-8 pr-8"
         />
         {searchQuery && (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute right-1 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0"
-            onClick={handleReset}
-          >
-            <X className="h-4 w-4" />
-          </Button>
+          <div className="absolute right-1">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-6 w-6 p-0"
+              onClick={handleReset}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         )}
       </div>
     </div>

@@ -45,13 +45,15 @@ export class AppInitializer {
     try {
       console.log('🚀 Initializing Archimind application...');
       // Inject UI components - Main component will set up the dialog system
+      await new Promise(resolve => setTimeout(resolve, 1000));
       this.injectUIComponents();
+       // Register all services
+       registerServices();
       
       // Initialize event manager first
       eventManager.initialize();
       
-      // Register all services
-      registerServices();
+     
       
       // Initialize services
       const servicesInitialized = await serviceManager.initializeAll();
@@ -85,18 +87,18 @@ export class AppInitializer {
    * Inject UI components
    */
   private injectUIComponents(): void {
-    console.log('🔧 Injecting UI components...');
+    console.log(chrome.i18n.getMessage('injectingUI'));
     
     // Inject the Main component which includes DialogProvider
     componentInjector.inject(Main, {}, {
-      id: 'archimind-main-component',
+      id: 'jaydai-main-component',
       position: {
         type: 'fixed',
         zIndex: '9999'
       }
     });
     
-    console.log('✅ UI components injected');
+    console.log(chrome.i18n.getMessage('uiInjected'));
   }
   
   /**

@@ -37,7 +37,7 @@ class ComponentInjector {
     
     try {
       // First check if styles already exist
-      if (document.getElementById('archimind-styles')) {
+      if (document.getElementById('jaydai-styles')) {
         this.stylesInjected = true;
         return;
       }
@@ -46,17 +46,17 @@ class ComponentInjector {
       const style = document.createElement('link');
       style.rel = 'stylesheet';
       style.href = chrome.runtime.getURL('assets/content.css');
-      style.id = 'archimind-styles';
+      style.id = 'jaydai-styles';
       document.head.appendChild(style);
       
       // Add an inline style to ensure shadow piercing for our components
       const inlineStyle = document.createElement('style');
       inlineStyle.textContent = `
-        #archimind-root, #archimind-root * {
-          z-index: 999999;
+        #jaydai-root, #jaydai-root * {
+          z-index: 1;
         }
       `;
-      inlineStyle.id = 'archimind-inline-styles';
+      inlineStyle.id = 'jaydai-inline-styles';
       document.head.appendChild(inlineStyle);
       
       this.stylesInjected = true;
@@ -74,10 +74,10 @@ class ComponentInjector {
     if (existingContainer) return existingContainer;
 
     // Create main container if it doesn't exist
-    let rootContainer = document.getElementById('archimind-root');
+    let rootContainer = document.getElementById('jaydai-root');
     if (!rootContainer) {
       rootContainer = document.createElement('div');
-      rootContainer.id = 'archimind-root';
+      rootContainer.id = 'jaydai-root';
       document.body.appendChild(rootContainer);
     }
 
@@ -125,7 +125,7 @@ class ComponentInjector {
     this.injectStyles();
     
     // Create unique ID for this instance
-    const id = options.id || `archimind-${Component.displayName || 'component'}-${Date.now()}`;
+    const id = options.id || `jaydai-${Component.displayName || 'component'}-${Date.now()}`;
     const containerId = `${id}-container`;
     
     // Create or get container
@@ -181,17 +181,17 @@ class ComponentInjector {
     
     // Also remove styles if they were injected
     if (this.stylesInjected) {
-      const styleElement = document.getElementById('archimind-styles');
+      const styleElement = document.getElementById('jaydai-styles');
       if (styleElement) styleElement.remove();
       
-      const inlineStyles = document.getElementById('archimind-inline-styles');
+      const inlineStyles = document.getElementById('jaydai-inline-styles');
       if (inlineStyles) inlineStyles.remove();
       
       this.stylesInjected = false;
     }
     
     // Remove root container if it exists
-    const rootContainer = document.getElementById('archimind-root');
+    const rootContainer = document.getElementById('jaydai-root');
     if (rootContainer) rootContainer.remove();
     
     console.log('✅ All components removed');

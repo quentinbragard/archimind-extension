@@ -1,4 +1,4 @@
-// src/services/auth/AuthService.ts
+// src/services/auth/AuthService/index.ts
 import { AbstractBaseService } from '../../BaseService';
 import { AuthState, AuthErrorCode } from '@/types';
 import { AuthStateManager } from './AuthStateManager';
@@ -128,13 +128,18 @@ export class AuthService extends AbstractBaseService {
    */
   public async signInWithEmail(email: string, password: string): Promise<boolean> {
     const response = await AuthOperations.signInWithEmail(email, password);
-    
     if (response.success) {
       this.stateManager.updateState({
         isAuthenticated: true,
         user: response.user,
         error: null
       });
+      
+      // Store session token if provided
+      if (response.session) {
+        await this.tokenService.storeAuthSession(response.session);
+      }
+      
       return true;
     } else {
       this.stateManager.updateState({
@@ -159,6 +164,12 @@ export class AuthService extends AbstractBaseService {
           error: null
         });
       }
+      
+      // Store session token if provided
+      if (response.session) {
+        await this.tokenService.storeAuthSession(response.session);
+      }
+      
       return true;
     } else {
       this.stateManager.updateState({
@@ -168,6 +179,51 @@ export class AuthService extends AbstractBaseService {
       return false;
     }
   }
+  
+  /**
+   * Sign in with Google OAuth
+   */
+  public async signInWithGoogle(): Promise<boolean> {
+    this.stateManager.updateState({ isLoading: true, error: null });
+    
+    try {
+      const response = await AuthOperations.signInWithGoogle();
+      
+      if (response.success && response.user) {
+        this.stateManager.updateState({
+          isAuthenticated: true,
+          user: response.user,
+          isLoading: false,
+          error: null
+        });
+        
+        // Store session token if provided
+        if (response.session) {
+          await this.tokenService.storeAuthSession(response.session);
+        }
+        
+        return true;
+      } else {
+        this.stateManager.updateState({
+          isAuthenticated: false,
+          isLoading: false,
+          error: response.error || 'Google sign-in failed'
+        });
+        return false;
+      }
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+      
+      this.stateManager.updateState({
+        isAuthenticated: false,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Google sign-in failed'
+      });
+      
+      return false;
+    }
+  }
+  
   
   /**
    * Sign out the current user

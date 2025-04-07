@@ -1,16 +1,16 @@
 {
   "manifest_version": 3,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvneO+KCb6Mw9KTmGgC9Ds19UZUF13PlIPnLV8sc2X8FDzMOPLH6vO92ELpFJDXk6kxrmNv/Pmwj2zbPlVMbSVZ+3odxeUSpA7wxrVSiHbTTJNSCW52M2vhNumRiSLRk4eU+d+Cgom3qtZtxiYS/yOyovPqS8Xspw2sgx+7eg/GcQ95Q+RYzNa8xDLneXXlfUH4H/INMyg72fg/oc5UMqOwPurGQ1IG5EiLv4AiQDtesCR3y+nxpVAaCd02fRptTzc1ctULQYHLBloRyVQmHSXUOPKtM81HHLKS2iupshnQdq66KX7qb5vP3+Q64KVyTBXye4OB4aMLrvKhdh6KB//wIDAQAB",
   "name": "__MSG_appName__",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
   "permissions": [
     "storage",
-    "scripting",
     "identity"
   ],
   "oauth2": {
-    "client_id": "32108269805-41r18uv12i7ckqqo9ice7dr7jbe50qgp.apps.googleusercontent.com",
+    "client_id": "32108269805-53if057t0kgq0qlmjqr3st6v124cajam.apps.googleusercontent.com",
     "scopes": ["openid", "email", "profile"]
   },
   "background": {

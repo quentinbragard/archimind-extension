@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Archimind Chrome Extension",
+    "message": "Jaydai Chrome Extension",
     "description": "The name of the extension"
   },
   "appDesc": {
@@ -8,7 +8,7 @@
     "description": "The description of the extension"
   },
   "welcomeTitle": {
-    "message": "Welcome to Archimind",
+    "message": "Welcome to Jaydai",
     "description": "Welcome page title"
   },
   "yourAICompanion": {
@@ -20,23 +20,23 @@
     "description": "Prefix for the changing tasks in the welcome page"
   },
   "aiTask1": {
-    "message": "write professional emails",
+    "message": " write professional emails",
     "description": "AI task example 1"
   },
   "aiTask2": {
-    "message": "organize complex data",
+    "message": " organize complex data",
     "description": "AI task example 2"
   }, 
   "aiTask3": {
-    "message": "create compelling content",
+    "message": " create compelling content",
     "description": "AI task example 3"
   },
   "aiTask4": {
-    "message": "summarize long documents",
+    "message": " summarize long documents",
     "description": "AI task example 4"
   },
   "aiTask5": {
-    "message": "draft technical reports",
+    "message": " draft technical reports",
     "description": "AI task example 5"
   },
   "welcomeDescription": {
@@ -98,7 +98,7 @@
   },
   
   "howItWorks": {
-    "message": "How Archimind Empowers You",
+    "message": "How Jaydai Empowers You",
     "description": "Section title"
   },
   "aiUsageTracking": {
@@ -130,7 +130,7 @@
     "description": "CTA title"
   },
   "readyToUnlockDesc": {
-    "message": "Archimind helps you harness the power of AI while maintaining your unique human expertise.",
+    "message": "Jaydai helps you harness the power of AI while maintaining your unique human expertise.",
     "description": "CTA description"
   },
   "name": {
@@ -140,6 +140,16 @@
   "signInWith": {
     "message": "Sign In with $PROVIDER$",
     "description": "Sign in with provider button",
+    "placeholders": {
+      "provider": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
+  },
+  "signUpWith": {
+    "message": "Sign Up with $PROVIDER$",
+    "description": "Sign up with provider button",
     "placeholders": {
       "provider": {
         "content": "$1",
@@ -159,8 +169,8 @@
     "message": "Or continue with",
     "description": "Separator text"
   },
-  "signInToArchimind": {
-    "message": "Sign In to Archimind",
+  "signInToJaydai": {
+    "message": "Sign In to Jaydai",
     "description": "Sign in dialog title"
   },
   "enterEmailPassword": {
@@ -249,7 +259,7 @@
   },
   "cancel": {
     "message": "Cancel",
-    "description": "Cancel button"
+    "description": "Button text to cancel an action"
   },
   "save": {
     "message": "Save",
@@ -308,8 +318,8 @@
     "description": "Dismiss button"
   },
   "newTemplate": {
-    "message": "New",
-    "description": "New template button"
+    "message": "New Template",
+    "description": "Button text to create a new template"
   },
   "officialTemplates": {
     "message": "Official Templates",
@@ -336,8 +346,8 @@
     "description": "Create template dialog title"
   },
   "templateName": {
-    "message": "Name",
-    "description": "Template name label"
+    "message": "Template Name",
+    "description": "Label for template name field"
   },
   "templateDescription": {
     "message": "Description (optional)",
@@ -353,18 +363,18 @@
   },
   "update": {
     "message": "Update",
-    "description": "Update button"
+    "description": "Button text to update an item"
   },
   "create": {
     "message": "Create",
-    "description": "Create button"
+    "description": "Button text to create an item"
   },
-  "archimindSettings": {
-    "message": "Archimind Settings",
+  "jaydaiSettings": {
+    "message": "Jaydai Settings",
     "description": "Settings dialog title"
   },
-  "configureArchimind": {
-    "message": "Configure how Archimind works with ChatGPT",
+  "configureJaydai": {
+    "message": "Configure how Jaydai works with ChatGPT",
     "description": "Settings dialog description"
   },
   "autoSaveConversations": {
@@ -385,7 +395,7 @@
   },
   "customizeTemplate": {
     "message": "Customize Template: $TEMPLATE_NAME$",
-    "description": "Customize template dialog title",
+    "description": "Title for template customization dialog",
     "placeholders": {
       "template_name": {
         "content": "$1",
@@ -394,28 +404,108 @@
     }
   },
   "customizeTemplateDesc": {
-    "message": "Customize the template to your needs",
-    "description": "Customize template dialog description"
+    "message": "Customize the template by filling in the placeholders.",
+    "description": "Description for template customization dialog"
   },
   "replacePlaceholders": {
     "message": "Replace Placeholders",
-    "description": "Replace placeholders section title"
+    "description": "Title for placeholder replacement section"
   },
   "editTemplate": {
     "message": "Edit Template",
-    "description": "Edit template section title"
+    "description": "Title for template editing section"
+  },
+  "createNewTemplate": {
+    "message": "Create New Template",
+    "description": "Title for create template dialog"
+  },
+  "editTemplateDescription": {
+    "message": "Edit your template details below.",
+    "description": "Description for edit template dialog"
+  },
+  "createTemplateDescription": {
+    "message": "Create a new template to use with AI conversations.",
+    "description": "Description for create template dialog"
+  },
+  "enterTemplateName": {
+    "message": "Enter template name",
+    "description": "Placeholder for template name input"
+  },
+  "templateNameRequired": {
+    "message": "Template name is required",
+    "description": "Validation error for template name"
+  },
+  "description": {
+    "message": "Description",
+    "description": "Label for description field"
+  },
+  "templateDescriptionPlaceholder": {
+    "message": "Brief description of this template",
+    "description": "Placeholder for template description input"
+  },
+  "folder": {
+    "message": "Folder",
+    "description": "Label for folder field"
+  },
+  "selectFolder": {
+    "message": "Select a folder",
+    "description": "Placeholder for folder selection"
+  },
+  "noFolder": {
+    "message": "No folder (root)",
+    "description": "Option for no folder selection"
+  },
+  "createNewFolder": {
+    "message": "Create new folder...",
+    "description": "Option to create a new folder"
+  },
+  "content": {
+    "message": "Content",
+    "description": "Label for content field"
+  },
+  "enterTemplateContent": {
+    "message": "Enter your template content here",
+    "description": "Placeholder for template content input"
+  },
+  "templateContentRequired": {
+    "message": "Template content is required",
+    "description": "Validation error for template content"
+  },
+  "updating": {
+    "message": "Updating...",
+    "description": "Text shown while updating template"
+  },
+  "creating": {
+    "message": "Creating...",
+    "description": "Text shown while creating template"
+  },
+  "templateUpdated": {
+    "message": "Template updated successfully, refreshing page...",
+    "description": "Success message when template is updated"
+  },
+  "templateCreated": {
+    "message": "Template created successfully",
+    "description": "Success message when template is created"
+  },
+  "errorSavingTemplate": {
+    "message": "Error saving template",
+    "description": "Error message when saving template fails"
+  },
+  "failedToCreateFolder": {
+    "message": "Failed to create folder",
+    "description": "Error message when folder creation fails"
   },
   "noPlaceholders": {
-    "message": "No placeholders found in this template",
-    "description": "No placeholders message"
+    "message": "No placeholders found in this template.",
+    "description": "Message shown when no placeholders are found"
   },
   "useTemplate": {
     "message": "Use Template",
-    "description": "Use template button"
+    "description": "Button text to use template"
   },
   "browseMore": {
     "message": "Browse More",
-    "description": "Browse more button text"
+    "description": "Button text to browse more items"
   },
   "browseMoreTitle": {
     "message": "Browse Templates",
@@ -440,5 +530,793 @@
   "allFolders": {
     "message": "All Folders",
     "description": "All folders section title"
+  },
+  "enterpriseFeature": {
+    "message": "This feature is only available in the Enterprise plan",
+    "description": "Message shown when a feature is enterprise-only"
+  },
+  "contactForEnterprise": {
+    "message": "Contact us to learn more about our Enterprise plan",
+    "description": "Call to action for enterprise plan"
+  },
+  "refreshing": {
+    "message": "Refreshing...",
+    "description": "Loading state text for refresh action"
+  },
+  "refresh": {
+    "message": "Refresh",
+    "description": "Refresh button text"
+  },
+  "noPinnedOfficialTemplates": {
+    "message": "No pinned official templates. Click Browse More to add some.",
+    "description": "Empty state message for official templates section"
+  },
+  "noUserTemplates": {
+    "message": "No user templates. Create a template to get started.",
+    "description": "Empty state message for user templates section"
+  },
+  "confirmAction": {
+    "message": "Confirm Action",
+    "description": "Title for confirmation dialog"
+  },
+  "confirmActionDescription": {
+    "message": "Are you sure you want to proceed?",
+    "description": "Description for confirmation dialog"
+  },
+  "confirm": {
+    "message": "Confirm",
+    "description": "Confirm button text"
+  },
+  "today": {
+    "message": "today",
+    "description": "Relative time for current day"
+  },
+  "yesterday": {
+    "message": "yesterday",
+    "description": "Relative time for previous day"
+  },
+  "daysAgo": {
+    "message": "$1 days ago",
+    "description": "Relative time for days ago",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "untitledTemplate": {
+    "message": "Untitled Template",
+    "description": "Default title for untitled templates"
+  },
+  "passwordTooShort": {
+    "message": "Password must be at least 8 characters",
+    "description": "Password validation error message"
+  },
+  "invalidCredentials": {
+    "message": "Invalid email or password",
+    "description": "Authentication error message"
+  },
+  "emailNotVerified": {
+    "message": "Email not verified",
+    "description": "Email verification error message"
+  },
+  "emailAlreadyInUse": {
+    "message": "Email already in use",
+    "description": "Sign up error message"
+  },
+  "sessionExpired": {
+    "message": "Session expired. Please sign in again.",
+    "description": "Session expiration message"
+  },
+  "notAuthenticated": {
+    "message": "Not authenticated. Please sign in.",
+    "description": "Authentication required message"
+  },
+  "networkError": {
+    "message": "Network error while refreshing token",
+    "description": "Network error message"
+  },
+  "googleAuthCanceled": {
+    "message": "Google authentication was canceled",
+    "description": "Google auth cancellation message"
+  },
+  "noAuthData": {
+    "message": "No authentication data received from Google",
+    "description": "Google auth error message"
+  },
+  "injectingUI": {
+    "message": "Injecting UI components...",
+    "description": "UI injection log message"
+  },
+  "uiInjected": {
+    "message": "UI components injected",
+    "description": "UI injection success message"
+  },
+  "welcome_notification_title": {
+    "message": "Welcome to Jaydai!",
+    "description": "Title for the welcome notification"
+  },
+  "welcome_notification_body": {
+    "message": "Thank you for joining us. Follow our LinkedIn page to stay updated on our latest features and announcements.",
+    "description": "Body text for the welcome notification"
+  },
+  "followOnLinkedIn": {
+    "message": "Follow on LinkedIn",
+    "description": "Button text to follow on LinkedIn"
+  },
+  "first_conversation_title": {
+    "message": "Analyze Your First Conversation",
+    "description": "Title for the first conversation notification"
+  },
+  "first_conversation_body": {
+    "message": "Start your AI analytics journey by sending your first message to ChatGPT or loading a past conversation.",
+    "description": "Body text for the first conversation notification"
+  },
+  "startConversation": {
+    "message": "Start Conversation",
+    "description": "Button text to start a conversation"
+  },
+  "prompt_length_insight_title": {
+    "message": "Prompt Length Insight",
+    "description": "Title for prompt length insight notification"
+  },
+  "response_time_insight_title": {
+    "message": "Response Time Insight",
+    "description": "Title for response time insight notification"
+  },
+  "conversation_quality_insight_title": {
+    "message": "Conversation Quality Insight",
+    "description": "Title for conversation quality insight notification"
+  },
+  "new_insight_title": {
+    "message": "New Insight Available",
+    "description": "Title for new insight notification"
+  },
+  "notifications_marked_read": {
+    "message": "Marked {{count}} notifications as read",
+    "description": "Message shown when notifications are marked as read",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "notification_deleted": {
+    "message": "Notification deleted",
+    "description": "Message shown when a notification is deleted"
+  },
+  "new_notifications_title": {
+    "message": "$COUNT$ new notification(s)",
+    "description": "Title for new notifications",
+    "placeholders": {
+      "COUNT": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "new_notifications_description": {
+    "message": "Click to view your notifications",
+    "description": "Description for new notifications"
+  },
+  "view_action": {
+    "message": "View",
+    "description": "Text for view action button"
+  },
+  "no_url_error": {
+    "message": "No URL provided for action",
+    "description": "Error message when URL is missing for an action"
+  },
+  "action_error": {
+    "message": "Failed to process notification action",
+    "description": "Error message when notification action fails"
+  },
+  "popular": {
+    "message": "Popular",
+    "description": "Label for popular items section"
+  },
+  "used_times": {
+    "message": "Used {{count}} times",
+    "description": "Message showing how many times a template has been used",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "last_used": {
+    "message": "Last used {{date}}",
+    "description": "Message showing when a template was last used",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "today"
+      }
+    }
+  },
+  "betaFeatureWarning": {
+    "message": "Beta Feature Warning",
+    "description": "Warning title for beta features"
+  },
+  "betaFeatureWarningMessage": {
+    "message": "We are still building and refining our analytics features. If you encounter any issues, please email us at",
+    "description": "Warning message for beta features"
+  },
+  "questionsFeedback": {
+    "message": "Questions or feedback?",
+    "description": "Label for questions and feedback"
+  },
+  "comingSoon": {
+    "message": "Coming Soon!",
+    "description": "Title for upcoming features"
+  },
+  "featureInDevelopment": {
+    "message": "We're still building this exciting $FEATURE$ feature! Your support gives us energy to build faster.",
+    "description": "Message for features in development",
+    "placeholders": {
+      "feature": {
+        "content": "$1",
+        "example": "analytics"
+      }
+    }
+  },
+  "followUsLinkedIn": {
+    "message": "Follow Us on LinkedIn",
+    "description": "Call to action for LinkedIn"
+  },
+  "rateUs": {
+    "message": "Rate Us 5 Stars",
+    "description": "Call to action for rating"
+  },
+  "enhancedAiAnalytics": {
+    "message": "Enhanced AI Analytics",
+    "description": "Title for enhanced analytics"
+  },
+  "analyticsDescription": {
+    "message": "Detailed insights about your AI interactions and usage patterns",
+    "description": "Description of analytics features"
+  },
+  "overview": {
+    "message": "Overview",
+    "description": "Overview tab title"
+  },
+  "usageMetrics": {
+    "message": "Usage Metrics",
+    "description": "Usage metrics section title"
+  },
+  "efficiency": {
+    "message": "Efficiency",
+    "description": "Efficiency section title"
+  },
+  "insights": {
+    "message": "Insights",
+    "description": "Insights section title"
+  },
+  "totalConversations": {
+    "message": "Total Conversations",
+    "description": "Total conversations metric"
+  },
+  "messagesExchanged": {
+    "message": "Messages Exchanged",
+    "description": "Messages exchanged metric"
+  },
+  "efficiencyScore": {
+    "message": "Efficiency Score",
+    "description": "Efficiency score metric"
+  },
+  "avgResponseTime": {
+    "message": "Avg. Response Time",
+    "description": "Average response time metric"
+  },
+  "energyUsage": {
+    "message": "Energy Usage",
+    "description": "Energy usage metric"
+  },
+  "tokensProcessed": {
+    "message": "Tokens Processed",
+    "description": "Tokens processed metric"
+  },
+  "lastWeek": {
+    "message": "last week",
+    "description": "Time period indicator"
+  },
+  "perChat": {
+    "message": "per chat",
+    "description": "Per chat indicator"
+  },
+  "seconds": {
+    "message": "seconds",
+    "description": "Time unit"
+  },
+  "consumptionEquivalent": {
+    "message": "Consumption equivalent",
+    "description": "Consumption equivalent label"
+  },
+  "inputOutput": {
+    "message": "Input + Output",
+    "description": "Input and output label"
+  },
+  "basedOnUsage": {
+    "message": "Based on your usage patterns",
+    "description": "Usage pattern indicator"
+  },
+  "dailyActivity": {
+    "message": "Daily Activity",
+    "description": "Daily activity chart label"
+  },
+  "tokenDistribution": {
+    "message": "Token Distribution",
+    "description": "Token distribution chart label"
+  },
+  "modelUsage": {
+    "message": "Model Usage",
+    "description": "Model usage chart label"
+  },
+  "energyDetails": {
+    "message": "Energy Consumption Details",
+    "description": "Energy details chart label"
+  },
+  "tokenDetails": {
+    "message": "Token Usage Details",
+    "description": "Token details chart label"
+  },
+  "inputTokens": {
+    "message": "Input Tokens",
+    "description": "Input tokens label"
+  },
+  "outputTokens": {
+    "message": "Output Tokens",
+    "description": "Output tokens label"
+  },
+  "ratios": {
+    "message": "Ratios",
+    "description": "Ratios label"
+  },
+  "outputToInput": {
+    "message": "Output/Input",
+    "description": "Output to input ratio label"
+  },
+  "recentVsTotal": {
+    "message": "Recent/Total",
+    "description": "Recent vs total label"
+  },
+  "totalEnergy": {
+    "message": "Total Energy",
+    "description": "Total energy label"
+  },
+  "recentEnergy": {
+    "message": "Recent (7 days)",
+    "description": "Recent energy label"
+  },
+  "perMessage": {
+    "message": "Per Message",
+    "description": "Per message label"
+  },
+  "equivalent": {
+    "message": "Equivalent to",
+    "description": "Equivalent to label"
+  },
+  "input": {
+    "message": "Input",
+    "description": "Input label"
+  },
+  "output": {
+    "message": "Output",
+    "description": "Output label"
+  },
+  "unknown": {
+    "message": "Unknown",
+    "description": "Unknown label"
+  },
+  "total": {
+    "message": "Total",
+    "description": "Total label"
+  },
+  "recent": {
+    "message": "Recent",
+    "description": "Recent label"
+  },
+  "efficiencyDescription": {
+    "message": "How effectively you use AI based on various metrics",
+    "description": "Efficiency description"
+  },
+  "conversationMetrics": {
+    "message": "Conversation Metrics",
+    "description": "Conversation metrics title"
+  },
+  "avgMessagesPerChat": {
+    "message": "Avg. Messages Per Chat",
+    "description": "Average messages per chat metric"
+  },
+  "responseTime": {
+    "message": "Response Time",
+    "description": "Response time metric"
+  },
+  "resourceEfficiency": {
+    "message": "Resource Efficiency",
+    "description": "Resource efficiency metric"
+  },
+  "outputInputRatio": {
+    "message": "Output/Input Ratio",
+    "description": "Output/input ratio metric"
+  },
+  "energyPerMessage": {
+    "message": "Energy Per Message",
+    "description": "Energy per message metric"
+  },
+  "idealRange": {
+    "message": "Ideal range",
+    "description": "Ideal range label"
+  },
+  "fasterBetter": {
+    "message": "Faster is better",
+    "description": "Faster is better indicator"
+  },
+  "higherBetter": {
+    "message": "Higher is better - getting more output for your input",
+    "description": "Higher is better indicator"
+  },
+  "lowerBetter": {
+    "message": "Lower is better - more energy efficient",
+    "description": "Lower is better indicator"
+  },
+  "expertLevel": {
+    "message": "Expert AI user - highly efficient",
+    "description": "Expert level description"
+  },
+  "advancedLevel": {
+    "message": "Advanced AI user - good conversation flow",
+    "description": "Advanced level description"
+  },
+  "proficientLevel": {
+    "message": "Proficient AI user - effective usage",
+    "description": "Proficient level description"
+  },
+  "developingLevel": {
+    "message": "Developing AI user - learning patterns",
+    "description": "Developing level description"
+  },
+  "noviceLevel": {
+    "message": "Novice AI user - beginning your journey",
+    "description": "Novice level description"
+  },
+  "usageInsights": {
+    "message": "Usage Insights",
+    "description": "Usage insights title"
+  },
+  "insightsDescription": {
+    "message": "AI-generated insights based on your usage patterns",
+    "description": "Insights description"
+  },
+  "conversationPatterns": {
+    "message": "Conversation Patterns",
+    "description": "Conversation patterns title"
+  },
+  "tokenEfficiency": {
+    "message": "Token Efficiency",
+    "description": "Token efficiency title"
+  },
+  "energyAwareness": {
+    "message": "Energy Awareness",
+    "description": "Energy awareness title"
+  },
+  "usageFrequency": {
+    "message": "Usage Frequency",
+    "description": "Usage frequency title"
+  },
+  "deepEngagement": {
+    "message": "You engage in deep, thorough conversations with AI. This approach is excellent for complex topics and detailed explanations.",
+    "description": "Deep engagement insight"
+  },
+  "balancedEngagement": {
+    "message": "You maintain a balanced conversation flow with AI. This approach works well for most queries.",
+    "description": "Balanced engagement insight"
+  },
+  "briefInteractions": {
+    "message": "You prefer brief interactions with AI. Consider extended conversations for more complex topics.",
+    "description": "Brief interactions insight"
+  },
+  "highEfficiency": {
+    "message": "Your input/output ratio is excellent. You receive substantial AI responses relative to your prompts.",
+    "description": "High efficiency insight"
+  },
+  "goodEfficiency": {
+    "message": "Your input/output ratio is good. You get good value from your interactions.",
+    "description": "Good efficiency insight"
+  },
+  "improvableEfficiency": {
+    "message": "Your input/output ratio could be improved. Consider using more specific, focused prompts.",
+    "description": "Improvable efficiency insight"
+  },
+  "energyInsight": {
+    "message": "Your AI usage has consumed",
+    "description": "Energy insight prefix"
+  },
+  "ofEnergy": {
+    "message": "of energy",
+    "description": "Energy insight suffix"
+  },
+  "recentActivity": {
+    "message": "Your recent activity shows",
+    "description": "Recent activity prefix"
+  },
+  "conversationsInWeek": {
+    "message": "conversations in the past week",
+    "description": "Conversations in week suffix"
+  },
+  "highFrequency": {
+    "message": "You are a frequent AI user, making it a regular part of your workflow.",
+    "description": "High frequency insight"
+  },
+  "moderateFrequency": {
+    "message": "You use AI moderately, balancing it with other tools.",
+    "description": "Moderate frequency insight"
+  },
+  "lowFrequency": {
+    "message": "You use AI occasionally. Consider exploring more use cases to increase productivity.",
+    "description": "Low frequency insight"
+  },
+  "improvementSuggestions": {
+    "message": "Improvement Suggestions",
+    "description": "Improvement suggestions title"
+  },
+  "efficiencyTip": {
+    "message": "Efficiency Tip",
+    "description": "Efficiency tip title"
+  },
+  "efficiencyTipDesc": {
+    "message": "Try using more specific prompts to get more focused responses and improve your efficiency score.",
+    "description": "Efficiency tip description"
+  },
+  "outputRatioTip": {
+    "message": "Output Ratio Tip",
+    "description": "Output ratio tip title"
+  },
+  "outputRatioTipDesc": {
+    "message": "Your AI responses are relatively short compared to your inputs. Consider asking for more detailed or comprehensive answers.",
+    "description": "Output ratio tip description"
+  },
+  "responseTimeTip": {
+    "message": "Response Time Tip",
+    "description": "Response time tip title"
+  },
+  "responseTimeTipDesc": {
+    "message": "Your average response time is a bit high. Consider breaking complex questions into smaller parts for faster responses.",
+    "description": "Response time tip description"
+  },
+  "aiUsageProfile": {
+    "message": "Your AI Usage Profile",
+    "description": "AI usage profile title"
+  },
+  "expertDesc": {
+    "message": "You use AI with exceptional efficiency and effectiveness.",
+    "description": "Expert description"
+  },
+  "advancedDesc": {
+    "message": "You are skilled at getting valuable results from AI.",
+    "description": "Advanced description"
+  },
+  "proficientDesc": {
+    "message": "You use AI effectively with good results.",
+    "description": "Proficient description"
+  },
+  "developingDesc": {
+    "message": "You are learning to use AI more effectively.",
+    "description": "Developing description"
+  },
+  "noviceDesc": {
+    "message": "You are beginning your journey with AI.",
+    "description": "Novice description"
+  },
+  "usageOverview": {
+    "message": "Usage Overview",
+    "description": "Usage overview title"
+  },
+  "keyMetricsDesc": {
+    "message": "Key metrics about your AI usage",
+    "description": "Key metrics description"
+  },
+  "messages": {
+    "message": "messages",
+    "description": "Messages label"
+  },
+  "tokenRatios": {
+    "message": "Token Distribution",
+    "description": "Token ratios title"
+  },
+  "noModelData": {
+    "message": "No model usage data available",
+    "description": "No model data message"
+  },
+  "noEquivalent": {
+    "message": "No equivalent available",
+    "description": "No equivalent message"
+  },
+  "updated": {
+    "message": "Updated",
+    "description": "Updated label"
+  },
+  "viewEnhancedStats": {
+    "message": "View Enhanced Analytics",
+    "description": "View enhanced stats button label"
+  },
+  "energyEquivalent": {
+    "message": "Energy Equivalent",
+    "description": "Title for energy equivalent section"
+  },
+  "energyEquivalentHelp": {
+    "message": "This shows what your AI energy usage is equivalent to in everyday terms",
+    "description": "Help text explaining the energy equivalent feature"
+  },
+  "delete": {
+    "message": "Delete",
+    "description": "Delete button text"
+  },
+  "deleteItem": {
+    "message": "Delete $ITEM_TYPE$",
+    "description": "Delete item button text",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "Folder"
+      }
+    }
+  },
+  "deleteConfirmTitle": {
+    "message": "Delete $ITEM_TYPE$",
+    "description": "Delete confirmation dialog title",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "Folder"
+      }
+    }
+  },
+  "deleteConfirmMessage": {
+    "message": "This will permanently delete $ITEM_TYPE$ \"$ITEM_NAME$\".",
+    "description": "Delete confirmation message with item name",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "folder"
+      },
+      "item_name": {
+        "content": "$2",
+        "example": "My Folder"
+      }
+    }
+  },
+  "deleteConfirmMessageNoName": {
+    "message": "This will permanently delete this $ITEM_TYPE$.",
+    "description": "Delete confirmation message without item name",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "folder"
+      }
+    }
+  },
+  "deleteFolderWarning": {
+    "message": "All templates inside this folder will also be deleted.",
+    "description": "Warning about deleting folder contents"
+  },
+  "deleteActionWarning": {
+    "message": "This action cannot be undone.",
+    "description": "Warning about action being irreversible"
+  },
+  "deleting": {
+    "message": "Deleting...",
+    "description": "Text shown while deletion is in progress"
+  },
+  "loadingTemplates": {
+    "message": "Loading templates...",
+    "description": "Text shown when loading templates"
+  },
+  "unorganizedTemplates": {
+    "message": "Unorganized Templates",
+    "description": "Unorganized templates title"
+  },
+  "deleteTemplate": {
+    "message": "Delete Template",
+    "description": "Title for template deletion dialog"
+  },
+  "deleteTemplateConfirmation": {
+    "message": "Are you sure you want to delete this template? This action cannot be undone.",
+    "description": "Confirmation message for template deletion"
+  },
+  "deleteFolder": {
+    "message": "Delete Folder",
+    "description": "Title for folder deletion dialog"
+  },
+  "deleteFolderConfirmation": {
+    "message": "Are you sure you want to delete this folder and all its templates? This action cannot be undone.",
+    "description": "Confirmation message for folder deletion"
+  },
+  "organizationTemplates": {
+    "message": "Organization Templates",
+    "description": "Title for organization templates section"
+  },
+  "noPinnedOrganizationTemplates": {
+    "message": "No pinned organization templates.",
+    "description": "Message shown when no organization templates are pinned"
+  },
+  "organization_templates_title": {
+    "message": "Enterprise Templates",
+    "description": "Title for enterprise templates section"
+  },
+  "enterprise_feature": {
+    "message": "Enterprise Feature",
+    "description": "Label indicating an enterprise feature"
+  },
+  "organization_templates_description": {
+    "message": "Access to organization templates is an enterprise feature. Contact us to enable this for your team.",
+    "description": "Description text for enterprise templates feature"
+  },
+  "contact_enterprise_sales": {
+    "message": "Contact Sales",
+    "description": "Button text to contact sales for enterprise features"
+  },
+  "searchOfficialFolders": {
+    "message": "Search official folders...",
+    "description": "Placeholder text for searching official folders"
+  },
+  "searchOrganizationFolders": {
+    "message": "Search organization folders...",
+    "description": "Placeholder text for searching organization folders"
+  },
+  "loadingFolders": {
+    "message": "Loading $FOLDER_TYPE$ folders...",
+    "description": "Loading message for folders",
+    "placeholders": {
+      "folder_type": {
+        "content": "$1",
+        "example": "official"
+      }
+    }
+  },
+  "errorLoadingFolders": {
+    "message": "Error loading folders",
+    "description": "Error message when folders fail to load"
+  },
+  "unknownError": {
+    "message": "Unknown error",
+    "description": "Generic error message"
+  },
+  "noMatchingFolders": {
+    "message": "No folders matching \"$SEARCH_QUERY$\"",
+    "description": "Message shown when no folders match search query",
+    "placeholders": {
+      "search_query": {
+        "content": "$1",
+        "example": "marketing"
+      }
+    }
+  },
+  "noFoldersAvailable": {
+    "message": "No $FOLDER_TYPE$ folders available",
+    "description": "Message shown when no folders are available",
+    "placeholders": {
+      "folder_type": {
+        "content": "$1",
+        "example": "official"
+      }
+    }
+  },
+  "enterValueFor": {
+    "message": "Enter value for $PLACEHOLDER$",
+    "description": "Placeholder text for placeholder input field",
+    "placeholders": {
+      "placeholder": {
+        "content": "$1",
+        "example": "[NAME]"
+      }
+    }
+  },
+  "templateProcessingError": {
+    "message": "Failed to process template. Please try again.",
+    "description": "Error message when template processing fails"
   }
 }

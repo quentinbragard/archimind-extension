@@ -7,6 +7,10 @@ import { PlaceholderEditor } from './templates/PlaceHolderEditor';
 import { AuthDialog } from './auth/AuthDialog';
 import { SettingsDialog } from './settings/SettingsDialog';
 import { ConfirmationDialog } from './common/ConfirmationDialog';
+import { EnhancedStatsDialog } from './analytics/EnhancedStatsDialog';
+
+// Create a global dialog manager initialization flag
+let initializationAttempted = false;
 
 /**
  * Main dialog provider that includes all dialog components
@@ -16,7 +20,34 @@ export const DialogProvider: React.FC<{children: React.ReactNode}> = ({ children
   // Debug check to verify dialog manager initialization
   useEffect(() => {
     console.log('DialogProvider mounted, checking dialogManager availability');
-    console.log('window.dialogManager available:', !!window.dialogManager);
+    
+    // Attempt to initialize dialog manager if it doesn't exist
+    if (!window.dialogManager) {
+      console.warn('Dialog manager not found, will try to initialize from DialogProvider');
+      initializationAttempted = true;
+      
+      // Create a temporary placeholder until the real one is initialized
+      window.dialogManager = {
+        openDialog: (type, data) => {
+          console.warn(`Attempted to open dialog ${type} before initialization is complete.`);
+          // Queue this operation for after initialization
+          setTimeout(() => {
+            if (window.dialogManager?.isInitialized) {
+              console.log(`Executing queued dialog open for ${type}`);
+              window.dialogManager.openDialog(type, data);
+            } else {
+              console.error(`Failed to open dialog ${type}: dialog manager still not initialized.`);
+            }
+          }, 100);
+        },
+        closeDialog: (type) => {
+          console.warn(`Attempted to close dialog ${type} before initialization is complete.`);
+        },
+        isInitialized: false
+      };
+    } else {
+      console.log('window.dialogManager already available:', window.dialogManager);
+    }
     
     // Monitor for any errors in dialog functionality
     const handleError = (error: ErrorEvent) => {
@@ -43,6 +74,7 @@ export const DialogProvider: React.FC<{children: React.ReactNode}> = ({ children
       <AuthDialog />
       <SettingsDialog />
       <ConfirmationDialog />
+      <EnhancedStatsDialog />
     </DialogManagerProvider>
   );
 };
@@ -56,3 +88,4 @@ export { PlaceholderEditor } from './templates/PlaceHolderEditor';
 export { AuthDialog } from './auth/AuthDialog';
 export { SettingsDialog } from './settings/SettingsDialog';
 export { ConfirmationDialog } from './common/ConfirmationDialog';
+export { EnhancedStatsDialog } from './analytics/EnhancedStatsDialog';

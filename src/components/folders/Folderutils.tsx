@@ -1,6 +1,6 @@
 // src/components/panels/TemplatesPanel/utils/folderUtils.ts
 
-import { TemplateFolder } from '@/types/templates';
+import { TemplateFolder } from '@/types/prompts/templates';
 
 /**
  * Count all templates in a folder including its subfolders

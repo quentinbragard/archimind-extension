@@ -1,6 +1,6 @@
 {
  "appName": {
-    "message": "Extension Chrome Archimind",
+    "message": "Extension Chrome Jaydai",
     "description": "Le nom de l'extension"
   },
   "appDesc": {
@@ -8,7 +8,7 @@
     "description": "La description de l'extension"
   },
   "welcomeTitle": {
-    "message": "Bienvenue sur Archimind",
+    "message": "Bienvenue sur Jaydai",
     "description": "Titre de la page d'accueil"
   },
   "yourAICompanion": {
@@ -20,23 +20,23 @@
     "description": "Préfixe pour les tâches changeantes dans la page d'accueil"
   },
   "aiTask1": {
-    "message": "rédiger des emails professionnels",
+    "message": " rédiger des emails professionnels",
     "description": "Exemple de tâche IA 1"
   },
   "aiTask2": {
-    "message": "organiser des données complexes",
+    "message": " organiser des données complexes",
     "description": "Exemple de tâche IA 2"
   }, 
   "aiTask3": {
-    "message": "créer du contenu convaincant",
+    "message": " créer du contenu convaincant",
     "description": "Exemple de tâche IA 3"
   },
   "aiTask4": {
-    "message": "résumer de longs documents",
+    "message": " résumer de longs documents",
     "description": "Exemple de tâche IA 4"
   },
   "aiTask5": {
-    "message": "rédiger des rapports techniques",
+    "message": " rédiger des rapports techniques",
     "description": "Exemple de tâche IA 5"
   },
   "welcomeDescription": {
@@ -72,12 +72,12 @@
     "description": "Bouton CTA"
   },
   "signIn": {
-    "message": "Se Connecter",
-    "description": "Bouton de connexion"
+    "message": "Se connecter",
+    "description": "Title for sign in dialog"
   },
   "signUp": {
     "message": "S'inscrire",
-    "description": "Bouton d'inscription"
+    "description": "Title for sign up dialog"
   },
   "emailConfirmationRequired": {
     "message": "Vérification par e-mail requise après l'inscription",
@@ -96,7 +96,7 @@
     "description": "Sous-titre de la page d'accueil"
   },
   "howItWorks": {
-    "message": "Comment Archimind Vous Donne du Pouvoir",
+    "message": "Comment Jaydai Vous Donne du Pouvoir",
     "description": "Titre de section"
   },
   "aiUsageTracking": {
@@ -128,7 +128,7 @@
     "description": "Titre CTA"
   },
   "readyToUnlockDesc": {
-    "message": "Archimind vous aide à exploiter la puissance de l'IA tout en maintenant votre expertise humaine unique.",
+    "message": "Jaydai vous aide à exploiter la puissance de l'IA tout en maintenant votre expertise humaine unique.",
     "description": "Description CTA"
   },
   "name": {
@@ -157,8 +157,8 @@
     "message": "Ou continuer avec",
     "description": "Texte séparateur"
   },
-  "signInToArchimind": {
-    "message": "Connexion à Archimind",
+  "signInToJaydai": {
+    "message": "Connexion à Jaydai",
     "description": "Titre de dialogue de connexion"
   },
   "enterEmailPassword": {
@@ -231,23 +231,31 @@
   },
   "menu": {
     "message": "Menu",
-    "description": "Élément de menu Menu"
+    "description": "Title for menu panel"
+  },
+  "templates": {
+    "message": "Modèles",
+    "description": "Menu item for templates"
+  },
+  "aiStats": {
+    "message": "Statistiques IA",
+    "description": "Menu item for AI stats"
   },
   "notifications": {
     "message": "Notifications",
-    "description": "Élément de menu Notifications"
+    "description": "Menu item for notifications"
   },
   "aiNews": {
-    "message": "News IA",
-    "description": "Élément de menu AI News"
+    "message": "Actualités IA",
+    "description": "Menu item for AI news"
   },
   "settings": {
     "message": "Paramètres",
-    "description": "Élément de menu Paramètres"
+    "description": "Menu item for settings"
   },
   "cancel": {
     "message": "Annuler",
-    "description": "Bouton Annuler"
+    "description": "Texte du bouton pour annuler une action"
   },
   "save": {
     "message": "Enregistrer",
@@ -260,10 +268,6 @@
   "back": {
     "message": "Retour",
     "description": "Bouton Retour"
-  },
-  "aiStats": {
-    "message": "Statistiques IA",
-    "description": "Étiquette des statistiques IA"
   },
   "noActiveConversation": {
     "message": "Aucune Conversation Active",
@@ -306,8 +310,8 @@
     "description": "Bouton Ignorer"
   },
   "newTemplate": {
-    "message": "Nouveau",
-    "description": "Bouton Nouveau template"
+    "message": "Nouveau Modèle",
+    "description": "Button text to create a new template"
   },
   "officialTemplates": {
     "message": "Templates Officiels",
@@ -318,16 +322,16 @@
     "description": "Titre de section Mes templates"
   },
   "noTemplates": {
-    "message": "Aucun template trouvé",
-    "description": "Message d'état vide"
+    "message": "Aucun modèle disponible",
+    "description": "Message shown when no templates are available"
   },
   "createTemplate": {
     "message": "Créer un template",
     "description": "Bouton Créer un template"
   },
   "createFirstTemplate": {
-    "message": "Créer votre premier template",
-    "description": "Bouton Créer votre premier template"
+    "message": "Créer votre premier modèle",
+    "description": "Button text to create first template"
   },
   "createTemplateTitle": {
     "message": "Créer un template",
@@ -351,18 +355,18 @@
   },
   "update": {
     "message": "Mettre à jour",
-    "description": "Bouton Mettre à jour"
+    "description": "Texte du bouton pour mettre à jour un élément"
   },
   "create": {
     "message": "Créer",
-    "description": "Bouton Créer"
+    "description": "Texte du bouton pour créer un élément"
   },
-  "archimindSettings": {
-    "message": "Paramètres d'Archimind",
+  "jaydaiSettings": {
+    "message": "Paramètres d'Jaydai",
     "description": "Titre de dialogue Paramètres"
   },
-  "configureArchimind": {
-    "message": "Configurez le fonctionnement d'Archimind avec ChatGPT",
+  "configureJaydai": {
+    "message": "Configurez le fonctionnement d'Jaydai avec ChatGPT",
     "description": "Description du dialogue Paramètres"
   },
   "autoSaveConversations": {
@@ -382,38 +386,39 @@
     "description": "Option de paramètres"
   },
   "customizeTemplate": {
-    "message": "Personnaliser le template: $TEMPLATE_NAME$",
-    "description": "Titre de dialogue Personnaliser le template",
+    "message": "Personnaliser le Modèle : $TEMPLATE_NAME$",
+    "description": "Titre pour la boîte de dialogue de personnalisation de modèle",
     "placeholders": {
-      "Template_name": {
+      "template_name": {
         "content": "$1",
-        "example": "Mon template"
+        "example": "Mon Modèle"
       }
     }
   },
   "customizeTemplateDesc": {
-    "message": "Personnalisez le template selon vos besoins",
-    "description": "Description du dialogue Personnaliser le template"
+    "message": "Personnalisez le modèle en remplissant les espaces réservés.",
+    "description": "Description pour la boîte de dialogue de personnalisation de modèle"
   },
   "replacePlaceholders": {
     "message": "Remplacer les Espaces Réservés",
-    "description": "Titre de section Remplacer les espaces réservés"
+    "message": "Remplacer les espaces réservés",
+    "description": "Title for placeholder replacement section"
   },
   "editTemplate": {
-    "message": "Modifier le template",
-    "description": "Titre de section Modifier le template"
+    "message": "Modifier le Modèle",
+    "description": "Titre pour la boîte de dialogue de modification de modèle"
   },
   "noPlaceholders": {
-    "message": "Aucun espace réservé trouvé dans ce template",
-    "description": "Message Aucun espace réservé"
+    "message": "Aucun espace réservé trouvé dans ce modèle.",
+    "description": "Message shown when no placeholders are found"
   },
   "useTemplate": {
-    "message": "Utiliser le template",
-    "description": "Bouton Utiliser le template"
+    "message": "Utiliser le modèle",
+    "description": "Button text to use template"
   },
   "browseMore": {
-    "message": "Parcourir Plus",
-    "description": "Texte du bouton Parcourir plus"
+    "message": "Voir Plus",
+    "description": "Button text to browse more items"
   },
   "browseMoreTitle": {
     "message": "Parcourir les Templates",
@@ -438,5 +443,859 @@
   "allFolders": {
     "message": "Tous les Dossiers",
     "description": "Titre de section Tous les dossiers"
+  },
+  "enterpriseFeature": {
+    "message": "Cette fonctionnalité n'est disponible que dans le plan Entreprise",
+    "description": "Message affiché lorsqu'une fonctionnalité est réservée à l'entreprise"
+  },
+  "contactForEnterprise": {
+    "message": "Contactez-nous pour en savoir plus sur notre plan Entreprise",
+    "description": "Call to action for enterprise plan"
+  },
+  "refreshing": {
+    "message": "Actualisation...",
+    "description": "Text shown when refreshing templates"
+  },
+  "refresh": {
+    "message": "Actualiser",
+    "description": "Button text to refresh templates"
+  },
+  "noPinnedOfficialTemplates": {
+    "message": "Aucun modèle officiel épinglé. Cliquez sur Parcourir pour en ajouter.",
+    "description": "Empty state message for official templates section"
+  },
+  "noUserTemplates": {
+    "message": "Aucun modèle utilisateur. Créez un modèle pour commencer.",
+    "description": "Message shown when no user templates exist"
+  },
+  "confirmAction": {
+    "message": "Confirmer l'action",
+    "description": "Title for confirmation dialog"
+  },
+  "confirmActionDescription": {
+    "message": "Êtes-vous sûr de vouloir continuer ?",
+    "description": "Description for confirmation dialog"
+  },
+  "confirm": {
+    "message": "Confirmer",
+    "description": "Confirm button text"
+  },
+  "today": {
+    "message": "aujourd'hui",
+    "description": "Relative time for current day"
+  },
+  "yesterday": {
+    "message": "hier",
+    "description": "Relative time for previous day"
+  },
+  "daysAgo": {
+    "message": "il y a $1 jours",
+    "description": "Relative time for days ago",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "untitledTemplate": {
+    "message": "Modèle sans titre",
+    "description": "Default title for untitled templates"
+  },
+  "passwordTooShort": {
+    "message": "Le mot de passe doit contenir au moins 8 caractères",
+    "description": "Password validation error message"
+  },
+  "invalidCredentials": {
+    "message": "Email ou mot de passe invalide",
+    "description": "Authentication error message"
+  },
+  "emailNotVerified": {
+    "message": "Email non vérifié",
+    "description": "Email verification error message"
+  },
+  "emailAlreadyInUse": {
+    "message": "Cet email est déjà utilisé",
+    "description": "Sign up error message"
+  },
+  "sessionExpired": {
+    "message": "Session expirée. Veuillez vous reconnecter.",
+    "description": "Session expiration message"
+  },
+  "notAuthenticated": {
+    "message": "Non authentifié. Veuillez vous connecter.",
+    "description": "Authentication required message"
+  },
+  "networkError": {
+    "message": "Erreur réseau lors du rafraîchissement du token",
+    "description": "Network error message"
+  },
+  "googleAuthCanceled": {
+    "message": "L'authentification Google a été annulée",
+    "description": "Google auth cancellation message"
+  },
+  "noAuthData": {
+    "message": "Aucune donnée d'authentification reçue de Google",
+    "description": "Google auth error message"
+  },
+  "injectingUI": {
+    "message": "Injection des composants UI...",
+    "description": "UI injection log message"
+  },
+  "uiInjected": {
+    "message": "Composants UI injectés",
+    "description": "UI injection success message"
+  },
+  "welcome_notification_title": {
+    "message": "Bienvenue sur Jaydai !",
+    "description": "Titre de la notification de bienvenue"
+  },
+  "welcome_notification_body": {
+    "message": "Merci de nous avoir rejoint. Suivez notre page LinkedIn pour rester informé de nos dernières fonctionnalités et annonces.",
+    "description": "Texte de la notification de bienvenue"
+  },
+  "followOnLinkedIn": {
+    "message": "Suivre sur LinkedIn",
+    "description": "Texte du bouton pour suivre sur LinkedIn"
+  },
+  "first_conversation_title": {
+    "message": "Analysez Votre Première Conversation",
+    "description": "Titre de la notification de première conversation"
+  },
+  "first_conversation_body": {
+    "message": "Commencez votre voyage d'analyse IA en envoyant votre premier message à ChatGPT ou en chargeant une conversation passée.",
+    "description": "Texte de la notification de première conversation"
+  },
+  "startConversation": {
+    "message": "Démarrer la Conversation",
+    "description": "Texte du bouton pour démarrer une conversation"
+  },
+  "prompt_length_insight_title": {
+    "message": "Analyse de la Longueur des Prompts",
+    "description": "Titre de la notification d'analyse de longueur des prompts"
+  },
+  "response_time_insight_title": {
+    "message": "Analyse du Temps de Réponse",
+    "description": "Titre de la notification d'analyse du temps de réponse"
+  },
+  "conversation_quality_insight_title": {
+    "message": "Analyse de la Qualité de la Conversation",
+    "description": "Titre de la notification d'analyse de qualité de conversation"
+  },
+  "new_insight_title": {
+    "message": "Nouvelle Analyse Disponible",
+    "description": "Titre de la notification de nouvelle analyse"
+  },
+  "notifications_marked_read": {
+    "message": "{{count}} notification{{#if plural}}s{{/if}} marquée{{#if plural}}s{{/if}} comme lue{{#if plural}}s{{/if}}",
+    "description": "Message affiché lorsque les notifications sont marquées comme lues",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "notification_deleted": {
+    "message": "Notification supprimée",
+    "description": "Message affiché lorsqu'une notification est supprimée"
+  },
+  "new_notifications_title": {
+    "message": "$COUNT$ nouvelle(s) notification(s)",
+    "description": "Titre pour les nouvelles notifications",
+    "placeholders": {
+      "COUNT": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "new_notifications_description": {
+    "message": "Cliquez pour voir vos notifications",
+    "description": "Description for new notifications"
+  },
+  "view_action": {
+    "message": "Voir",
+    "description": "Texte du bouton d'action voir"
+  },
+  "no_url_error": {
+    "message": "Aucune URL fournie pour l'action",
+    "description": "Message d'erreur lorsqu'une URL est manquante pour une action"
+  },
+  "action_error": {
+    "message": "Échec du traitement de l'action de notification",
+    "description": "Message d'erreur lorsqu'une action de notification échoue"
+  },
+  "popular": {
+    "message": "Populaire",
+    "description": "Étiquette pour la section des éléments populaires"
+  },
+  "used_times": {
+    "message": "Utilisé {{count}} fois",
+    "description": "Message indiquant combien de fois un template a été utilisé",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "last_used": {
+    "message": "Dernière utilisation {{date}}",
+    "description": "Message indiquant quand un template a été utilisé pour la dernière fois",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "aujourd'hui"
+      }
+    }
+  },
+  "betaFeatureWarning": {
+    "message": "Avertissement de Fonctionnalité Bêta",
+    "description": "Titre d'avertissement pour les fonctionnalités bêta"
+  },
+  "betaFeatureWarningMessage": {
+    "message": "Nous développons et améliorons encore nos fonctionnalités d'analyse. Si vous rencontrez des problèmes, veuillez nous envoyer un email à",
+    "description": "Message d'avertissement pour les fonctionnalités bêta"
+  },
+  "questionsFeedback": {
+    "message": "Questions ou commentaires ?",
+    "description": "Text for questions and feedback"
+  },
+  "comingSoon": {
+    "message": "Bientôt Disponible !",
+    "description": "Titre pour les fonctionnalités à venir"
+  },
+  "featureInDevelopment": {
+    "message": "Nous construisons encore cette fonctionnalité passionnante de $FEATURE$ ! Votre soutien nous donne l'énergie pour construire plus rapidement.",
+    "description": "Message pour les fonctionnalités en développement",
+    "placeholders": {
+      "feature": {
+        "content": "$1",
+        "example": "analytique"
+      }
+    }
+  },
+  "followUsLinkedIn": {
+    "message": "Suivez-nous sur LinkedIn",
+    "description": "Button text to follow on LinkedIn"
+  },
+  "rateUs": {
+    "message": "Évaluez-nous 5 étoiles",
+    "description": "Button text to rate the extension"
+  },
+  "enhancedAiAnalytics": {
+    "message": "Analytique IA Avancée",
+    "description": "Titre pour l'analytique avancée"
+  },
+  "analyticsDescription": {
+    "message": "Aperçus détaillés de vos interactions et modèles d'utilisation de l'IA",
+    "description": "Description des fonctionnalités d'analytique"
+  },
+  "overview": {
+    "message": "Aperçu",
+    "description": "Titre de l'onglet aperçu"
+  },
+  "usageMetrics": {
+    "message": "Métriques d'utilisation",
+    "description": "Title for usage metrics"
+  },
+  "efficiency": {
+    "message": "Efficacité",
+    "description": "Titre de la section efficacité"
+  },
+  "insights": {
+    "message": "Perspectives",
+    "description": "Titre de la section perspectives"
+  },
+  "totalConversations": {
+    "message": "Conversations Totales",
+    "description": "Métrique des conversations totales"
+  },
+  "messagesExchanged": {
+    "message": "Messages Échangés",
+    "description": "Métrique des messages échangés"
+  },
+  "efficiencyScore": {
+    "message": "Score d'Efficacité",
+    "description": "Métrique du score d'efficacité"
+  },
+  "avgResponseTime": {
+    "message": "Temps de Réponse Moyen",
+    "description": "Métrique du temps de réponse moyen"
+  },
+  "energyUsage": {
+    "message": "Consommation d'Énergie",
+    "description": "Métrique de la consommation d'énergie"
+  },
+  "tokensProcessed": {
+    "message": "Tokens Traités",
+    "description": "Métrique des tokens traités"
+  },
+  "lastWeek": {
+    "message": "dernière semaine",
+    "description": "Indicateur de période"
+  },
+  "perChat": {
+    "message": "par conversation",
+    "description": "Indicateur par conversation"
+  },
+  "seconds": {
+    "message": "secondes",
+    "description": "Unité de temps"
+  },
+  "consumptionEquivalent": {
+    "message": "Équivalent de consommation",
+    "description": "Label d'équivalent de consommation"
+  },
+  "inputOutput": {
+    "message": "Entrée + Sortie",
+    "description": "Label d'entrée et sortie"
+  },
+  "basedOnUsage": {
+    "message": "Basé sur vos habitudes d'utilisation",
+    "description": "Indicateur de modèle d'utilisation"
+  },
+  "dailyActivity": {
+    "message": "Activité Quotidienne",
+    "description": "Label du graphique d'activité quotidienne"
+  },
+  "tokenDistribution": {
+    "message": "Distribution des Tokens",
+    "description": "Label du graphique de distribution des tokens"
+  },
+  "modelUsage": {
+    "message": "Utilisation des Modèles",
+    "description": "Label du graphique d'utilisation des modèles"
+  },
+  "energyDetails": {
+    "message": "Détails de la consommation d'énergie",
+    "description": "Title for energy consumption details"
+  },
+  "tokenDetails": {
+    "message": "Détails d'Utilisation des Tokens",
+    "description": "Label du graphique des détails des tokens"
+  },
+  "inputTokens": {
+    "message": "Tokens d'Entrée",
+    "description": "Label des tokens d'entrée"
+  },
+  "outputTokens": {
+    "message": "Tokens de Sortie",
+    "description": "Label des tokens de sortie"
+  },
+  "ratios": {
+    "message": "Ratios",
+    "description": "Label des ratios"
+  },
+  "outputToInput": {
+    "message": "Sortie/Entrée",
+    "description": "Label du ratio sortie/entrée"
+  },
+  "recentVsTotal": {
+    "message": "Récent/Total",
+    "description": "Label récent vs total"
+  },
+  "totalEnergy": {
+    "message": "Énergie totale",
+    "description": "Label for total energy consumption"
+  },
+  "recentEnergy": {
+    "message": "Récent (7 jours)",
+    "description": "Label d'énergie récente"
+  },
+  "perMessage": {
+    "message": "Par message",
+    "description": "Label for energy per message"
+  },
+  "equivalent": {
+    "message": "Équivalent à",
+    "description": "Label for energy equivalent"
+  },
+  "input": {
+    "message": "Entrée",
+    "description": "Label d'entrée"
+  },
+  "output": {
+    "message": "Sortie",
+    "description": "Label de sortie"
+  },
+  "unknown": {
+    "message": "Inconnu",
+    "description": "Label inconnu"
+  },
+  "total": {
+    "message": "Total",
+    "description": "Label total"
+  },
+  "recent": {
+    "message": "Récent",
+    "description": "Label récent"
+  },
+  "efficiencyDescription": {
+    "message": "Comment vous utilisez efficacement l'IA selon diverses métriques",
+    "description": "Description de l'efficacité"
+  },
+  "conversationMetrics": {
+    "message": "Métriques de Conversation",
+    "description": "Titre des métriques de conversation"
+  },
+  "avgMessagesPerChat": {
+    "message": "Moy. Messages Par Conversation",
+    "description": "Métrique moyenne des messages par conversation"
+  },
+  "responseTime": {
+    "message": "Temps de Réponse",
+    "description": "Métrique du temps de réponse"
+  },
+  "resourceEfficiency": {
+    "message": "Efficacité des Ressources",
+    "description": "Métrique d'efficacité des ressources"
+  },
+  "outputInputRatio": {
+    "message": "Ratio Sortie/Entrée",
+    "description": "Métrique du ratio sortie/entrée"
+  },
+  "energyPerMessage": {
+    "message": "Énergie Par Message",
+    "description": "Métrique d'énergie par message"
+  },
+  "idealRange": {
+    "message": "Plage idéale",
+    "description": "Label de plage idéale"
+  },
+  "fasterBetter": {
+    "message": "Plus rapide est mieux",
+    "description": "Indicateur plus rapide est mieux"
+  },
+  "higherBetter": {
+    "message": "Plus élevé est mieux - obtenir plus de sortie pour votre entrée",
+    "description": "Indicateur plus élevé est mieux"
+  },
+  "lowerBetter": {
+    "message": "Plus bas est mieux - plus économe en énergie",
+    "description": "Indicateur plus bas est mieux"
+  },
+  "expertLevel": {
+    "message": "Utilisateur expert de l'IA - très efficace",
+    "description": "Description du niveau expert"
+  },
+  "advancedLevel": {
+    "message": "Utilisateur avancé de l'IA - bon flux de conversation",
+    "description": "Description du niveau avancé"
+  },
+  "proficientLevel": {
+    "message": "Utilisateur compétent de l'IA - utilisation efficace",
+    "description": "Description du niveau compétent"
+  },
+  "developingLevel": {
+    "message": "Utilisateur en développement de l'IA - apprentissage des modèles",
+    "description": "Description du niveau en développement"
+  },
+  "noviceLevel": {
+    "message": "Utilisateur novice de l'IA - début de votre parcours",
+    "description": "Description du niveau novice"
+  },
+  "usageInsights": {
+    "message": "Aperçus d'Utilisation",
+    "description": "Titre des aperçus d'utilisation"
+  },
+  "insightsDescription": {
+    "message": "Perspectives générées par l'IA basées sur vos modèles d'utilisation",
+    "description": "Description des perspectives"
+  },
+  "conversationPatterns": {
+    "message": "Modèles de Conversation",
+    "description": "Titre des modèles de conversation"
+  },
+  "tokenEfficiency": {
+    "message": "Efficacité des Tokens",
+    "description": "Titre de l'efficacité des tokens"
+  },
+  "energyAwareness": {
+    "message": "Conscience Énergétique",
+    "description": "Titre de la conscience énergétique"
+  },
+  "usageFrequency": {
+    "message": "Fréquence d'Utilisation",
+    "description": "Titre de la fréquence d'utilisation"
+  },
+  "deepEngagement": {
+    "message": "Vous vous engagez dans des conversations profondes et détaillées avec l'IA. Cette approche est excellente pour les sujets complexes et les explications détaillées.",
+    "description": "Perspective d'engagement profond"
+  },
+  "balancedEngagement": {
+    "message": "Vous maintenez un flux de conversation équilibré avec l'IA. Cette approche fonctionne bien pour la plupart des requêtes.",
+    "description": "Perspective d'engagement équilibré"
+  },
+  "briefInteractions": {
+    "message": "Vous préférez des interactions brèves avec l'IA. Envisagez des conversations plus longues pour des sujets plus complexes.",
+    "description": "Perspective d'interactions brèves"
+  },
+  "highEfficiency": {
+    "message": "Votre ratio entrée/sortie est excellent. Vous recevez des réponses substantielles de l'IA par rapport à vos invites.",
+    "description": "Perspective de haute efficacité"
+  },
+  "goodEfficiency": {
+    "message": "Votre ratio entrée/sortie est bon. Vous obtenez une bonne valeur de vos interactions.",
+    "description": "Perspective de bonne efficacité"
+  },
+  "improvableEfficiency": {
+    "message": "Votre ratio entrée/sortie pourrait être amélioré. Envisagez d'utiliser des invites plus spécifiques et ciblées.",
+    "description": "Perspective d'efficacité améliorable"
+  },
+  "energyInsight": {
+    "message": "Votre utilisation de l'IA a consommé",
+    "description": "Préfixe de la perspective énergétique"
+  },
+  "ofEnergy": {
+    "message": "d'énergie",
+    "description": "Suffixe de la perspective énergétique"
+  },
+  "recentActivity": {
+    "message": "Votre activité récente montre",
+    "description": "Préfixe de l'activité récente"
+  },
+  "conversationsInWeek": {
+    "message": "conversations au cours de la semaine dernière",
+    "description": "Suffixe des conversations de la semaine"
+  },
+  "highFrequency": {
+    "message": "Vous êtes un utilisateur fréquent de l'IA, ce qui en fait une partie régulière de votre flux de travail.",
+    "description": "Perspective de haute fréquence"
+  },
+  "moderateFrequency": {
+    "message": "Vous utilisez l'IA modérément, en l'équilibrant avec d'autres outils.",
+    "description": "Perspective de fréquence modérée"
+  },
+  "lowFrequency": {
+    "message": "Vous utilisez l'IA occasionnellement. Envisagez d'explorer plus de cas d'utilisation pour augmenter la productivité.",
+    "description": "Perspective de basse fréquence"
+  },
+  "improvementSuggestions": {
+    "message": "Suggestions d'Amélioration",
+    "description": "Titre des suggestions d'amélioration"
+  },
+  "efficiencyTip": {
+    "message": "Conseil d'Efficacité",
+    "description": "Titre du conseil d'efficacité"
+  },
+  "efficiencyTipDesc": {
+    "message": "Essayez d'utiliser des invites plus spécifiques pour obtenir des réponses plus ciblées et améliorer votre score d'efficacité.",
+    "description": "Description du conseil d'efficacité"
+  },
+  "outputRatioTip": {
+    "message": "Conseil de Ratio de Sortie",
+    "description": "Titre du conseil de ratio de sortie"
+  },
+  "outputRatioTipDesc": {
+    "message": "Vos réponses d'IA sont relativement courtes par rapport à vos entrées. Pensez à demander des réponses plus détaillées ou complètes.",
+    "description": "Description du conseil de ratio de sortie"
+  },
+  "responseTimeTip": {
+    "message": "Conseil de Temps de Réponse",
+    "description": "Titre du conseil de temps de réponse"
+  },
+  "responseTimeTipDesc": {
+    "message": "Votre temps de réponse moyen est un peu élevé. Envisagez de décomposer les questions complexes en parties plus petites pour des réponses plus rapides.",
+    "description": "Description du conseil de temps de réponse"
+  },
+  "aiUsageProfile": {
+    "message": "Votre Profil d'Utilisation de l'IA",
+    "description": "Titre du profil d'utilisation de l'IA"
+  },
+  "expertDesc": {
+    "message": "Vous utilisez l'IA avec une efficacité et une efficience exceptionnelles.",
+    "description": "Description expert"
+  },
+  "advancedDesc": {
+    "message": "Vous êtes habile à obtenir des résultats précieux de l'IA.",
+    "description": "Description avancée"
+  },
+  "proficientDesc": {
+    "message": "Vous utilisez l'IA efficacement avec de bons résultats.",
+    "description": "Description compétente"
+  },
+  "developingDesc": {
+    "message": "Vous apprenez à utiliser l'IA plus efficacement.",
+    "description": "Description en développement"
+  },
+  "noviceDesc": {
+    "message": "Vous commencez votre parcours avec l'IA.",
+    "description": "Description novice"
+  },
+  "usageOverview": {
+    "message": "Aperçu d'Utilisation",
+    "description": "Titre de l'aperçu d'utilisation"
+  },
+  "keyMetricsDesc": {
+    "message": "Indicateurs clés sur votre utilisation de l'IA",
+    "description": "Description des indicateurs clés"
+  },
+  "messages": {
+    "message": "messages",
+    "description": "Label des messages"
+  },
+  "tokenRatios": {
+    "message": "Distribution des Tokens",
+    "description": "Titre des ratios de tokens"
+  },
+  "noModelData": {
+    "message": "Aucune donnée d'utilisation de modèle disponible",
+    "description": "Message d'absence de données de modèle"
+  },
+  "noEquivalent": {
+    "message": "Aucun équivalent disponible",
+    "description": "Message d'absence d'équivalent"
+  },
+  "updated": {
+    "message": "Mis à jour",
+    "description": "Label mis à jour"
+  },
+  "viewEnhancedStats": {
+    "message": "Voir Analytique Avancée",
+    "description": "Label du bouton voir analytique avancée"
+  },
+  "energyEquivalent": {
+    "message": "Équivalent Énergétique",
+    "description": "Titre pour la section équivalent énergétique"
+  },
+  "energyEquivalentHelp": {
+    "message": "Ceci montre à quoi équivaut votre consommation d'énergie IA en termes quotidiens",
+    "description": "Texte d'aide expliquant la fonctionnalité d'équivalent énergétique"
+  },
+  "delete": {
+    "message": "Supprimer",
+    "description": "Button text to delete"
+  },
+  "deleteItem": {
+    "message": "Supprimer $ITEM_TYPE$",
+    "description": "Texte du bouton supprimer un élément",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "Dossier"
+      }
+    }
+  },
+  "deleteConfirmTitle": {
+    "message": "Supprimer $ITEM_TYPE$",
+    "description": "Titre de la boîte de dialogue de confirmation de suppression",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "Dossier"
+      }
+    }
+  },
+  "deleteConfirmMessage": {
+    "message": "Cela supprimera définitivement $ITEM_TYPE$ \"$ITEM_NAME$\".",
+    "description": "Message de confirmation de suppression avec nom de l'élément",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "dossier"
+      },
+      "item_name": {
+        "content": "$2",
+        "example": "Mon Dossier"
+      }
+    }
+  },
+  "deleteConfirmMessageNoName": {
+    "message": "Cela supprimera définitivement ce $ITEM_TYPE$.",
+    "description": "Message de confirmation de suppression sans nom d'élément",
+    "placeholders": {
+      "item_type": {
+        "content": "$1",
+        "example": "dossier"
+      }
+    }
+  },
+  "deleteFolderWarning": {
+    "message": "Tous les modèles dans ce dossier seront également supprimés.",
+    "description": "Avertissement concernant la suppression du contenu du dossier"
+  },
+  "deleteActionWarning": {
+    "message": "Cette action ne peut pas être annulée.",
+    "description": "Avertissement concernant l'action irréversible"
+  },
+  "deleting": {
+    "message": "Suppression...",
+    "description": "Text shown when deleting"
+  },
+  "loadingTemplates": {
+    "message": "Chargement des modèles...",
+    "description": "Text shown when loading templates"
+  },
+  "deleteTemplate": {
+    "message": "Supprimer le Modèle",
+    "description": "Titre pour la boîte de dialogue de suppression de modèle"
+  },
+  "deleteTemplateConfirmation": {
+    "message": "Êtes-vous sûr de vouloir supprimer ce modèle ? Cette action ne peut pas être annulée.",
+    "description": "Message de confirmation pour la suppression de modèle"
+  },
+  "deleteFolder": {
+    "message": "Supprimer le Dossier",
+    "description": "Titre pour la boîte de dialogue de suppression de dossier"
+  },
+  "deleteFolderConfirmation": {
+    "message": "Êtes-vous sûr de vouloir supprimer ce dossier et tous ses modèles ? Cette action ne peut pas être annulée.",
+    "description": "Message de confirmation pour la suppression de dossier"
+  },
+  "organizationTemplates": {
+    "message": "Modèles de l'Organisation",
+    "description": "Titre pour la section des modèles de l'organisation"
+  },
+  "noPinnedOrganizationTemplates": {
+    "message": "Aucun modèle d'organisation épinglé.",
+    "description": "Message affiché lorsqu'aucun modèle d'organisation n'est épinglé"
+  },
+  "unorganizedTemplates": {
+    "message": "Modèles Non Organisés",
+    "description": "Titre pour la section des modèles non organisés"
+  },
+  "organization_templates_title": {
+    "message": "Modèles Entreprise",
+    "description": "Title for enterprise templates section"
+  },
+  "enterprise_feature": {
+    "message": "Fonctionnalité Entreprise",
+    "description": "Label indicating an enterprise feature"
+  },
+  "organization_templates_description": {
+    "message": "L'accès aux modèles d'organisation est une fonctionnalité entreprise. Contactez-nous pour l'activer pour votre équipe.",
+    "description": "Description text for enterprise templates feature"
+  },
+  "contact_enterprise_sales": {
+    "message": "Contacter les Ventes",
+    "description": "Button text to contact sales for enterprise features"
+  },
+  "searchOfficialFolders": {
+    "message": "Rechercher des dossiers officiels...",
+    "description": "Texte d'espace réservé pour la recherche de dossiers officiels"
+  },
+  "searchOrganizationFolders": {
+    "message": "Rechercher des dossiers d'organisation...",
+    "description": "Texte d'espace réservé pour la recherche de dossiers d'organisation"
+  },
+  "loadingFolders": {
+    "message": "Chargement des dossiers $FOLDER_TYPE$...",
+    "description": "Message de chargement pour les dossiers",
+    "placeholders": {
+      "folder_type": {
+        "content": "$1",
+        "example": "officiels"
+      }
+    }
+  },
+  "errorLoadingFolders": {
+    "message": "Erreur lors du chargement des dossiers",
+    "description": "Message d'erreur lorsque le chargement des dossiers échoue"
+  },
+  "unknownError": {
+    "message": "Erreur inconnue",
+    "description": "Message d'erreur générique"
+  },
+  "noMatchingFolders": {
+    "message": "Aucun dossier correspondant à \"$SEARCH_QUERY$\"",
+    "description": "Message affiché lorsqu'aucun dossier ne correspond à la recherche",
+    "placeholders": {
+      "search_query": {
+        "content": "$1",
+        "example": "marketing"
+      }
+    }
+  },
+  "noFoldersAvailable": {
+    "message": "Aucun dossier $FOLDER_TYPE$ disponible",
+    "description": "Message affiché lorsqu'aucun dossier n'est disponible",
+    "placeholders": {
+      "folder_type": {
+        "content": "$1",
+        "example": "officiel"
+      }
+    }
+  },
+  "createNewTemplate": {
+    "message": "Créer un Nouveau Modèle",
+    "description": "Titre pour la boîte de dialogue de création de modèle"
+  },
+  "editTemplateDescription": {
+    "message": "Modifiez les détails de votre modèle ci-dessous.",
+    "description": "Description pour la boîte de dialogue de modification de modèle"
+  },
+  "createTemplateDescription": {
+    "message": "Créez un nouveau modèle à utiliser avec les conversations IA.",
+    "description": "Description pour la boîte de dialogue de création de modèle"
+  },
+  "templateName": {
+    "message": "Nom du Modèle",
+    "description": "Étiquette pour le champ de nom du modèle"
+  },
+  "enterTemplateName": {
+    "message": "Entrez le nom du modèle",
+    "description": "Espace réservé pour la saisie du nom du modèle"
+  },
+  "templateNameRequired": {
+    "message": "Le nom du modèle est requis",
+    "description": "Message d'erreur de validation pour le nom du modèle"
+  },
+  "description": {
+    "message": "Description",
+    "description": "Étiquette pour le champ de description"
+  },
+  "templateDescriptionPlaceholder": {
+    "message": "Brève description de ce modèle",
+    "description": "Espace réservé pour la saisie de la description du modèle"
+  },
+  "folder": {
+    "message": "Dossier",
+    "description": "Étiquette pour le champ de dossier"
+  },
+  "selectFolder": {
+    "message": "Sélectionnez un dossier",
+    "description": "Espace réservé pour la sélection de dossier"
+  },
+  "noFolder": {
+    "message": "Aucun dossier (racine)",
+    "description": "Option pour aucune sélection de dossier"
+  },
+  "createNewFolder": {
+    "message": "Créer un nouveau dossier...",
+    "description": "Option pour créer un nouveau dossier"
+  },
+  "content": {
+    "message": "Contenu",
+    "description": "Étiquette pour le champ de contenu"
+  },
+  "enterTemplateContent": {
+    "message": "Entrez le contenu de votre modèle ici",
+    "description": "Espace réservé pour la saisie du contenu du modèle"
+  },
+  "templateContentRequired": {
+    "message": "Le contenu du modèle est requis",
+    "description": "Message d'erreur de validation pour le contenu du modèle"
+  },
+  "updating": {
+    "message": "Mise à jour...",
+    "description": "Texte affiché pendant la mise à jour du modèle"
+  },
+  "creating": {
+    "message": "Création...",
+    "description": "Texte affiché pendant la création du modèle"
+  },
+  "templateUpdated": {
+    "message": "Modèle mis à jour avec succès, actualisation de la page...",
+    "description": "Message de succès lorsque le modèle est mis à jour"
+  },
+  "templateCreated": {
+    "message": "Modèle créé avec succès",
+    "description": "Message de succès lorsque le modèle est créé"
+  },
+  "errorSavingTemplate": {
+    "message": "Erreur lors de l'enregistrement du modèle",
+    "description": "Message d'erreur lorsque l'enregistrement du modèle échoue"
   }
 }

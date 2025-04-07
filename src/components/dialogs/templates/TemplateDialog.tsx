@@ -1,5 +1,4 @@
 // src/components/dialogs/templates/TemplateDialog.tsx
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Dialog, 
@@ -15,12 +14,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useDialog } from '@/components/dialogs/core/DialogContext';
 import { DIALOG_TYPES } from '@/core/dialogs/registry';
 import { FolderPlus } from 'lucide-react';
-import { DEFAULT_FORM_DATA } from '@/types/templates';
+import { DEFAULT_FORM_DATA } from '@/types/prompts/templates';
 import { toast } from 'sonner';
-import { promptApi } from '@/services/api/PromptApi';
+import { promptApi } from '@/services/api';
+import { getMessage } from '@/core/utils/i18n';
 
 /**
  * Unified Template Dialog for both creating and editing templates
+ * This version doesn't directly import React Query hooks to avoid errors
  */
 export const TemplateDialog: React.FC = () => {
   // Get create and edit dialog states
@@ -44,12 +45,19 @@ export const TemplateDialog: React.FC = () => {
   const currentTemplate = data?.template || null;
   const initialFormData = data?.formData || DEFAULT_FORM_DATA;
   const onFormChange = data?.onFormChange;
-  const onSave = data?.onSave || (() => Promise.resolve(false));
+  const onSave = data?.onSave
   const userFolders = data?.userFolders || [];
   const selectedFolder = data?.selectedFolder; // New: pre-selected folder from folder creation
   
   // Process user folders for the select dropdown
   const processUserFolders = useCallback(() => {
+    // Safely validate and transform user folders
+    if (!userFolders || !Array.isArray(userFolders)) {
+      console.log('No valid user folders found');
+      setUserFoldersList([]);
+      return;
+    }
+    
     // Helper function to flatten folder hierarchy
     const flattenFolderHierarchy = (
       folders: any[], 
@@ -57,7 +65,11 @@ export const TemplateDialog: React.FC = () => {
       result: {id: number, name: string, fullPath: string}[] = []
     ) => {
       folders.forEach(folder => {
-        if (!folder || !folder.id || !folder.name) return;
+        // Extra validation to ensure folder is valid
+        if (!folder || typeof folder.id !== 'number' || !folder.name) {
+          console.warn('Invalid folder encountered:', folder);
+          return;
+        }
         
         const folderPath = path ? `${path} / ${folder.name}` : folder.name;
         
@@ -67,7 +79,8 @@ export const TemplateDialog: React.FC = () => {
           fullPath: folderPath
         });
         
-        if (folder.Folders && folder.Folders.length > 0) {
+        // Recursively process subfolders if they exist
+        if (folder.Folders && Array.isArray(folder.Folders) && folder.Folders.length > 0) {
           flattenFolderHierarchy(folder.Folders, folderPath, result);
         }
       });
@@ -77,7 +90,7 @@ export const TemplateDialog: React.FC = () => {
     
     const flattenedFolders = flattenFolderHierarchy(userFolders);
     console.log('Processed user folders:', flattenedFolders);
-    setUserFoldersList(flattenedFolders);
+    setUserFoldersList(flattenedFolders || []);
   }, [userFolders]);
   
   // Initialize form state when dialog opens or data changes
@@ -85,23 +98,22 @@ export const TemplateDialog: React.FC = () => {
     if (isOpen) {
       // Reset validation errors
       setValidationErrors({});
+  
+      // Initialize form data only once when dialog opens
+      console.log('Setting initial form data:', initialFormData);
+      setFormData(initialFormData);
       
-      if (initialFormData) {
-        console.log('Setting initial form data:', initialFormData);
-        setFormData(initialFormData);
-        
-        // Set selected folder ID
-        if (initialFormData.folder_id) {
-          setSelectedFolderId(initialFormData.folder_id.toString());
-        } else {
-          setSelectedFolderId('');
-        }
+      // Set selected folder ID from form data if available
+      if (initialFormData.folder_id) {
+        setSelectedFolderId(initialFormData.folder_id.toString());
+      } else {
+        setSelectedFolderId('');
       }
       
       // Process user folders
       processUserFolders();
-
-      // If there's a selectedFolder from folder creation, set it
+      
+      // If there's a pre-selected folder, update the form accordingly
       if (selectedFolder) {
         console.log('Auto-selecting folder from creation:', selectedFolder);
         setSelectedFolderId(selectedFolder.id.toString());
@@ -109,7 +121,8 @@ export const TemplateDialog: React.FC = () => {
         handleFormChange('folder', selectedFolder.name);
       }
     }
-  }, [isOpen, initialFormData, processUserFolders, selectedFolder]);
+    // Run this effect when dialog open state changes or when user folders update
+  }, [isOpen, userFolders, selectedFolder, initialFormData, processUserFolders]);
   
   // Handle dialog close
   const handleClose = () => {
@@ -159,7 +172,22 @@ export const TemplateDialog: React.FC = () => {
       // Open create folder dialog and pass callback to handle newly created folder
       if (window.dialogManager) {
         window.dialogManager.openDialog(DIALOG_TYPES.CREATE_FOLDER, {
-          onSaveFolder: handleCreateFolder,
+          onSaveFolder: async (folderData: { name: string; path: string; description: string }) => {
+            try {
+              // Direct API call fallback
+              const response = await promptApi.createFolder(folderData);
+              
+              if (response.success && response.folder) {
+                return { success: true, folder: response.folder };
+              } else {
+                toast.error(response.error || getMessage('failedToCreateFolder'));
+                return { success: false, error: response.error || getMessage('unknownError') };
+              }
+            } catch (error) {
+              console.error('Error creating folder:', error);
+              return { success: false, error: getMessage('failedToCreateFolder') };
+            }
+          },
           onFolderCreated: (folder: any) => {
             // When folder is created, update the form with the new folder
             console.log('New folder created, updating selection:', folder);
@@ -168,11 +196,19 @@ export const TemplateDialog: React.FC = () => {
             handleFormChange('folder', folder.name);
             
             // Add the new folder to the list immediately for better UX
-            setUserFoldersList(prev => [...prev, {
-              id: folder.id,
-              name: folder.name,
-              fullPath: folder.name
-            }]);
+            setUserFoldersList(prev => {
+              // Check if folder is already in the list
+              if (prev.some(f => f.id === folder.id)) {
+                return prev;
+              }
+              
+              // Add the new folder to the list
+              return [...prev, {
+                id: folder.id,
+                name: folder.name,
+                fullPath: folder.name
+              }];
+            });
           }
         });
       }
@@ -198,25 +234,30 @@ export const TemplateDialog: React.FC = () => {
     }
   };
   
-  // Handler for folder creation
-  const handleCreateFolder = async (folderData: { name: string; path: string; description: string }) => {
-    try {
-      console.log('Creating folder:', folderData);
+  // Function to truncate folder name with ellipsis
+  const truncateFolderPath = (path: string, maxLength: number = 35) => {
+    if (!path || path.length <= maxLength) return path;
+    
+    // For paths with slashes, try to preserve the last part
+    if (path.includes('/')) {
+      const parts = path.split('/');
+      const lastPart = parts[parts.length - 1].trim();
+      const firstParts = parts.slice(0, -1).join('/');
       
-      const result = await promptApi.createFolder(folderData);
-      
-      if (result.success && result.folder) {
-        // Note: We don't need to select the folder here, as the onFolderCreated callback will handle it
-        return result;
-      } else {
-        toast.error(`Failed to create folder: ${result.error || 'Unknown error'}`);
-        return false;
+      // If the last part is already too long, truncate it
+      if (lastPart.length >= maxLength - 3) {
+        return lastPart.substring(0, maxLength - 3) + '...';
       }
-    } catch (error) {
-      console.error('Error creating folder:', error);
-      toast.error('Error creating folder');
-      return false;
+      
+      // Otherwise, try to keep the last part intact and truncate the beginning
+      const availableLength = maxLength - lastPart.length - 3 - 3; // 3 for ellipsis, 3 for " / "
+      if (availableLength > 5) { // Only if we can show a meaningful portion
+        return '...' + firstParts.substring(firstParts.length - availableLength) + ' / ' + lastPart;
+      }
     }
+    
+    // Simple truncation for other cases
+    return path.substring(0, maxLength - 3) + '...';
   };
   
   // Validate form before saving
@@ -224,11 +265,11 @@ export const TemplateDialog: React.FC = () => {
     const errors: {[key: string]: string} = {};
     
     if (!formData.name?.trim()) {
-      errors.name = 'Template name is required';
+      errors.name = getMessage('templateNameRequired');
     }
     
     if (!formData.content?.trim()) {
-      errors.content = 'Template content is required';
+      errors.content = getMessage('templateContentRequired');
     }
     
     setValidationErrors(errors);
@@ -251,14 +292,53 @@ export const TemplateDialog: React.FC = () => {
     setIsSubmitting(true);
     try {
       console.log('Saving template with data:', formData);
-      const success = await onSave(formData);
-      if (success) {
-        handleClose();
+      
+      // If onSave is provided (custom handling), use it
+      if (onSave) {
+        const success = await onSave(formData);
+        if (success) {
+          handleClose();
+          return success;
+        }
+      } else {
+        // Otherwise use direct API calls
+        const templateData = {
+          title: formData.name,
+          content: formData.content,
+          description: formData.description,
+          folder_id: formData.folder_id
+        };
+        
+        let response;
+        if (currentTemplate?.id) {
+          // Update existing template
+          response = await promptApi.updateTemplate(currentTemplate.id, templateData);
+        } else {
+          // Create new template
+          response = await promptApi.createTemplate(templateData);
+        }
+        
+        if (response.success) {
+          // Show success message
+          toast.success(currentTemplate ? getMessage('templateUpdated') : getMessage('templateCreated'));
+          
+          // Set a short timeout to allow the toast to be visible before refresh
+          if (currentTemplate) {
+            setTimeout(() => {
+              // Refresh the page to get updated data
+              window.location.reload();
+            }, 1000); // 1-second delay so user can see the success message
+          }
+          
+          // Close the dialog
+          handleClose();
+          return true;
+        }
       }
-      return success;
+      return false;
     } catch (error) {
       console.error('Error saving template:', error);
-      toast.error('Error saving template');
+      toast.error(getMessage('errorSavingTemplate'));
       return false;
     } finally {
       setIsSubmitting(false);
@@ -272,22 +352,22 @@ export const TemplateDialog: React.FC = () => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {currentTemplate ? 'Edit Template' : 'Create New Template'}
+            {currentTemplate ? getMessage('editTemplate') : getMessage('createNewTemplate')}
           </DialogTitle>
           <DialogDescription>
             {currentTemplate 
-              ? 'Edit your template details below.' 
-              : 'Create a new template to use with AI conversations.'}
+              ? getMessage('editTemplateDescription')
+              : getMessage('createTemplateDescription')}
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4 py-2">
           <div>
-            <label className="text-sm font-medium">Template Name</label>
+            <label className="text-sm font-medium">{getMessage('templateName')}</label>
             <Input 
               value={formData.name || ''} 
               onChange={(e) => handleFormChange('name', e.target.value)}
-              placeholder="Enter template name"
+              placeholder={getMessage('enterTemplateName')}
               className={`mt-1 ${validationErrors.name ? 'border-red-500' : ''}`}
             />
             {validationErrors.name && (
@@ -296,18 +376,18 @@ export const TemplateDialog: React.FC = () => {
           </div>
           
           <div>
-            <label className="text-sm font-medium">Description</label>
+            <label className="text-sm font-medium">{getMessage('description')}</label>
             <Input 
               value={formData.description || ''} 
               onChange={(e) => handleFormChange('description', e.target.value)}
-              placeholder="Brief description of this template"
+              placeholder={getMessage('templateDescriptionPlaceholder')}
               className="mt-1"
             />
           </div>
           
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="text-sm font-medium">Folder</label>
+              <label className="text-sm font-medium">{getMessage('folder')}</label>
             </div>
             
             <Select 
@@ -315,15 +395,28 @@ export const TemplateDialog: React.FC = () => {
               onValueChange={handleFolderSelect}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a folder" />
+                <SelectValue placeholder={getMessage('selectFolder')}>
+                  {selectedFolderId === 'root' ? (
+                    <span className="text-muted-foreground">{getMessage('noFolder')}</span>
+                  ) : selectedFolderId ? (
+                    <span className="truncate" title={formData.folder}>
+                      {truncateFolderPath(formData.folder)}
+                    </span>
+                  ) : null}
+                </SelectValue>
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-80">
                 <SelectItem value="root">
-                  <span className="text-muted-foreground">No folder (root)</span>
+                  <span className="text-muted-foreground">{getMessage('noFolder')}</span>
                 </SelectItem>
                 
                 {userFoldersList.map(folder => (
-                  <SelectItem key={folder.id} value={folder.id.toString()}>
+                  <SelectItem 
+                    key={folder.id} 
+                    value={folder.id.toString()}
+                    className="truncate"
+                    title={folder.fullPath} // Show full path on hover
+                  >
                     {folder.fullPath}
                   </SelectItem>
                 ))}
@@ -332,7 +425,7 @@ export const TemplateDialog: React.FC = () => {
                 <SelectItem value="new" className="text-primary font-medium">
                   <div className="flex items-center">
                     <FolderPlus className="h-4 w-4 mr-2" />
-                    Create new folder...
+                    {getMessage('createNewFolder')}
                   </div>
                 </SelectItem>
               </SelectContent>
@@ -340,7 +433,7 @@ export const TemplateDialog: React.FC = () => {
           </div>
           
           <div>
-            <label className="text-sm font-medium">Content</label>
+            <label className="text-sm font-medium">{getMessage('content')}</label>
             <textarea 
               className={`flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm mt-1 ${
                 validationErrors.content ? 'border-red-500' : ''
@@ -348,7 +441,7 @@ export const TemplateDialog: React.FC = () => {
               rows={6}
               value={formData.content || ''} 
               onChange={(e) => handleFormChange('content', e.target.value)}
-              placeholder="Enter your template content here"
+              placeholder={getMessage('enterTemplateContent')}
             />
             {validationErrors.content && (
               <p className="text-xs text-red-500 mt-1">{validationErrors.content}</p>
@@ -358,16 +451,16 @@ export const TemplateDialog: React.FC = () => {
         
         <DialogFooter>
           <Button variant="outline" onClick={handleClose} disabled={isSubmitting}>
-            Cancel
+            {getMessage('cancel')}
           </Button>
           <Button onClick={handleSave} disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <div className="h-4 w-4 border-2 border-current border-t-transparent animate-spin rounded-full inline-block mr-2"></div>
-                {currentTemplate ? 'Updating...' : 'Creating...'}
+                {currentTemplate ? getMessage('updating') : getMessage('creating')}
               </>
             ) : (
-              currentTemplate ? 'Update' : 'Create'
+              currentTemplate ? getMessage('update') : getMessage('create')
             )}
           </Button>
         </DialogFooter>

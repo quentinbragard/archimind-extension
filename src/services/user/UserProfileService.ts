@@ -1,7 +1,6 @@
 // src/services/user/UserProfileService.ts
 import { AbstractBaseService } from '../BaseService';
 import { UserMetadata } from '@/types/services/conversation';
-import { networkRequestMonitor } from '@/core/network/NetworkRequestMonitor';
 import { emitEvent, AppEvent } from '@/core/events/events';
 import { errorReporter } from '@/core/errors/ErrorReporter';
 import { AppError, ErrorCode } from '@/core/errors/AppError';
@@ -17,7 +16,6 @@ export class UserProfileService extends AbstractBaseService {
   private userInfo: UserMetadata | null = null;
   private fetchedUserInfo: boolean = false;
   private storageKey: string = 'archimind_user_info';
-  private cleanupListeners: (() => void)[] = [];
   
   private constructor() {
     super();
@@ -44,56 +42,42 @@ export class UserProfileService extends AbstractBaseService {
       }
     });
     
-    // Set up network request listeners
-    this.setupNetworkListeners();
-    
-    // Add event listener for user data from injected script
-    document.addEventListener('archimind-network-intercept', this.handleInterceptEvent);
+    // Add event listener for user data directly instead of using networkRequestMonitor
+    document.addEventListener('jaydai:user-info', this.handleUserInfoEvent);
   }
   
   /**
    * Clean up resources
    */
   protected onCleanup(): void {
-    // Remove all listeners
-    this.cleanupListeners.forEach(cleanup => cleanup());
-    this.cleanupListeners = [];
-    
     // Remove event listener
-    document.removeEventListener('archimind-network-intercept', this.handleInterceptEvent);
+    document.removeEventListener('jaydai:user-info', this.handleUserInfoEvent);
     
     debug('UserProfileService cleaned up');
   }
   
   /**
-   * Set up network request listeners
+   * Handle user info event directly
    */
-  private setupNetworkListeners(): void {
-    // Listen specifically for /backend-api/me responses
-    const removeUserInfoListener = networkRequestMonitor.addListener(
-      '/backend-api/me',
-      this.handleUserInfoCapture.bind(this)
-    );
-    this.cleanupListeners.push(removeUserInfoListener);
-    
-    // Also listen for conversations responses which sometimes include user data
-    const removeConversationsListener = networkRequestMonitor.addListener(
-      '/backend-api/conversations',
-      this.handleConversationsCapture.bind(this)
-    );
-    this.cleanupListeners.push(removeConversationsListener);
-  }
-  
-  /**
-   * Handle user info captured by network monitor
-   */
-  public handleUserInfoCapture(data: any): void {
+  private handleUserInfoEvent = (event: CustomEvent): void => {
     try {
-      debug('User info captured from network');
-      
+      const data = event.detail;
       if (!data || !data.responseBody) return;
       
-      const userData = data.responseBody;
+      this.handleUserInfoCapture(data.responseBody);
+    } catch (error) {
+      errorReporter.captureError(
+        new AppError('Error handling user info event', ErrorCode.EXTENSION_ERROR, error)
+      );
+    }
+  };
+  
+  /**
+   * Process user information
+   */
+  public handleUserInfoCapture(userData: any): void {
+    try {
+      debug('User info captured from network');
       
       // Verify this is complete user data with email
       if (userData && userData.email && userData.email !== '') {
@@ -113,69 +97,6 @@ export class UserProfileService extends AbstractBaseService {
       );
     }
   }
-  
-  /**
-   * Handle conversations response which might contain user data
-   */
-  private handleConversationsCapture(data: any): void {
-    try {
-      if (!data || !data.responseBody) return;
-      
-      const responseData = data.responseBody;
-      
-      // Look for user data in the response
-      const userData = responseData.user || responseData.viewer || responseData.current_user;
-      
-      if (userData && userData.id && userData.email && userData.email !== '') {
-        this.processUserInfo(userData);
-        this.fetchedUserInfo = true;
-        this.saveUserInfoToStorage(userData);
-        
-        // Emit event for other components
-        emitEvent(AppEvent.USER_INFO_UPDATED, {
-          email: userData.email,
-          name: userData.name || userData.email.split('@')[0]
-        });
-      }
-    } catch (error) {
-      errorReporter.captureError(
-        new AppError('Error processing conversations data', ErrorCode.API_ERROR, error)
-      );
-    }
-  }
-  
-  /**
-   * Handle events from the network interceptor
-   */
-  private handleInterceptEvent = (event: CustomEvent): void => {
-    try {
-      if (!event.detail || event.detail.type !== 'userInfo' || !event.detail.data) {
-        return;
-      }
-      
-      const data = event.detail.data;
-      if (!data.responseBody) return;
-      
-      const userData = data.responseBody;
-      
-      // Check if this is complete user info
-      if (userData && userData.email && userData.email !== '') {
-        this.processUserInfo(userData);
-        this.fetchedUserInfo = true;
-        this.saveUserInfoToStorage(userData);
-        
-        // Emit event for other components
-        emitEvent(AppEvent.USER_INFO_UPDATED, {
-          email: userData.email,
-          name: userData.name || userData.email.split('@')[0]
-        });
-      }
-    } catch (error) {
-      errorReporter.captureError(
-        new AppError('Error handling intercept event', ErrorCode.EXTENSION_ERROR, error)
-      );
-    }
-  };
   
   /**
    * Process user information from API

@@ -1,6 +1,6 @@
 // src/components/panels/TemplatesPanel/utils/templateUtils.ts
 
-import { Template } from '@/types/templates';
+import { Template } from '@/types/prompts/templates';
 
 /**
  * Format template usage date for display

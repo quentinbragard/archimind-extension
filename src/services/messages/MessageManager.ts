@@ -25,14 +25,14 @@ export class MessageManager extends AbstractBaseService {
   protected async onInitialize(): Promise<void> {
     debug('Initializing MessageManager');
     
-    // Listen for messages from various sources
-    document.addEventListener('archimind:message-extracted', this.handleExtractedMessage);
-    document.addEventListener('archimind:conversation-loaded', this.handleConversationMessages);
+    // Listen for messages from various sources - direct event listeners
+    document.addEventListener('jaydai:message-extracted', this.handleExtractedMessage);
+    document.addEventListener('jaydai:conversation-loaded', this.handleConversationMessages);
   }
   
   protected onCleanup(): void {
-    document.removeEventListener('archimind:message-extracted', this.handleExtractedMessage);
-    document.removeEventListener('archimind:conversation-loaded', this.handleConversationMessages);
+    document.removeEventListener('jaydai:message-extracted', this.handleExtractedMessage);
+    document.removeEventListener('jaydai:conversation-loaded', this.handleConversationMessages);
     this.messages.clear();
     debug('MessageManager cleaned up');
   }
@@ -46,7 +46,7 @@ export class MessageManager extends AbstractBaseService {
       this.addMessage(message);
       
       // Forward to queue for saving
-      document.dispatchEvent(new CustomEvent('archimind:queue-message', {
+      document.dispatchEvent(new CustomEvent('jaydai:queue-message', {
         detail: { message }
       }));
       

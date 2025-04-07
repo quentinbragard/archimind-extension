@@ -1,9 +1,10 @@
+// src/components/folders/FolderHeader.tsx
 import { Folder, ChevronDown, ChevronRight } from "lucide-react";
 
 export function FolderHeader({ folder, isExpanded, onToggle, actionButtons }: { folder: any, isExpanded: boolean, onToggle: () => void, actionButtons: React.ReactNode }) {
     return (
       <div 
-        className="flex items-center p-2 hover:bg-accent/60 cursor-pointer rounded-sm"
+        className="group flex items-center p-2 hover:bg-accent/60 cursor-pointer rounded-sm"
         onClick={onToggle}
       >
         {isExpanded ? 

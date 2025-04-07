@@ -1,104 +1,77 @@
 // src/core/contexts/PanelNavigationContext.tsx
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import type { PanelType } from '@/hooks/ui/useMainButtonState';
 
-// Define panel types for the application
-export type PanelType = 
-  | 'menu'
-  | 'templates'
-  | 'templatesBrowse'
-  | 'officialTemplates'
-  | 'organizationTemplates'
-  | 'notifications'
-  | 'stats'
-  | 'settings';
-
-// Define the panel data structure
-export interface PanelData {
+export interface PanelConfig {
   type: PanelType;
-  props?: Record<string, any>; // Additional props specific to each panel
+  props?: any;
 }
 
-// Define the context interface
-interface PanelNavigationContextType {
-  currentPanel: PanelData;
-  panelStack: PanelData[];
-  pushPanel: (panel: PanelData) => void;
-  replacePanel: (panel: PanelData) => void;
+interface PanelNavigationContextProps {
+  panelStack: PanelConfig[];
+  currentPanel: PanelConfig;
+  pushPanel: (panel: PanelConfig) => void;
   popPanel: () => void;
-  resetToPanel: (panelType: PanelType, props?: Record<string, any>) => void;
-  resetToRoot: () => void;
+  resetNavigation: (initialPanel: PanelConfig) => void;
 }
 
-// Create the context with default values
-const PanelNavigationContext = createContext<PanelNavigationContextType>({
-  currentPanel: { type: 'menu' },
-  panelStack: [{ type: 'menu' }],
-  pushPanel: () => {},
-  replacePanel: () => {},
-  popPanel: () => {},
-  resetToPanel: () => {},
-  resetToRoot: () => {},
-});
+const PanelNavigationContext = createContext<PanelNavigationContextProps | undefined>(undefined);
 
-// Create the provider component
 interface PanelNavigationProviderProps {
   children: ReactNode;
-  initialPanel?: PanelData;
+  initialPanel: PanelConfig;
 }
 
-export const PanelNavigationProvider: React.FC<PanelNavigationProviderProps> = ({
+/**
+ * Context provider for panel navigation
+ */
+export const PanelNavigationProvider: React.FC<PanelNavigationProviderProps> = ({ 
   children,
-  initialPanel = { type: 'menu' },
+  initialPanel = { type: 'menu' }
 }) => {
-  const [panelStack, setPanelStack] = useState<PanelData[]>([initialPanel]);
-
-  // Get the current panel (top of the stack)
+  const [panelStack, setPanelStack] = useState<PanelConfig[]>([initialPanel]);
+  
+  // Get the current panel (last one in the stack)
   const currentPanel = panelStack[panelStack.length - 1];
-
-  // Push a new panel onto the stack
-  const pushPanel = (panel: PanelData) => {
+  
+  // Add a new panel to the stack
+  const pushPanel = (panel: PanelConfig) => {
     setPanelStack(prev => [...prev, panel]);
   };
-
-  // Replace the current panel
-  const replacePanel = (panel: PanelData) => {
-    setPanelStack(prev => [...prev.slice(0, -1), panel]);
-  };
-
-  // Pop the current panel off the stack (go back)
+  
+  // Remove the last panel from the stack
   const popPanel = () => {
     if (panelStack.length > 1) {
       setPanelStack(prev => prev.slice(0, -1));
     }
   };
-
-  // Reset to a specific panel type (clear stack and set that panel)
-  const resetToPanel = (panelType: PanelType, props?: Record<string, any>) => {
-    setPanelStack([{ type: panelType, props }]);
+  
+  // Reset the navigation stack with a new initial panel
+  const resetNavigation = (newInitialPanel: PanelConfig) => {
+    setPanelStack([newInitialPanel]);
   };
-
-  // Reset to the root panel
-  const resetToRoot = () => {
-    setPanelStack([initialPanel]);
-  };
-
+  
   return (
-    <PanelNavigationContext.Provider
-      value={{
-        currentPanel,
-        panelStack,
-        pushPanel,
-        replacePanel,
-        popPanel,
-        resetToPanel,
-        resetToRoot,
-      }}
-    >
+    <PanelNavigationContext.Provider value={{ 
+      panelStack, 
+      currentPanel, 
+      pushPanel, 
+      popPanel,
+      resetNavigation
+    }}>
       {children}
     </PanelNavigationContext.Provider>
   );
 };
 
-// Create a custom hook to use the panel navigation context
-export const usePanelNavigation = () => useContext(PanelNavigationContext);
+/**
+ * Hook to use panel navigation
+ */
+export const usePanelNavigation = (): PanelNavigationContextProps => {
+  const context = useContext(PanelNavigationContext);
+  if (context === undefined) {
+    throw new Error('usePanelNavigation must be used within a PanelNavigationProvider');
+  }
+  return context;
+};

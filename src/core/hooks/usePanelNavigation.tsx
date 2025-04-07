@@ -36,6 +36,7 @@ export const PanelNavigationProvider: React.FC<{
       if (prevStack.length <= 1) return prevStack;
       return prevStack.slice(0, prevStack.length - 1);
     });
+    
   }, []);
   
   // Replace the current panel

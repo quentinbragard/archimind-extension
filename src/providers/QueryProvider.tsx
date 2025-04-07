@@ -6,10 +6,9 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
       retry: 1,
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      cacheTime: 1000 * 60 * 10, // 10 minutes
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
     },
   },
 });
@@ -18,13 +17,20 @@ interface QueryProviderProps {
   children: ReactNode;
 }
 
-/**
- * Provider for React Query
- */
-export function QueryProvider({ children }: QueryProviderProps) {
+export const QueryProvider: React.FC<QueryProviderProps> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
     </QueryClientProvider>
   );
+};
+
+// Create a hook to safely access React Query functionality
+export function useSafeQuery() {
+  const isQueryAvailable = typeof queryClient !== 'undefined';
+  
+  return {
+    isQueryAvailable,
+    queryClient: isQueryAvailable ? queryClient : null
+  };
 }

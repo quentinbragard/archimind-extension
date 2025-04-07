@@ -1,5 +1,5 @@
 
-> archimind-extension@1.0.0 build
+> jaydai-extension@1.0.0 build
 > node build.js --prod
 
 🚀 Building extension in production mode...
@@ -166,9 +166,9 @@ src/types/services/index.ts(49,30): error TS2307: Cannot find module '../notific
 src/types/services/index.ts(50,36): error TS2307: Cannot find module '../notifications' or its corresponding type declarations.
 src/types/services/index.ts(55,61): error TS2307: Cannot find module '../notifications' or its corresponding type declarations.
 src/types/services/index.ts(56,58): error TS2307: Cannot find module '../notifications' or its corresponding type declarations.
-src/types/services/index.ts(62,36): error TS2694: Namespace '"/Users/quentinbragard/archimind/archimind-extension/src/types/services/auth"' has no exported member 'AuthState'.
-src/types/services/index.ts(63,48): error TS2694: Namespace '"/Users/quentinbragard/archimind/archimind-extension/src/types/services/auth"' has no exported member 'AuthState'.
-src/types/services/index.ts(72,44): error TS2694: Namespace '"/Users/quentinbragard/archimind/archimind-extension/src/types/services/auth"' has no exported member 'TokenResponse'.
-src/types/services/index.ts(74,46): error TS2694: Namespace '"/Users/quentinbragard/archimind/archimind-extension/src/types/services/auth"' has no exported member 'AuthToken'.
-src/types/services/index.ts(80,34): error TS2694: Namespace '"/Users/quentinbragard/archimind/archimind-extension/src/types/stats"' has no exported member 'Stats'.
-src/types/services/index.ts(82,49): error TS2694: Namespace '"/Users/quentinbragard/archimind/archimind-extension/src/types/stats"' has no exported member 'Stats'.
+src/types/services/index.ts(62,36): error TS2694: Namespace '"/Users/quentinbragard/archimind/jaydai-extension/src/types/services/auth"' has no exported member 'AuthState'.
+src/types/services/index.ts(63,48): error TS2694: Namespace '"/Users/quentinbragard/archimind/jaydai-extension/src/types/services/auth"' has no exported member 'AuthState'.
+src/types/services/index.ts(72,44): error TS2694: Namespace '"/Users/quentinbragard/archimind/jaydai-extension/src/types/services/auth"' has no exported member 'TokenResponse'.
+src/types/services/index.ts(74,46): error TS2694: Namespace '"/Users/quentinbragard/archimind/jaydai-extension/src/types/services/auth"' has no exported member 'AuthToken'.
+src/types/services/index.ts(80,34): error TS2694: Namespace '"/Users/quentinbragard/archimind/jaydai-extension/src/types/stats"' has no exported member 'Stats'.
+src/types/services/index.ts(82,49): error TS2694: Namespace '"/Users/quentinbragard/archimind/jaydai-extension/src/types/stats"' has no exported member 'Stats'.

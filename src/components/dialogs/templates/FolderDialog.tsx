@@ -14,9 +14,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { useDialog } from '@/components/dialogs/core/DialogContext';
 import { DIALOG_TYPES } from '@/core/dialogs/registry';
 import { toast } from 'sonner';
+import { promptApi } from '@/services/api';
 
 /**
  * Dialog for creating new template folders
+ * This version uses direct API calls to avoid React Query errors
  */
 export const FolderDialog: React.FC = () => {
   const { isOpen, data, dialogProps } = useDialog(DIALOG_TYPES.CREATE_FOLDER);
@@ -55,13 +57,35 @@ export const FolderDialog: React.FC = () => {
         description: description.trim()
       };
       
-      // Call the provided callback with folder data
-      const result = await onSaveFolder(folderData);
+      // Call the provided callback with folder data if it exists
+      // This allows for custom handling by parent components
+      if (onSaveFolder) {
+        const customResult = await onSaveFolder(folderData);
+        if (customResult && customResult.success && customResult.folder) {
+          // Use the folder from the custom result
+          if (onFolderCreated) {
+            onFolderCreated(customResult.folder);
+          }
+          
+          toast.success(`Folder "${name}" created successfully`);
+          resetForm();
+          dialogProps.onOpenChange(false);
+          return;
+        } else if (customResult && !customResult.success) {
+          // Handle custom error case
+          toast.error(customResult.error || 'Failed to create folder');
+          setIsSubmitting(false);
+          return;
+        }
+      }
       
-      if (result && result.success) {
+      // Default handling - use direct API call
+      const response = await promptApi.createFolder(folderData);
+      
+      if (response.success && response.folder) {
         // Call the onFolderCreated callback if provided with the created folder
-        if (onFolderCreated && result.folder) {
-          onFolderCreated(result.folder);
+        if (onFolderCreated) {
+          onFolderCreated(response.folder);
         }
         
         toast.success(`Folder "${name}" created successfully`);
@@ -70,7 +94,7 @@ export const FolderDialog: React.FC = () => {
         resetForm();
         dialogProps.onOpenChange(false);
       } else {
-        toast.error(result?.error || 'Failed to create folder');
+        toast.error(response.error || 'Failed to create folder');
       }
     } catch (error) {
       console.error('Error creating folder:', error);

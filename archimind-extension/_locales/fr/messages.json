@@ -1,0 +1,558 @@
+{
+ "appName": {
+    "message": "Extension Chrome Archimind",
+    "description": "Le nom de l'extension"
+  },
+  "appDesc": {
+    "message": "Jaydai : Maximisez le potentiel de l'IA. Jaydai est une extension Chrome offrant une bibliothèque de prompts de haute qualité.",
+    "description": "La description de l'extension"
+  },
+  "welcomeTitle": {
+    "message": "Bienvenue sur Archimind",
+    "description": "Titre de la page d'accueil"
+  },
+  "browseOfficialTemplates": {
+    "message": "Parcourir les templates officiels",
+    "description": "Bouton Parcourir les templates officiels"
+  },
+  "yourAICompanion": {
+    "message": "Votre compagnon IA",
+    "description": "Sous-titre de la page d'accueil"
+  },
+  "useAIToPrefix": {
+    "message": "Utilisez l'IA pour",
+    "description": "Préfixe pour les tâches changeantes dans la page d'accueil"
+  },
+  "aiTask1": {
+    "message": "rédiger des emails professionnels",
+    "description": "Exemple de tâche IA 1"
+  },
+  "aiTask2": {
+    "message": "organiser des données complexes",
+    "description": "Exemple de tâche IA 2"
+  }, 
+  "aiTask3": {
+    "message": "créer du contenu convaincant",
+    "description": "Exemple de tâche IA 3"
+  },
+  "aiTask4": {
+    "message": "résumer de longs documents",
+    "description": "Exemple de tâche IA 4"
+  },
+  "aiTask5": {
+    "message": "rédiger des rapports techniques",
+    "description": "Exemple de tâche IA 5"
+  },
+  "welcomeDescription": {
+    "message": "Maximisez votre expérience avec l'IA générative grâce à Jaydai, l'extension Chrome gratuite qui transforme votre utilisation de ChatGPT",
+    "description": "Description de la page d'accueil"
+  },
+  "energyInsights": {
+    "message": "Débloquez le potentiel de l'IA",
+    "description": "Titre de carte de fonctionnalité"
+  },
+  "energyInsightsDesc": {
+    "message": "Accèder à notre bibliothèque de prompts rédigés par des experts et classés par thématique",
+    "description": "Description de carte de fonctionnalité"
+  },
+  "smartTemplates": {
+    "message": "Boostez votre productivité",
+    "description": "Titre de carte de fonctionnalité"
+  },
+  "smartTemplatesDesc": {
+    "message": "Sauvegardez tous vos prompts personnalisés pour un accès instantané",
+    "description": "Description de carte de fonctionnalité"
+  },
+  "skillDevelopment": {
+    "message": "Mesurez votre impact",
+    "description": "Titre de carte de fonctionnalité"
+  },
+  "skillDevelopmentDesc": {
+    "message": "Retrouvez des analyses détaillées sur votre utilisation et votre empreinte énergétique",
+    "description": "Description de carte de fonctionnalité"
+  },
+  "getStarted": {
+    "message": "Commencer",
+    "description": "Bouton CTA"
+  },
+  "signIn": {
+    "message": "Se Connecter",
+    "description": "Bouton de connexion"
+  },
+  "signUp": {
+    "message": "S'inscrire",
+    "description": "Bouton d'inscription"
+  },
+  "signUpWith": {
+    "message": "S'inscrire avec $PROVIDER$",
+    "description": "Bouton d'inscription avec fournisseur",
+    "placeholders": {
+      "provider": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
+  },
+  "emailConfirmationRequired": {
+    "message": "Vérification par e-mail requise après l'inscription",
+    "description": "Avis de vérification par e-mail"
+  },
+  "allRightsReserved": {
+    "message": "Tous droits réservés",
+    "description": "Texte de copyright en bas de page"
+  },
+  "aiToolLauncher": {
+    "message": "Lanceur d'Outils IA",
+    "description": "Titre pour le popup"
+  },
+  "welcomeSubtitle": {
+    "message": "Votre Compagnon Intelligent d'Utilisation de l'IA",
+    "description": "Sous-titre de la page d'accueil"
+  },
+  "howItWorks": {
+    "message": "Comment Archimind Vous Donne du Pouvoir",
+    "description": "Titre de section"
+  },
+  "aiUsageTracking": {
+    "message": "Suivi d'Utilisation de l'IA",
+    "description": "Titre de fonctionnalité"
+  },
+  "aiUsageTrackingDesc": {
+    "message": "Surveillez vos interactions avec l'IA, comprenez les templates et obtenez des informations sur votre flux de travail numérique.",
+    "description": "Description de fonctionnalité"
+  },
+  "personalizedInsights": {
+    "message": "Informations Personnalisées",
+    "description": "Titre de fonctionnalité"
+  },
+  "personalizedInsightsDesc": {
+    "message": "Recevez des recommandations exploitables pour améliorer votre utilisation de l'IA et maintenir vos compétences.",
+    "description": "Description de fonctionnalité"
+  },
+  "continuousLearning": {
+    "message": "Apprentissage Continu",
+    "description": "Titre de fonctionnalité"
+  },
+  "continuousLearningDesc": {
+    "message": "Développez une approche équilibrée de l'assistance IA avec des rapports hebdomadaires et des conseils de développement de compétences.",
+    "description": "Description de fonctionnalité"
+  },
+  "readyToUnlock": {
+    "message": "Prêt à Débloquer Votre Potentiel IA ?",
+    "description": "Titre CTA"
+  },
+  "readyToUnlockDesc": {
+    "message": "Archimind vous aide à exploiter la puissance de l'IA tout en maintenant votre expertise humaine unique.",
+    "description": "Description CTA"
+  },
+  "name": {
+    "message": "Nom",
+    "description": "Étiquette de nom"
+  },
+  "signInWith": {
+    "message": "Se Connecter avec $PROVIDER$",
+    "description": "Bouton de connexion avec fournisseur",
+    "placeholders": {
+      "provider": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
+  },
+  "email": {
+    "message": "Email",
+    "description": "Étiquette d'email"
+  },
+  "password": {
+    "message": "Mot de passe",
+    "description": "Étiquette de mot de passe"
+  },
+  "or": {
+    "message": "Ou continuer avec",
+    "description": "Texte séparateur"
+  },
+  "signInToJaydai": {
+    "message": "Connexion à Archimind",
+    "description": "Titre de dialogue de connexion"
+  },
+  "enterEmailPassword": {
+    "message": "Veuillez saisir à la fois l'email et le mot de passe.",
+    "description": "Message de validation"
+  },
+  "signInSuccessful": {
+    "message": "Connexion réussie !",
+    "description": "Message de succès"
+  },
+  "youCanNowAccess": {
+    "message": "Vous pouvez maintenant accéder à vos conversations ChatGPT.",
+    "description": "Description du message de succès"
+  },
+  "openChatGPT": {
+    "message": "Ouvrir ChatGPT",
+    "description": "Bouton pour ouvrir ChatGPT"
+  },
+  "signInFailed": {
+    "message": "Échec de la connexion",
+    "description": "Message d'erreur"
+  },
+  "authError": {
+    "message": "Erreur d'Authentification",
+    "description": "Titre d'erreur"
+  },
+  "unableToProcess": {
+    "message": "Impossible de traiter la demande pour le moment.",
+    "description": "Message d'erreur"
+  },
+  "emailVerificationSent": {
+    "message": "Vérifiez Votre E-mail",
+    "description": "Titre d'envoi de vérification par e-mail"
+  },
+  "emailVerificationInstructions": {
+    "message": "Nous avons envoyé un lien de vérification à votre adresse e-mail. Veuillez vérifier votre boîte de réception et suivre les instructions pour compléter votre inscription.",
+    "description": "Instructions de vérification par e-mail"
+  },
+  "close": {
+    "message": "Fermer",
+    "description": "Bouton Fermer"
+  },
+  "signingIn": {
+    "message": "Connexion en cours...",
+    "description": "Texte de chargement de connexion"
+  },
+  "signingUp": {
+    "message": "Création du compte...",
+    "description": "Texte de chargement d'inscription"
+  },
+  "signUpSuccessful": {
+    "message": "Compte créé avec succès !",
+    "description": "Message de succès d'inscription"
+  },
+  "signUpFailed": {
+    "message": "Échec de la création du compte",
+    "description": "Message d'échec d'inscription"
+  },
+  "passwordRequirements": {
+    "message": "Le mot de passe doit comporter au moins 8 caractères avec au moins une lettre et un chiffre.",
+    "description": "Conseil sur les exigences du mot de passe"
+  },
+  "bySigningUp": {
+    "message": "En vous inscrivant, vous acceptez nos Conditions d'Utilisation et notre Politique de Confidentialité.",
+    "description": "Texte d'accord des conditions"
+  },
+  "Templates": {
+    "message": "Templates",
+    "description": "Élément de menu templates"
+  },
+  "menu": {
+    "message": "Menu",
+    "description": "Élément de menu Menu"
+  },
+  "notifications": {
+    "message": "Notifications",
+    "description": "Élément de menu Notifications"
+  },
+  "aiNews": {
+    "message": "News IA",
+    "description": "Élément de menu AI News"
+  },
+  "settings": {
+    "message": "Paramètres",
+    "description": "Élément de menu Paramètres"
+  },
+  "cancel": {
+    "message": "Annuler",
+    "description": "Bouton Annuler"
+  },
+  "save": {
+    "message": "Enregistrer",
+    "description": "Bouton Enregistrer"
+  },
+  "saveChanges": {
+    "message": "Enregistrer les Modifications",
+    "description": "Bouton Enregistrer les modifications"
+  },
+  "back": {
+    "message": "Retour",
+    "description": "Bouton Retour"
+  },
+  "aiStats": {
+    "message": "Statistiques IA",
+    "description": "Étiquette des statistiques IA"
+  },
+  "noActiveConversation": {
+    "message": "Aucune Conversation Active",
+    "description": "Message d'erreur"
+  },
+  "pleaseSelectConversation": {
+    "message": "Veuillez d'abord sélectionner une conversation.",
+    "description": "Description du message d'erreur"
+  },
+  "conversationSaved": {
+    "message": "Conversation Enregistrée",
+    "description": "Message de succès"
+  },
+  "conversationSavedSuccess": {
+    "message": "Votre conversation a été enregistrée avec succès.",
+    "description": "Description du message de succès"
+  },
+  "errorSavingConversation": {
+    "message": "Erreur d'Enregistrement de la Conversation",
+    "description": "Message d'erreur"
+  },
+  "problemSavingConversation": {
+    "message": "Un problème est survenu lors de l'enregistrement de votre conversation.",
+    "description": "Description du message d'erreur"
+  },
+  "markAllRead": {
+    "message": "Tout marquer comme lu",
+    "description": "Bouton Tout marquer comme lu"
+  },
+  "loadingNotifications": {
+    "message": "Chargement des notifications...",
+    "description": "Message de chargement"
+  },
+  "noNotifications": {
+    "message": "Vous n'avez pas encore de notifications",
+    "description": "Message d'état vide"
+  },
+  "dismiss": {
+    "message": "Ignorer",
+    "description": "Bouton Ignorer"
+  },
+  "newTemplate": {
+    "message": "Nouveau",
+    "description": "Bouton Nouveau template"
+  },
+  "officialTemplates": {
+    "message": "Templates Officiels",
+    "description": "Titre de section templates officiels"
+  },
+  "myTemplates": {
+    "message": "Mes templates",
+    "description": "Titre de section Mes templates"
+  },
+  "noTemplates": {
+    "message": "Aucun template trouvé",
+    "description": "Message d'état vide"
+  },
+  "createTemplate": {
+    "message": "Créer un template",
+    "description": "Bouton Créer un template"
+  },
+  "createFirstTemplate": {
+    "message": "Créer votre premier template",
+    "description": "Bouton Créer votre premier template"
+  },
+  "createTemplateTitle": {
+    "message": "Créer un template",
+    "description": "Titre de dialogue Créer un template"
+  },
+  "TemplateName": {
+    "message": "Nom",
+    "description": "Étiquette Nom du template"
+  },
+  "TemplateDescription": {
+    "message": "Description (optionnel)",
+    "description": "Étiquette Description du template"
+  },
+  "TemplateFolder": {
+    "message": "Dossier (optionnel)",
+    "description": "Étiquette Dossier du template"
+  },
+  "TemplateContent": {
+    "message": "Contenu",
+    "description": "Étiquette Contenu du template"
+  },
+  "update": {
+    "message": "Mettre à jour",
+    "description": "Bouton Mettre à jour"
+  },
+  "create": {
+    "message": "Créer",
+    "description": "Bouton Créer"
+  },
+  "jaydaiSettings": {
+    "message": "Paramètres d'Archimind",
+    "description": "Titre de dialogue Paramètres"
+  },
+  "configureJaydai": {
+    "message": "Configurez le fonctionnement d'Archimind avec ChatGPT",
+    "description": "Description du dialogue Paramètres"
+  },
+  "autoSaveConversations": {
+    "message": "Enregistrement automatique des conversations",
+    "description": "Option de paramètres"
+  },
+  "autoSaveInterval": {
+    "message": "Intervalle d'enregistrement automatique (secondes)",
+    "description": "Option de paramètres"
+  },
+  "enableSync": {
+    "message": "Activer la synchronisation",
+    "description": "Option de paramètres"
+  },
+  "showStatsPanel": {
+    "message": "Afficher le panneau de statistiques",
+    "description": "Option de paramètres"
+  },
+  "customizeTemplate": {
+    "message": "Personnaliser le template: $TEMPLATE_NAME$",
+    "description": "Titre de dialogue Personnaliser le template",
+    "placeholders": {
+      "Template_name": {
+        "content": "$1",
+        "example": "Mon template"
+      }
+    }
+  },
+  "customizeTemplateDesc": {
+    "message": "Personnalisez le template selon vos besoins",
+    "description": "Description du dialogue Personnaliser le template"
+  },
+  "replacePlaceholders": {
+    "message": "Remplacer les Espaces Réservés",
+    "description": "Titre de section Remplacer les espaces réservés"
+  },
+  "editTemplate": {
+    "message": "Modifier le template",
+    "description": "Titre de section Modifier le template"
+  },
+  "noPlaceholders": {
+    "message": "Aucun espace réservé trouvé dans ce template",
+    "description": "Message Aucun espace réservé"
+  },
+  "useTemplate": {
+    "message": "Utiliser le template",
+    "description": "Bouton Utiliser le template"
+  },
+  "browseMore": {
+    "message": "Parcourir Plus",
+    "description": "Texte du bouton Parcourir plus"
+  },
+  "browseMoreTitle": {
+    "message": "Parcourir les Templates",
+    "description": "Titre de la modale Parcourir plus"
+  },
+  "browseMoreDesc": {
+    "message": "Parcourir et épingler les templates officiels et d'organisation",
+    "description": "Description de la modale Parcourir plus"
+  },
+  "pinFolder": {
+    "message": "Épingler le Dossier",
+    "description": "Texte du bouton Épingler le dossier"
+  },
+  "unpinFolder": {
+    "message": "Désépingler le Dossier",
+    "description": "Texte du bouton Désépingler le dossier"
+  },
+  "pinnedFolders": {
+    "message": "Dossiers Épinglés",
+    "description": "Titre de section Dossiers épinglés"
+  },
+  "allFolders": {
+    "message": "Tous les Dossiers",
+    "description": "Titre de section Tous les dossiers"
+  },
+  "enterpriseFeature": {
+    "message": "Cette fonctionnalité n'est disponible que dans le plan Entreprise",
+    "description": "Message affiché lorsqu'une fonctionnalité est réservée à l'entreprise"
+  },
+  "contactForEnterprise": {
+    "message": "Contactez-nous pour en savoir plus sur notre plan Entreprise",
+    "description": "Call to action for enterprise plan"
+  },
+  "refreshing": {
+    "message": "Actualisation...",
+    "description": "Loading state text for refresh action"
+  },
+  "refresh": {
+    "message": "Actualiser",
+    "description": "Refresh button text"
+  },
+  "noPinnedOfficialTemplates": {
+    "message": "Aucun modèle officiel épinglé. Cliquez sur Parcourir pour en ajouter.",
+    "description": "Empty state message for official templates section"
+  },
+  "noUserTemplates": {
+    "message": "Aucun modèle utilisateur. Créez un modèle pour commencer.",
+    "description": "Empty state message for user templates section"
+  },
+  "confirmAction": {
+    "message": "Confirmer l'action",
+    "description": "Default title for confirmation dialog"
+  },
+  "confirmActionDescription": {
+    "message": "Êtes-vous sûr de vouloir continuer ?",
+    "description": "Default description for confirmation dialog"
+  },
+  "confirm": {
+    "message": "Confirmer",
+    "description": "Confirm button text"
+  },
+  "today": {
+    "message": "aujourd'hui",
+    "description": "Relative time for current day"
+  },
+  "yesterday": {
+    "message": "hier",
+    "description": "Relative time for previous day"
+  },
+  "daysAgo": {
+    "message": "il y a $1 jours",
+    "description": "Relative time for days ago",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "untitledTemplate": {
+    "message": "Modèle sans titre",
+    "description": "Default title for untitled templates"
+  },
+  "passwordTooShort": {
+    "message": "Le mot de passe doit contenir au moins 8 caractères",
+    "description": "Password validation error message"
+  },
+  "invalidCredentials": {
+    "message": "Email ou mot de passe invalide",
+    "description": "Authentication error message"
+  },
+  "emailNotVerified": {
+    "message": "Email non vérifié",
+    "description": "Email verification error message"
+  },
+  "emailAlreadyInUse": {
+    "message": "Cet email est déjà utilisé",
+    "description": "Sign up error message"
+  },
+  "sessionExpired": {
+    "message": "Session expirée. Veuillez vous reconnecter.",
+    "description": "Session expiration message"
+  },
+  "notAuthenticated": {
+    "message": "Non authentifié. Veuillez vous connecter.",
+    "description": "Authentication required message"
+  },
+  "networkError": {
+    "message": "Erreur réseau lors du rafraîchissement du token",
+    "description": "Network error message"
+  },
+  "googleAuthCanceled": {
+    "message": "L'authentification Google a été annulée",
+    "description": "Google auth cancellation message"
+  },
+  "noAuthData": {
+    "message": "Aucune donnée d'authentification reçue de Google",
+    "description": "Google auth error message"
+  },
+  "injectingUI": {
+    "message": "Injection des composants UI...",
+    "description": "UI injection log message"
+  },
+  "uiInjected": {
+    "message": "Composants UI injectés",
+    "description": "UI injection success message"
+  }
+}
